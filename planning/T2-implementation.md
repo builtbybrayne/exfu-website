@@ -1,7 +1,7 @@
 ---
 id: T2-implementation
 plan_kind: thematic
-status: draft
+status: active
 tier: 2
 ---
 

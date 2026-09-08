@@ -1,0 +1,21 @@
+---
+const { title = 'What would you like help with?' } = Astro.props;
+---
+
+<section class="invitation section" aria-labelledby="invitation-title">
+  <div class="wrap invitation-inner">
+    <p class="eyebrow">A useful place to start</p>
+    <h2 id="invitation-title">{title}</h2>
+    <div class="needs-links">
+      <a href="/enquire/?quiz=1&need=business"
+        >AI across my business <span aria-hidden="true">↗</span></a
+      >
+      <a href="/enquire/?quiz=1&need=project"
+        >A specific project <span aria-hidden="true">↗</span></a
+      >
+      <a href="/enquire/?quiz=1&need=personal">My own workload <span aria-hidden="true">↗</span></a>
+    </div>
+    <p>Choose a starting point. A few short questions, then an invitation to talk.</p>
+    <a class="text-link" href="/enquire/">Already have a brief? Send it straight to me.</a>
+  </div>
+</section>

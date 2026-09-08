@@ -1,0 +1,167 @@
+---
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  service?: string;
+}
+const { title, description, noindex = false, service } = Astro.props;
+const path = Astro.url.pathname;
+const canonical = new URL(path, Astro.site).href;
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://exfu.ai/#organization',
+      name: 'ExFu',
+      legalName: 'WhaleyBear Ltd',
+      url: 'https://exfu.ai/',
+      email: 'al@exfu.ai',
+      logo: 'https://exfu.ai/images/exfu-logo-light.png',
+      founder: { '@id': 'https://exfu.ai/#alastair' },
+      description:
+        'AI consultancy offering fractional support, defined projects and personal agent setup. Remote engagements and Bristol sessions by arrangement.',
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://exfu.ai/#alastair',
+      name: 'Alastair Brayne',
+      url: 'https://exfu.ai/about/',
+      image: 'https://exfu.ai/images/alastair-headshot.jpg',
+      jobTitle: 'AI consultant',
+      sameAs: ['https://www.linkedin.com/in/albrayne', 'https://github.com/exfu'],
+      worksFor: { '@id': 'https://exfu.ai/#organization' },
+    },
+    ...(service
+      ? [
+          {
+            '@type': 'Service',
+            name: service,
+            description,
+            url: canonical,
+            provider: { '@id': 'https://exfu.ai/#organization' },
+          },
+        ]
+      : []),
+  ],
+};
+const links = [
+  ['/fractional-support/', 'Fractional support'],
+  ['/personal-support/', 'Personal support'],
+  ['/about/', 'About'],
+];
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | ExFu</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#f5f3ee" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} | ExFu`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://exfu.ai/images/social-card.png" />
+    <meta property="og:image:alt" content="ExFu. Experienced help to make AI work for you." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/fonts/work-sans-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(schema).replace(/</g, '\u003c')}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/" aria-label="ExFu home"
+          ><img src="/images/exfu-logo-light.png" width="2211" height="917" alt="ExFu" /></a
+        >
+        <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" hidden
+          >Menu <span aria-hidden="true">＋</span></button
+        >
+        <nav id="site-nav" aria-label="Main navigation">
+          {
+            links.map(([href, label]) => (
+              <a href={href} aria-current={path === href ? 'page' : undefined}>
+                {label}
+              </a>
+            ))
+          }
+          <a
+            class="nav-contact"
+            href="/enquire/"
+            aria-current={path === '/enquire/' ? 'page' : undefined}
+            >Let’s talk <span aria-hidden="true">↗</span></a
+          >
+        </nav>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap footer-top">
+        <a class="brand" href="/" aria-label="ExFu home"
+          ><img
+            src="/images/exfu-logo-light.png"
+            width="2211"
+            height="917"
+            alt="ExFu"
+            loading="lazy"
+          /></a
+        >
+        <a href="/about/#experience">CV & experience</a>
+        <a href="https://github.com/exfu/exfu-marketplace"
+          >Open-source tools <span aria-hidden="true">↗</span></a
+        >
+        <a href="mailto:al@exfu.ai">al@exfu.ai</a>
+      </div>
+      <div class="wrap footer-bottom">
+        <p>ExFu is a trading name of WhaleyBear Ltd.</p><p>Bristol, UK. Working remotely.</p><a
+          href="/privacy/">Privacy</a
+        >
+      </div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#site-nav');
+      if (toggle && nav) {
+        toggle.hidden = false;
+        document.documentElement.classList.add('has-js');
+        const close = () => {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+        };
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') !== 'true';
+          toggle.setAttribute('aria-expanded', String(open));
+          nav.classList.toggle('is-open', open);
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            close();
+            toggle.focus();
+          }
+        });
+        nav.addEventListener('click', (event) => {
+          if ((event.target as HTMLElement).closest('a')) close();
+        });
+        matchMedia('(min-width: 800px)').addEventListener('change', close);
+      }
+    </script>
+  </body>
+</html>

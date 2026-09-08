@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Let’s find a useful starting point"
+  description="Tell Alastair what you would like help with. Send a brief about fractional AI support, a defined project or personal agent setup, or use the short needs quiz."
+>
+  <section class="enquiry-section section">
+    <div class="wrap enquiry-layout">
+      <div class="enquiry-intro">
+        <p class="eyebrow red">Let’s talk</p><h1>
+          <span class="enquiry-default-title"
+            >A little context.<br />A useful<br />conversation.</span
+          ><span class="enquiry-quiz-title">Find your<br />starting point.</span>
+        </h1><p class="lead">
+          Tell me what you’d like to move forward. A rough idea is enough to start.
+        </p><p>
+          I’ll read your enquiry and reply personally. We can work out whether I’m the right person
+          to help.
+        </p><a class="text-link email-link" href="mailto:al@exfu.ai"
+          >Prefer email? al@exfu.ai <span aria-hidden="true">↗</span></a
+        ><div class="contact-note">
+          <p>
+            Fractional and contract work.<br />Remote preferred.<br />Bristol in person by
+            arrangement.
+          </p>
+        </div>
+      </div>
+      <div class="enquiry-workspace">
+        <div class="quiz-start" hidden>
+          <span>Still working out what to ask?</span><button
+            class="text-link"
+            id="start-quiz"
+            type="button">Try three short questions <span aria-hidden="true">↗</span></button
+          >
+        </div>
+        <section id="quiz" class="quiz-panel" aria-label="Find your starting point" hidden>
+          <div class="quiz-top">
+            <p id="quiz-progress" aria-live="polite">Question 1 of 3</p><button
+              type="button"
+              id="skip-quiz"
+              class="text-link">Skip to enquiry</button
+            >
+          </div>
+          <div class="progress-track" aria-hidden="true"><span id="quiz-progress-bar"></span></div>
+          <fieldset data-step="0">
+            <legend tabindex="-1">Where would you like help?</legend><label class="choice"
+              ><input type="radio" name="quiz-need" value="business" /><span
+                >AI across my business<small
+                  >Direction, leadership backing and ongoing support.</small
+                ></span
+              ></label
+            ><label class="choice"
+              ><input type="radio" name="quiz-need" value="project" /><span
+                >A specific project<small>An idea or brief I want to move forward.</small></span
+              ></label
+            ><label class="choice"
+              ><input type="radio" name="quiz-need" value="personal" /><span
+                >My own workload<small>Hands-on help getting agents working for me.</small></span
+              ></label
+            >
+          </fieldset>
+          <fieldset data-step="1" hidden>
+            <legend tabindex="-1">What is getting in the way?</legend><label class="choice"
+              ><input type="radio" name="quiz-obstacle" value="Knowing where to start" /><span
+                >Knowing where to start</span
+              ></label
+            ><label class="choice"
+              ><input type="radio" name="quiz-obstacle" value="Making the case to others" /><span
+                >Making the case to others</span
+              ></label
+            ><label class="choice"
+              ><input
+                type="radio"
+                name="quiz-obstacle"
+                value="Time or experience to build it"
+              /><span>Time or experience to build it</span></label
+            ><label class="choice"
+              ><input type="radio" name="quiz-obstacle" value="Making it work day to day" /><span
+                >Making it work day to day</span
+              ></label
+            >
+          </fieldset>
+          <fieldset data-step="2" hidden>
+            <legend tabindex="-1">How far along are you?</legend><label class="choice"
+              ><input type="radio" name="quiz-stage" value="Exploring what is possible" /><span
+                >Exploring what is possible</span
+              ></label
+            ><label class="choice"
+              ><input type="radio" name="quiz-stage" value="Have an opportunity in mind" /><span
+                >I have an opportunity in mind</span
+              ></label
+            ><label class="choice"
+              ><input type="radio" name="quiz-stage" value="Already trying things" /><span
+                >Already trying things</span
+              ></label
+            ><label class="choice"
+              ><input type="radio" name="quiz-stage" value="Ready to bring in help" /><span
+                >Ready to bring in help</span
+              ></label
+            >
+          </fieldset>
+          <p id="quiz-error" class="form-error" role="alert" hidden></p><div class="quiz-actions">
+            <button type="button" id="quiz-back" class="text-link" hidden>Back</button><button
+              type="button"
+              id="quiz-next"
+              class="button">Next question <span aria-hidden="true">↗</span></button
+            >
+          </div>
+        </section>
+        <div id="contact-panel">
+          <div id="quiz-result" class="quiz-result" hidden>
+            <p class="eyebrow">Your starting point</p><h2 id="result-title"></h2><p
+              id="result-description"
+            >
+            </p><button type="button" id="edit-answers" class="text-link">Change my answers</button>
+          </div>
+          <h2 class="form-title" tabindex="-1">What’s on your mind?</h2>
+          <form
+            name="enquiry"
+            method="POST"
+            action="/thanks/"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            id="enquiry-form"
+          >
+            <input type="hidden" name="form-name" value="enquiry" />
+            <p hidden>
+              <label
+                >Leave this empty <input name="bot-field" autocomplete="off" tabindex="-1" /></label
+              >
+            </p>
+            <label for="support">I’m interested in</label><select name="support" id="support"
+              ><option value="Not sure yet">Not sure yet</option><option
+                value="Fractional AI support">Fractional AI support</option
+              ><option value="A defined project">A defined project</option><option
+                value="Personal AI support">Personal AI support</option
+              ><option value="A contract opportunity">A contract opportunity</option></select
+            >
+            <label for="message">What would you like help with?</label><textarea
+              name="message"
+              id="message"
+              rows="5"
+              required
+              maxlength="8000"
+              aria-describedby="message-hint"></textarea><p id="message-hint" class="field-hint">
+              A few lines is plenty. Please leave out passwords and sensitive client information.
+            </p>
+            <div class="form-row">
+              <div>
+                <label for="name">Your name</label><input
+                  type="text"
+                  name="name"
+                  id="name"
+                  autocomplete="name"
+                  required
+                  maxlength="120"
+                />
+              </div><div>
+                <label for="email">Email address</label><input
+                  type="email"
+                  name="email"
+                  id="email"
+                  autocomplete="email"
+                  required
+                  maxlength="254"
+                />
+              </div>
+            </div>
+            <p class="form-privacy">
+              I’ll use these details to respond to your enquiry. <a href="/privacy/"
+                >How your information is handled</a
+              >.
+            </p>
+            <p id="form-status" role="status" aria-live="polite" tabindex="-1" hidden></p>
+            <button type="submit" class="button" id="send-enquiry"
+              >Send enquiry to Alastair <span aria-hidden="true">↗</span></button
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="../scripts/enquiry.ts"></script>
+</Layout>

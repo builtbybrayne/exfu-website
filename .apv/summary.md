@@ -1,38 +1,38 @@
-# Project state — generated 2026-09-08T16:19:54Z
+# Project state — generated 2026-09-08T16:53:20Z
 
-**Total events:** 34  ·  **Draft:** 2  ·  **Live:** 6  ·  **Dormant:** 0  ·  **Closed:** 0  ·  **Orphaned:** 0
+**Total events:** 51  ·  **Draft:** 2  ·  **Live:** 5  ·  **Dormant:** 0  ·  **Closed:** 1  ·  **Orphaned:** 0
 
 ## Live work
 
 ### By thematic parent
 
 - **(T1 itself)**
-  - `T1-exfu-website` (2 events): entity.created → entity.accepted
+  - `T1-exfu-website` (3 events): entity.created → entity.accepted → entity.progressed
 
 - **(T2 itself)**
-  - `T2-content-and-enquiries` (3 events): entity.created → relationship.spawns → entity.accepted
-  - `T2-implementation` (3 events): entity.created → relationship.spawns → entity.accepted
-  - `T2-visual-language` (3 events): entity.created → relationship.spawns → entity.accepted
+  - `T2-content-and-enquiries` (4 events): relationship.spawns → entity.accepted → entity.progressed
+  - `T2-implementation` (4 events): relationship.spawns → entity.accepted → entity.progressed
+  - `T2-visual-language` (4 events): relationship.spawns → entity.accepted → entity.progressed
 
 - **(milestone)**
-  - `M2-publish-ready` (3 events): entity.created → relationship.spawns → entity.accepted
-
-- **T2-implementation**
-  - `T3-build-static-site` (4 events): relationship.spawns → relationship.depends-on → entity.accepted
+  - `M2-publish-ready` (5 events): entity.accepted → entity.extended → verification.deferred
 
 ### By milestone
 
 - **(self: M2-publish-ready)**
   - `M2-publish-ready`
 
-- **M2-publish-ready**
-  - `T3-build-static-site`
-
 ## Awaiting operator
 
 **Acceptance ceremonies pending** (draft plans — the draft gate blocks implementation against them):
-- `M1-reviewable-design` (authored 2026-09-08, 1 commit(s) ago)
-- `T3-review-home-and-service` (authored 2026-09-08, 1 commit(s) ago)
+- `M1-reviewable-design` (authored 2026-09-08, 2 commit(s) ago)
+- `T3-review-home-and-service` (authored 2026-09-08, 2 commit(s) ago)
+
+**Closure ceremonies pending** (all scheduled T3s closed; milestone still live):
+- `M2-publish-ready`
+
+**Deferred verifications** (operator legs to come back to):
+- `M2-publish-ready` (deferred 2026-09-08): The user explicitly retains deployment to the existing Netlify site. After deploying, enable/verify form detection, configure enquiry notifications to al@exfu.ai and verify one actual submission, spam handling and email receipt. No external enquiry was authorized or sent.
 
 ## Draft
 
@@ -50,7 +50,7 @@ _No orphaned entities._
 
 ## Recently closed
 
-_None._
+- `T3-build-static-site` (plan)
 
 ## Notable patterns
 
@@ -59,7 +59,7 @@ _No flapping closures._
 ## Milestone progress
 
 - **M1-reviewable-design**: 0/1 T3 complete (0%); 0 live
-- **M2-publish-ready**: 0/1 T3 complete (0%); 1 live
+- **M2-publish-ready**: 1/1 T3 complete (100%); 0 live
 
 ---
-_8 entities · 11 relationships · 6 decisions._
+_8 entities · 11 relationships · 8 decisions._

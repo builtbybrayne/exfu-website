@@ -2,7 +2,7 @@
 id: T2-content-and-enquiries
 plan_kind: thematic
 tier: 2
-status: draft
+status: active
 ---
 
 # Content and enquiries

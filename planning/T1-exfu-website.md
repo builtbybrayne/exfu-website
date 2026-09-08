@@ -2,7 +2,7 @@
 id: T1-exfu-website
 plan_kind: thematic
 tier: 1
-status: draft
+status: active
 ---
 
 # ExFu website intent

@@ -2,7 +2,7 @@
 id: T2-visual-language
 plan_kind: thematic
 tier: 2
-status: draft
+status: active
 ---
 
 # Visual language

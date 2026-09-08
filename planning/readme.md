@@ -21,3 +21,7 @@ APV: run `./apv refresh` to rebuild projections and `./apv` to serve its view. R
 ## Development approval, 2026-09-08
 
 The user approved proceeding until the site is ready to publish, supplied `al@exfu.ai` for enquiries, and will deploy to an existing Netlify site themselves. This supersedes earlier design-only limitations and unresolved launch-destination questions. Implement Home, Fractional support, Personal support and About, with a short needs quiz, direct enquiry and necessary utility pages. Omit AI chat and the pricing meter. Use the approved warm Working canvas design and existing illustrative portraits. Record work under T3-build-static-site and M2-publish-ready. No deployment or customer contact is authorized. Netlify form detection and notification delivery require a post-deployment check by the operator.
+
+## Current handoff
+
+The implementation is now under `src/`, with a production build in ignored `dist/`. Read `README.md` for running, testing and the operator's Netlify deployment steps. `design/build-decisions.md` explains the translation from mockups to code and the launch trade-offs. The initial design-only draft paragraphs above are preserved history; they are superseded by the explicit development approval. M2-publish-ready tracks the handoff and final operator-owned delivery check. No new confirmation is needed to perform routine local checks or fixes within the accepted build scope.
