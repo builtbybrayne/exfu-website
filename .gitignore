@@ -1,0 +1,13 @@
+# agent-plan-visualiser local per-checkout state — never tracked
+.apv/.last-capture
+# agent-plan-visualiser local per-checkout state — never tracked
+.apv/.pending-extract
+# agent-plan-visualiser local per-checkout state — never tracked
+.apv/.toolchain-home
+.exfu/handoffs/
+.exfu/returns/
+.exfu/state/
+.apv/cache.sqlite*
+.apv/projection.json
+.apv/view.html
+.DS_Store
