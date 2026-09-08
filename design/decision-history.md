@@ -45,3 +45,7 @@ Captured 2026-09-08 from the current Codex task. This is a dated conversation su
 ## Still unresolved
 
 Exact fractional offer terms, final approved case material, enquiry destination and delivery service, production stack/hosting, and final page selection. Pricing-meter deferral is currently an agent recommendation. Future deployment needs a concrete built and tested result.
+
+## Development approval, 2026-09-08
+
+The user approved proceeding until the site is ready to publish, supplied `al@exfu.ai` for enquiries, and will deploy to an existing Netlify site themselves. This supersedes earlier design-only limitations and unresolved launch-destination questions. Implement Home, Fractional support, Personal support and About, with a short needs quiz, direct enquiry and necessary utility pages. Omit AI chat and the pricing meter. Use the approved warm Working canvas design and existing illustrative portraits. Record work under T3-build-static-site and M2-publish-ready. No deployment or customer contact is authorized. Netlify form detection and notification delivery require a post-deployment check by the operator.

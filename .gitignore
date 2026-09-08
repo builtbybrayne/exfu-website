@@ -11,3 +11,12 @@
 .apv/projection.json
 .apv/view.html
 .DS_Store
+
+node_modules/
+dist/
+.astro/
+test-results/
+playwright-report/
+.env
+.env.*
+!.env.example

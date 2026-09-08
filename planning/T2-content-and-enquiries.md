@@ -61,3 +61,7 @@ Draft authored 2026-09-08 following read-only inspection of the prior Astro impl
 - Include at least one white male among the illustrated avatars, reflecting the likely audience, while retaining the other selected portraits. Images do not define eligibility or infer the visitor's identity.
 - **Q1** remains open: actual delivery destination and mechanism have not been chosen.
 - **Q2** remains open for a future experiment; omitting the meter from launch is the current recommendation, not yet an explicit user acceptance.
+
+## Development approval, 2026-09-08
+
+The user approved proceeding until the site is ready to publish, supplied `al@exfu.ai` for enquiries, and will deploy to an existing Netlify site themselves. This supersedes earlier design-only limitations and unresolved launch-destination questions. Implement Home, Fractional support, Personal support and About, with a short needs quiz, direct enquiry and necessary utility pages. Omit AI chat and the pricing meter. Use the approved warm Working canvas design and existing illustrative portraits. Record work under T3-build-static-site and M2-publish-ready. No deployment or customer contact is authorized. Netlify form detection and notification delivery require a post-deployment check by the operator.

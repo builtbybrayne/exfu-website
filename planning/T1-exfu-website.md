@@ -62,3 +62,7 @@ The website should itself demonstrate thoughtful human-agent collaboration throu
 ## 7. Provenance and acceptance
 
 Drafted from this task's conversation on 2026-09-08. Section 5 records explicit user choices; the plan as a whole remains draft pending human acceptance. No clinical, financial, or technical performance promises are inferred from the branding or CVs.
+
+## Development approval, 2026-09-08
+
+The user approved proceeding until the site is ready to publish, supplied `al@exfu.ai` for enquiries, and will deploy to an existing Netlify site themselves. This supersedes earlier design-only limitations and unresolved launch-destination questions. Implement Home, Fractional support, Personal support and About, with a short needs quiz, direct enquiry and necessary utility pages. Omit AI chat and the pricing meter. Use the approved warm Working canvas design and existing illustrative portraits. Record work under T3-build-static-site and M2-publish-ready. No deployment or customer contact is authorized. Netlify form detection and notification delivery require a post-deployment check by the operator.

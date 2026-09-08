@@ -44,3 +44,7 @@ Drafted 2026-09-08. The user preferred concept 3, requested softer backgrounds a
 - **Q1/Q3:** the user said they like this design language and the visual direction. Continue from the homepage/service pair rather than reopening the concept search. This is direction approval, not acceptance of every generated phrase or formal acceptance of this entire plan.
 - The definition should explicitly explain the Kung Fu reference. Use **Execution fu (as in Kung Fu)**.
 - **Q2:** continue exploring the fan with at least one white male represented alongside the other avatars. Latest visual correction uses five source illustrations.
+
+## Development approval, 2026-09-08
+
+The user approved proceeding until the site is ready to publish, supplied `al@exfu.ai` for enquiries, and will deploy to an existing Netlify site themselves. This supersedes earlier design-only limitations and unresolved launch-destination questions. Implement Home, Fractional support, Personal support and About, with a short needs quiz, direct enquiry and necessary utility pages. Omit AI chat and the pricing meter. Use the approved warm Working canvas design and existing illustrative portraits. Record work under T3-build-static-site and M2-publish-ready. No deployment or customer contact is authorized. Netlify form detection and notification delivery require a post-deployment check by the operator.
