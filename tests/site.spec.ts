@@ -292,6 +292,7 @@ test('each persona cycles portraits and the pause control stops the cycle', asyn
 });
 test('setup commands copy exact text and FAQs are permanently visible', async ({ page }) => {
   await page.goto('/tools/');
+  await page.getByRole('radio', { name: 'Claude Code', exact: true }).check();
   await page.evaluate(() =>
     Object.defineProperty(navigator, 'clipboard', {
       value: {
@@ -361,6 +362,7 @@ test('plugin selection updates installation, copied text and first-session guida
   page,
 }) => {
   await page.goto('/tools/');
+  await page.getByRole('radio', { name: 'Claude Code', exact: true }).check();
   await page.evaluate(() =>
     Object.defineProperty(navigator, 'clipboard', {
       value: {
@@ -427,4 +429,54 @@ test('tools catalogue selects the correct plugin and sidebar stays available', a
     'aria-current',
     'location',
   );
+});
+
+test('app selection filters every setup step, preserves plugin choice and supports keyboard switching', async ({
+  page,
+}) => {
+  await page.goto('/tools/');
+  const cowork = page.getByRole('radio', { name: 'Cowork', exact: true });
+  const code = page.getByRole('radio', { name: 'Claude Code', exact: true });
+  await expect(cowork).toBeChecked();
+  await expect(page.locator('[data-setup-app="code"]:visible')).toHaveCount(0);
+  await page.locator('[data-choose-plugin="exfu-humane-agents"]').click();
+  await page.getByRole('link', { name: 'Change app', exact: true }).click();
+  await expect(cowork).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await expect(code).toBeChecked();
+  await expect(page.locator('[data-setup-app="cowork"]:visible')).toHaveCount(0);
+  await expect(page.locator('[data-setup-app="code"]:visible')).toHaveCount(2);
+  await expect(page.locator('#plugin-choice')).toHaveValue('exfu-humane-agents');
+  await expect(page.locator('#selected-terminal code')).toContainText(
+    'exfu-humane-agents@exfu-marketplace',
+  );
+  await expect(page.locator('#app-selection-status')).toContainText('Claude Code');
+  expect(
+    (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+      .violations,
+  ).toEqual([]);
+  await cowork.check();
+  await expect(page.locator('[data-setup-app="cowork"]:visible')).toHaveCount(2);
+  await expect(page.locator('#plugin-choice')).toHaveValue('exfu-humane-agents');
+});
+
+test('without JavaScript both app instructions and narrative content remain readable', async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto('http://127.0.0.1:4391/tools/');
+  await expect(page.locator('.app-picker')).toBeHidden();
+  await expect(page.locator('[data-setup-app]:visible')).toHaveCount(4);
+  for (const route of ['/fractional-support/', '/personal-support/']) {
+    await page.goto(`http://127.0.0.1:4391${route}`);
+    await expect(page.locator('.narrative-image')).toBeVisible();
+    const img = page.locator('.narrative-image img');
+    await img.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
+      .toBeTruthy();
+    await expect(page.locator('.faq-answer')).not.toHaveCount(0);
+  }
+  await context.close();
 });

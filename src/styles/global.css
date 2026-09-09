@@ -3614,3 +3614,334 @@ p + a.button {
 .more-tools .text-link {
   color: #92291c;
 }
+
+/* Secondary pages: an informative scan path within sustained reading. */
+.editorial-prose > section + section {
+  margin-top: 64px;
+  padding-top: 48px;
+}
+.editorial-prose h2 {
+  font-size: clamp(29px, 2.7vw, 38px);
+  line-height: 1.16;
+  text-wrap: balance;
+  margin-bottom: 22px;
+}
+.editorial-prose p {
+  line-height: 1.65;
+}
+.editorial-prose p.lead {
+  font-size: clamp(20px, 2vw, 23px);
+  line-height: 1.45;
+  margin-bottom: 20px;
+}
+.editorial-prose h3 {
+  text-wrap: balance;
+}
+.narrative-image {
+  margin: 32px 0 0;
+}
+.narrative-image img {
+  width: 100%;
+  border-radius: 2px;
+}
+.narrative-image figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.narrative-image figcaption span {
+  font-size: 12px;
+}
+.editorial-prose .evidence-chapter,
+.editorial-prose .routine-chapter {
+  background: #e8e3db;
+  padding: clamp(24px, 3vw, 36px);
+  border: 0;
+}
+.editorial-prose .case-account {
+  margin-top: 30px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.editorial-prose .case-account h3 {
+  font-size: 24px;
+  margin: 0 0 24px;
+}
+.case-facts {
+  margin: 0;
+}
+.case-facts > div {
+  display: grid;
+  grid-template-columns: 85px minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 16px;
+}
+.case-facts dt {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7;
+  padding-top: 2px;
+}
+.case-facts dd {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.service-rows {
+  margin-top: 30px;
+}
+.editorial-prose .service-rows > article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 25px;
+  margin-top: 28px;
+}
+.editorial-prose .service-rows h3 {
+  margin: 0;
+  font-size: 23px;
+  line-height: 1.25;
+}
+.editorial-prose .service-rows .row-answer {
+  margin-top: 12px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.editorial-prose .service-rows > article > p {
+  margin: 0;
+  font-size: 17px;
+}
+.bring-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 26px;
+}
+.bring-list li {
+  padding: 13px 0 13px 28px;
+  border-top: 1px solid var(--line);
+  position: relative;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.bring-list li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 21px;
+  width: 11px;
+  height: 7px;
+  border-left: 2px solid var(--red);
+  border-bottom: 2px solid var(--red);
+  transform: rotate(-45deg);
+}
+.editorial-prose .worked-example h3 {
+  margin-top: 30px;
+}
+.editorial-prose .example-label {
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+.routine-steps {
+  list-style: none;
+  counter-reset: routine;
+  padding: 0;
+  margin: 28px 0 0;
+}
+.routine-steps li {
+  counter-increment: routine;
+  position: relative;
+  padding: 20px 0 20px 40px;
+  border-top: 1px solid #beb6aa;
+}
+.routine-steps li::before {
+  content: counter(routine);
+  position: absolute;
+  left: 0;
+  top: 18px;
+  font-family:
+    Source Serif,
+    Georgia,
+    serif;
+  font-size: 25px;
+  color: var(--red);
+}
+.editorial-prose .routine-steps p {
+  margin-top: 7px;
+  font-size: 17px;
+}
+.editorial-prose .example-return {
+  border-top: 1px solid #beb6aa;
+  padding-top: 20px;
+  font-size: 16px;
+}
+.editorial-prose .perspective-map {
+  margin: 28px 0;
+}
+.editorial-prose .download-links {
+  margin-top: 24px;
+  margin-bottom: 30px;
+}
+.editorial-prose .engagement-start {
+  border: 0;
+  padding: 0;
+}
+.engagement-start .process-band {
+  padding: clamp(24px, 3vw, 36px);
+}
+.engagement-start .wrap {
+  width: 100%;
+}
+.engagement-start .section-heading {
+  display: block;
+  margin-bottom: 28px;
+}
+.engagement-start .section-heading p {
+  max-width: none;
+}
+.engagement-start .process-list {
+  display: block;
+}
+.engagement-start .process-list li {
+  padding: 20px 0 20px 44px;
+}
+.engagement-start .process-number {
+  position: absolute;
+  top: 21px;
+  left: 0;
+  font-size: 29px;
+  letter-spacing: -0.04em;
+}
+.engagement-start .process-list h3 {
+  margin: 0;
+  font-size: 23px;
+}
+.engagement-start .process-list p {
+  margin-top: 9px;
+  font-size: 17px;
+}
+.app-picker {
+  border: 0;
+  padding: 0;
+  margin: 30px 0 24px;
+}
+.app-picker legend {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 0;
+}
+.app-picker p {
+  font-size: 15px;
+  margin: 10px 0 16px;
+}
+.app-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.app-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 22px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  background: var(--white);
+}
+.app-options label:has(:checked) {
+  border-color: var(--red);
+  background: #e8e0d3;
+  font-weight: 600;
+}
+.app-options input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--red);
+}
+.app-filter-ready .setup-options {
+  grid-template-columns: minmax(0, 1fr);
+}
+.app-choice-reminder a {
+  text-decoration: underline;
+  color: var(--red);
+}
+@media (max-width: 1000px) and (min-width: 800px) {
+  .editorial-layout {
+    grid-template-columns: 185px minmax(0, 1fr);
+    gap: 35px;
+  }
+}
+@media (max-width: 599px) {
+  .editorial-prose .service-rows > article {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .case-facts > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-top: 20px;
+  }
+  .editorial-prose > section + section {
+    margin-top: 44px;
+    padding-top: 34px;
+  }
+  .editorial-prose .evidence-chapter,
+  .editorial-prose .routine-chapter {
+    padding: 22px;
+  }
+  .editorial-prose .engagement-start {
+    padding: 0;
+  }
+  .app-options label {
+    flex: 1 1 135px;
+  }
+}
+@media print {
+  .app-picker,
+  .app-choice-reminder {
+    display: none;
+  }
+  [data-setup-app][hidden] {
+    display: block !important;
+  }
+}
+
+/* A shallow, full-bleed pause before the practical questions. */
+.narrative-panorama {
+  width: 100%;
+  height: clamp(150px, 20vw, 320px);
+  overflow: hidden;
+  background: transparent;
+}
+.narrative-panorama img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 62%;
+}
+@media (max-width: 599px) {
+  .narrative-panorama {
+    height: auto;
+    aspect-ratio: 3 / 1;
+  }
+}
+
+/* Transparent vignettes keep the illustrations subordinate to the reading. */
+.narrative-image img {
+  aspect-ratio: 4 / 1;
+  object-fit: contain;
+  background: transparent;
+}
+@media (max-width: 599px) {
+  .narrative-image img {
+    aspect-ratio: 3 / 1;
+  }
+}

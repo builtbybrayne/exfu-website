@@ -48,3 +48,38 @@ if (links.length) {
   window.addEventListener('resize', updateSection);
   updateSection();
 }
+
+// App choice is local to this page; no storage, installation or network calls.
+const appPicker = document.querySelector<HTMLFieldSetElement>('.app-picker');
+if (appPicker) {
+  const appInputs = Array.from(appPicker.querySelectorAll<HTMLInputElement>('input'));
+  const updateApp = () => {
+    const selected = appInputs.find((input) => input.checked)?.value ?? 'cowork';
+    const name = selected === 'code' ? 'Claude Code' : 'Cowork';
+    document.querySelectorAll<HTMLElement>('[data-setup-app]').forEach((panel) => {
+      panel.hidden = panel.dataset.setupApp !== selected;
+    });
+    document.querySelectorAll<HTMLElement>('[data-current-app]').forEach((el) => {
+      el.textContent = name;
+    });
+    document.querySelector('#app-selection-status')!.textContent =
+      `Showing ${name} instructions for all setup steps.`;
+    document.querySelectorAll<HTMLElement>('.setup-options .copy-status').forEach((el) => {
+      el.hidden = true;
+    });
+    updateSection();
+  };
+  appPicker.hidden = false;
+  document.querySelectorAll<HTMLElement>('.app-choice-reminder').forEach((el) => {
+    el.hidden = false;
+  });
+  document.querySelector('.tools-main')?.classList.add('app-filter-ready');
+  appInputs.forEach((input) => input.addEventListener('change', updateApp));
+  document.querySelectorAll<HTMLAnchorElement>('[data-change-app]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      appInputs.find((input) => input.checked)?.focus();
+    });
+  });
+  updateApp();
+}

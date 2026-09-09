@@ -64,8 +64,35 @@ import { toolFamilies, marketplace } from '../data/tools';
           choose whichever plugins you want. If you have already added it, <a href="#setup"
             >go straight to your plugin</a
           >.
-        </p><div class="setup-options">
-          <article class="setup-option">
+        </p>
+        <fieldset class="app-picker" hidden>
+          <legend>Which app are you using?</legend>
+          <p id="app-choice-help">
+            Choose once for the instructions below. You can switch at any time.
+          </p>
+          <div class="app-options">
+            <label
+              ><input
+                type="radio"
+                name="setup-app"
+                value="cowork"
+                checked
+                aria-describedby="app-choice-help"
+              /> Cowork</label
+            >
+            <label
+              ><input
+                type="radio"
+                name="setup-app"
+                value="code"
+                aria-describedby="app-choice-help"
+              /> Claude Code</label
+            >
+          </div>
+          <p id="app-selection-status" role="status">Showing Cowork instructions.</p>
+        </fieldset>
+        <div class="setup-options">
+          <article class="setup-option" data-setup-app="cowork">
             <h3>In Cowork</h3><p>
               In Claude Desktop, open Cowork, then <strong>Customize → Plugins</strong>. Under
               Personal plugins, choose <strong>+ → Add marketplace</strong> and add from a repository.
@@ -74,7 +101,7 @@ import { toolFamilies, marketplace } from '../data/tools';
               target="_blank"
               rel="noopener noreferrer">Claude’s plugin guide ↗</a
             >
-          </article><article class="setup-option">
+          </article><article class="setup-option" data-setup-app="code">
             <h3>In Claude Code</h3><p>
               With Claude Code installed and signed in, paste this into your terminal:
             </p><CopyBlock
@@ -98,6 +125,11 @@ import { toolFamilies, marketplace } from '../data/tools';
           ><select id="plugin-choice"
             >{toolFamilies.map((tool) => <option value={tool.pkg}>{tool.name}</option>)}</select
           ><p id="plugin-selection-status" role="status">Showing Agent Library instructions.</p>
+          <p class="app-choice-reminder" hidden>
+            Using <span data-current-app>Cowork</span>. <a href="#marketplace" data-change-app
+              >Change app</a
+            >
+          </p>
         </div><div class="selected-plugin-body">
           <h2 id="selected-tool-title">Install the Agent Library.</h2><p
             id="selected-plugin-description"
@@ -106,13 +138,13 @@ import { toolFamilies, marketplace } from '../data/tools';
           </p><p>Marketplace added? These instructions install just this plugin.</p><div
             class="setup-options"
           >
-            <article class="setup-option">
+            <article class="setup-option" data-setup-app="cowork">
               <h3>In Cowork</h3><p>
                 Browse your ExFu marketplace and find <strong id="selected-plugin-name"
                   >exfu-agent-library-solo</strong
                 >. Choose Install, then check that it is enabled.
               </p>
-            </article><article class="setup-option">
+            </article><article class="setup-option" data-setup-app="code">
               <h3>In Claude Code</h3><p>In your terminal:</p><div id="selected-terminal">
                 <CopyBlock
                   text="claude plugin install exfu-agent-library-solo@exfu-marketplace"

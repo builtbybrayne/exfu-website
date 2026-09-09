@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import WorkingNote from '../components/WorkingNote.astro';
+import NarrativeImage from '../components/NarrativeImage.astro';
 import Invitation from '../components/Invitation.astro';
 ---
 
@@ -27,78 +27,115 @@ import Invitation from '../components/Invitation.astro';
       </div>
     </div>
   </section>
-  <div class="wrap reading-layout section">
+  <div class="wrap reading-layout section editorial-layout">
     <nav class="contents" aria-label="On this page">
-      <p>On this page</p><a href="#starting">Start with your day</a><a href="#setup"
-        >What we set up</a
-      ><a href="#fit">Who it’s for</a><a href="#questions">Practical questions</a>
-    </nav><div class="prose">
+      <p>On this page</p><a href="#starting">What you bring</a><a href="#setup"
+        >What we do together</a
+      ><a href="#routine">What you keep using</a><a href="#fit">Who it’s for</a><a href="#questions"
+        >Practical questions</a
+      >
+    </nav>
+    <div class="prose editorial-prose">
       <section id="starting">
-        <h2>You don’t need another list of things AI can do.</h2><p class="lead">
-          You need help making it useful for the way you actually work.
-        </p><p>
-          You might have tried a few tools, had some impressive conversations, and still find the
-          same jobs waiting for you. Or you may know where you want help but not how to connect the
-          pieces.
-        </p><p>
-          We choose a real workstream and work through it together. You get practical setup, an
-          explanation of what is happening, and conventions you can return to once the session is
-          over.
+        <h2>Bring one job you’d like help with.</h2>
+        <p class="lead">A real workstream gives us somewhere useful to start.</p>
+        <p>
+          You might have tried a few AI tools and still find the same jobs waiting for you. Bring an
+          example: preparing for meetings, drafting follow-ups, organising project information or
+          triaging email. You don’t need to know how to connect the pieces.
         </p>
+        <ul class="bring-list">
+          <li>The task you want help with</li><li>An example of the information it uses</li><li>
+            What you want to check yourself
+          </li>
+        </ul>
+        <NarrativeImage
+          name="a-place-to-return"
+          alt="A hand places a loose note in an open notebook beside a laptop."
+          caption="Give the work a place you can come back to."
+        />
       </section>
-      <WorkingNote
-        label="A starting point, on paper"
-        title="One job. A little context. Something to try."
-        items={[
-          'The task you want help with',
-          'The information it needs',
-          'What you want to check yourself',
-        ]}
-        note="Bring a real example. We can work through the setup together."
-      />
       <section id="setup">
-        <h2>Give your agent some context.</h2><p>
-          A useful agent needs to understand your work. We can set up a library of context, reusable
-          skills, and sensible ways to store and update information. Claude is one tool I work with;
-          the setup depends on what you need and already use.
-        </p><h3>A place to begin</h3><p>
-          That could be organising information for a recurring project, preparing for meetings,
-          drafting follow-ups, or helping triage email. We look at what the agent needs access to,
-          where you want to stay involved, and which actions should wait for your approval.
-        </p><h3>A setup you understand</h3><p>
-          We work together so you can see how the pieces fit. You learn how to give useful
-          direction, recognise when an answer needs checking, and adjust the setup as your work
-          changes.
-        </p><h3>Conventions that make it easier to return</h3><p>
-          Clear places for context, ongoing tasks and reusable instructions reduce the effort of
-          starting again. Where scheduled tasks are useful, we agree what they should do and how you
-          will know whether they worked.
+        <h2>We build the setup together.</h2>
+        <p class="lead">You see how it works, and decide where you stay involved.</p>
+        <p>
+          We give the agent useful context, connect the tools it needs and try it on your work.
+          Claude is one tool I use; the choice depends on what you need and already have.
         </p>
-      </section>
-      <div class="context-map" aria-label="How a personal agent setup fits together">
-        <div><span>Context</span><p>What it needs to know</p></div><b aria-hidden="true">+</b><div>
-          <span>Skills</span><p>How you want it to work</p>
-        </div><b aria-hidden="true">=</b><div>
-          <span>A working routine</span><p>Something you can return to</p>
+        <div class="service-rows">
+          <article>
+            <div>
+              <h3>Give it context</h3><p class="row-answer">Help it understand the task.</p>
+            </div><p>
+              Organise relevant information, reusable instructions and sensible places to store
+              updates. We agree what the agent needs access to.
+            </p>
+          </article>
+          <article>
+            <div>
+              <h3>Try it on real work</h3><p class="row-answer">
+                Learn by working through an example.
+              </p>
+            </div><p>
+              Practise giving direction, checking an answer and adjusting the setup. Agree which
+              actions should wait for your approval.
+            </p>
+          </article>
         </div>
-      </div>
+      </section>
+      <section id="routine" class="routine-chapter">
+        <h2>A routine you can return to.</h2>
+        <p>
+          Clear places for context, ongoing tasks and reusable instructions make it easier to pick
+          up the work again. Where scheduled tasks are useful, we agree what they should do and how
+          you’ll know whether they worked.
+        </p>
+        <div class="worked-example">
+          <h3>For example: preparing for a meeting.</h3>
+          <p class="example-label">An illustrative workflow we could build around your needs.</p>
+          <ol class="routine-steps">
+            <li>
+              <strong>Your context</strong><p>
+                Previous notes, the agenda and the questions you need answered.
+              </p>
+            </li>
+            <li>
+              <strong>The agent’s task</strong><p>
+                Bring the relevant points together in a draft briefing.
+              </p>
+            </li>
+            <li>
+              <strong>Your check</strong><p>
+                Check the sources, correct the draft and decide what to use.
+              </p>
+            </li>
+          </ol>
+          <p class="example-return">
+            Next time, return to the same instructions with the new meeting context.
+          </p>
+        </div>
+      </section>
       <section id="fit">
-        <h2>For a busy mind, and a real workload.</h2><p>
-          I work with business owners, leaders, coaches and people managing their own work. You do
-          not need to be a developer. Curiosity and a willingness to try things are a useful
-          starting point.
-        </p><p>
+        <h2>For your workload and your way of working.</h2>
+        <p class="lead">You don’t need to be a developer.</p>
+        <p>
+          I work with business owners, leaders, coaches and people managing their own work.
+          Curiosity and a willingness to try things are a useful starting point.
+        </p>
+        <h3>Room for a busy mind.</h3>
+        <p>
           Executive function is one of the meanings behind ExFu. I’m interested in making these
           tools helpful for people with ADHD and other neurodivergent ways of working. We can
           account for how you plan, maintain context and return to a task, without expecting you to
           become a different person.
-        </p><p>
+        </p>
+        <p>
           This is practical AI consultancy. My psychotherapy training informs how I work with
           people; these sessions are not therapy or clinical care.
-        </p><p>
-          If you are setting this up as a leader, your own experience can also become a useful
-          foundation for deciding how to <a href="/fractional-support/"
-            >bring AI into the wider business</a
+        </p>
+        <p>
+          If you lead a team, your own experience can also help you decide how to <a
+            href="/fractional-support/">bring AI into the wider business</a
           >.
         </p>
       </section>
@@ -106,9 +143,9 @@ import Invitation from '../components/Invitation.astro';
   </div>
   <section class="section faq-section" id="questions">
     <div class="wrap reading-layout">
-      <div><p class="eyebrow">Before we start</p><h2>A practical<br />conversation.</h2></div><div
-        class="faqs"
-      >
+      <div>
+        <p class="eyebrow">Before we start</p><h2>Tools, costs &amp;<br />one-to-one help.</h2>
+      </div><div class="faqs">
         <article class="faq-answer">
           <h3>Do I need to know which tool I want?</h3><p>
             No. Tell me what you would like help with and what you already use. We can work out a

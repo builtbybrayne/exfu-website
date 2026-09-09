@@ -12,3 +12,7 @@ Deliver an accessible, responsive Astro website on Netlify with no runtime AI or
 ## Operator authorization
 
 2026-09-08: the user instructed “Otherwise, proceed with the plan until the site is ready to publish.” These documents decompose that authorized work; technical choices are delegated to the implementing agent.
+
+## Secondary-page revision, 2026-09-09
+
+The user approved the recommendations from the readability review in this task. Implemented descriptive scan paths, early structured project evidence, service rows, a concrete personal workflow, foregrounded About perspectives and selective Cowork/Claude Code setup instructions. Added two narrative illustrations and a shallow full-width panorama following the user's imagery feedback. The implementation details and verification are in `design/secondary-page-readability.md`; exact image prompts are retained. This records the current session's authorization, not retroactive acceptance of older design drafts.

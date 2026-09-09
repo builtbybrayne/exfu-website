@@ -103,3 +103,21 @@ User changed the agent introduction to “Want an AI to read this website for yo
 ## Copy cleanup and main handoff, 2026-09-09
 
 User requested “Different clients. Familiar sticking points” and removal of the outgoing arrow on the internal footer Tools link, followed by capture/commit/merge/push. Both edits are on main. Current origin is git@github.com:builtbybrayne/exfu-website.git; fetch confirms main aligned with origin before this commit.
+
+## Secondary-page readability and narrative imagery, 2026-09-09
+
+The user approved the task's recommendations: descriptive headings and summary sentences, different structures for different information, removal of repetition, purposeful visual pauses, open FAQs and a single app choice for Tools setup. Implemented across Fractional, Personal, About and Tools. Project evidence appears earlier and retains existing grounded claims and anchors. The user also suggested generated imagery and explicitly proposed shallow full-width panoramas for breaks between sections. Added two 3:2 graphite/watercolour narrative illustrations and one panoramic workbench break. These are illustrations, not client evidence. See `secondary-page-readability.md` and `narrative-image-prompts.json` for implementation and prompt provenance. No publication or real enquiry was performed.
+
+### Image review follow-up, same task
+
+The user requested transparent backgrounds for the panoramas and said the squarer figures were too imposing. All three narrative assets are now shallow panoramas with verified alpha transparency. Painted-checkerboard intermediate outputs were rejected. The user also requested their separately generated sketch profile picture on About; its location has been requested, and the existing photograph remains pending receipt of that specific image.
+
+### Visual content remains under review
+
+The user likes the structure of the shallow visual breaks but says the content, and possibly the style, are not yet right; they suggest fewer hands. The current transparent illustrations are provisional review assets, not an accepted final art direction. Proposed directions for review are abstract editorial arrangements, landscape-like paths/crossings, or simplified recognisable work with no hands/desk scenes. Further generation is paused pending that preference. The approved readability and Tools interaction revisions remain implemented.
+
+## Three art directions for visual selection, 2026-09-09
+
+The user asked to generate all three proposed alternatives and flip between them visually. Generated hand-free transparent panoramas for A: abstract editorial fragments and threads; B: landscape with a path, bridge and clearing; C: recognisable documents becoming a usable briefing. No direction has been selected or approved for the website.
+
+`design/imagery-review.html` is a standalone comparison with identical placement and surrounding text, A/B/C buttons, previous/next controls, arrow-key navigation and paper/putty/dark background selection. Assets and exact prompts are in `design/imagery-options/`. Serve with `python3 -m http.server 4393 --bind 127.0.0.1 --directory design`, then open `http://127.0.0.1:4393/imagery-review.html`. The review server was left running for the user. Browser inspection verified switching A/B/C, next, dark background compositing and return to paper. The website's current provisional illustrations remain separate from this exploration. The requested About sketch still awaits its file.

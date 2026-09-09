@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import WorkingNote from '../components/WorkingNote.astro';
+import NarrativeImage from '../components/NarrativeImage.astro';
 import Invitation from '../components/Invitation.astro';
 import Process from '../components/Process.astro';
 ---
@@ -26,108 +26,144 @@ import Process from '../components/Process.astro';
       </div>
     </div>
   </section>
-  <div class="wrap service-summary">
-    <span>A business goal to work towards.</span><span>Make the case. Build the solution.</span
-    ><span>Ownership inside your team.</span>
-  </div>
-  <div class="wrap reading-layout section">
+  <div class="wrap reading-layout section editorial-layout">
     <nav class="contents" aria-label="On this page">
-      <p>On this page</p><a href="#making-the-case">Making the case</a><a href="#what-we-can-do"
-        >What we can work on</a
-      ><a href="#recent-experience">Recent experience</a><a href="#questions">Practical questions</a
-      ><a class="text-link" href="/enquire/?need=business">Tell me what’s on your mind ↗</a>
+      <p>On this page</p>
+      <a href="#making-the-case">Working alongside your team</a>
+      <a href="#recent-experience">Recent experience</a>
+      <a href="#what-we-can-do">What we can work on</a>
+      <a href="#how-we-start">How we start</a>
+      <a href="#questions">Practical questions</a>
+      <a class="text-link" href="/enquire/?need=business">Discuss your brief ↗</a>
     </nav>
-    <div class="prose">
+    <div class="prose editorial-prose">
       <section id="making-the-case">
-        <h2>When you need more than enthusiasm.</h2><p class="lead">
-          You can see that AI could be useful. Turning that into a proposal people can assess is
-          another piece of work.
-        </p><p>
-          You may already have a CTO or someone pushing AI forward. They need time, technical
-          backing, and a case leadership can consider. I work alongside that person, helping them
-          explore the opportunities, test assumptions and explain what is worth pursuing.
-        </p><p>
-          We start with a business goal. That might mean exploring a new customer channel, improving
-          access to business knowledge, or creating a workflow nobody currently has capacity to run.
-          We look at the value, the effort and the uncertainties before deciding what to build.
-        </p><blockquote>What useful work isn’t happening today?</blockquote><p>
-          That question often opens up better possibilities. An agent might research more potential
-          customers than your team could reasonably investigate, or keep a business tool up to date
-          using context already sitting in documents and emails. The aim is to add something
-          worthwhile, with the people affected involved from the start.
+        <h2>Build a business case alongside your CTO.</h2>
+        <p class="lead">
+          Experienced support for the person moving AI forward inside your business.
         </p>
+        <p>
+          You may have a CTO or an internal advocate with opportunities to explore and limited time
+          to pursue them. I work alongside them, bringing technical backing and practical delivery
+          so leadership has something concrete to assess.
+        </p>
+        <p>
+          The starting point is useful work: a new customer channel, better access to business
+          knowledge, or a workflow your team doesn’t have capacity to run. We consider the value,
+          effort and uncertainties together.
+        </p>
+        <NarrativeImage
+          name="working-together"
+          alt="Two hands working through a paper prototype beside a laptop."
+          caption="Make the question concrete enough to work through together."
+        />
       </section>
-      <WorkingNote
-        label="The first useful deliverable"
-        title="A decision you can make."
-        items={['One business goal', 'An assumption to test', 'Evidence for the next step']}
-        note="Something concrete for leadership to assess, before a larger commitment."
-      />
+      <section id="recent-experience" class="evidence-chapter">
+        <h2>Recent work, from question to outcome.</h2>
+        <p>Two examples of how an engagement can develop. Client names are omitted.</p>
+        <article id="travel" class="case-account">
+          <h3>Travel: finding a better direction.</h3>
+          <dl class="case-facts">
+            <div>
+              <dt>Situation</dt><dd>
+                A travel business wanted to explore an AI customer-discovery channel.
+              </dd>
+            </div>
+            <div>
+              <dt>Work</dt><dd>
+                A prototype tested the opportunity. The findings helped redirect investment towards
+                a customer-facing agent on the company’s own website.
+              </dd>
+            </div>
+            <div>
+              <dt>Outcome</dt><dd>
+                A better-informed direction, with the development team supported and trained to take
+                ownership of the implementation.
+              </dd>
+            </div>
+          </dl>
+        </article>
+        <article id="ev-project" class="case-account">
+          <h3>EV sector: supporting an internal AI specialist.</h3>
+          <dl class="case-facts">
+            <div>
+              <dt>Situation</dt><dd>
+                The business was exploring AI applications across management teams.
+              </dd>
+            </div>
+            <div>
+              <dt>Work</dt><dd>
+                Practical experiments alongside training for an in-house AI specialist.
+              </dd>
+            </div>
+            <div>
+              <dt>Outcome</dt><dd>
+                Support for someone inside the business to develop the knowledge and confidence to
+                carry the work forward.
+              </dd>
+            </div>
+          </dl>
+        </article>
+      </section>
       <section id="what-we-can-do">
-        <h2>What we can work on.</h2><p>
-          Your needs determine the mix of advice, engineering and team support. An engagement can
-          develop across several of these areas.
-        </p><h3>Opportunity and business case</h3><p>
-          Work with leadership and internal advocates to identify useful applications, assess
-          feasibility, and propose a specific next step. Small experiments can make the trade-offs
-          clearer before a larger commitment.
-        </p><h3>Agents, workflows and integrations</h3><p>
-          Build internal or customer-facing agents, connect existing tools, and make shared context
-          available where people need it. That can include MCP servers, skill libraries, CRM
-          extensions, dashboards and visible automations. Sometimes an existing product is the
-          sensible choice; sometimes a small custom build is needed.
-        </p><h3>Team adoption and internal ownership</h3><p>
-          Help people work confidently with the tools they will use. Some are comfortable directing
-          an agent; others need a familiar interface and a workflow they can see. We account for
-          that in the implementation.
-        </p><p>
-          I can also support an in-house specialist taking responsibility for the agent
-          infrastructure: the shared skills, permissions, context and conventions that need ongoing
-          care. The aim is for your team to have the knowledge and ownership to keep developing the
-          work.
-        </p>
+        <h2>Advice, engineering and team support.</h2>
+        <p>Your needs determine the mix. An engagement can develop across these areas.</p>
+        <div class="service-rows">
+          <article>
+            <div>
+              <h3>Opportunity &amp; business case</h3><p class="row-answer">
+                A next step leadership can assess.
+              </p>
+            </div><p>
+              Identify useful applications, assess feasibility and make the trade-offs clear. A
+              focused experiment can test an assumption before a larger commitment.
+            </p>
+          </article>
+          <article>
+            <div>
+              <h3>Agents, workflows &amp; integrations</h3><p class="row-answer">
+                Useful tools connected to your work.
+              </p>
+            </div><p>
+              Build internal or customer-facing agents and connect shared context. That can include
+              MCP servers, skill libraries, CRM extensions, dashboards and visible automations. We
+              choose between existing products and a custom build according to the need.
+            </p>
+          </article>
+          <article>
+            <div>
+              <h3>Team adoption &amp; ownership</h3><p class="row-answer">
+                People who can keep it working.
+              </p>
+            </div><p>
+              Help your team use the tools confidently, whether through a familiar interface or by
+              directing an agent. Support can include an in-house specialist looking after shared
+              skills, permissions, context and conventions.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section id="how-we-start" class="engagement-start">
+        <Process />
       </section>
     </div>
   </div>
-  <Process />
-  <div class="wrap reading-layout section" id="recent-experience">
-    <aside class="contents">
-      <p>Experience, in context</p><p class="aside-note">
-        Two examples of how the work can develop. Client names are omitted here.
-      </p>
-    </aside><div class="prose">
-      <h2>Recent experience.</h2><article id="travel" class="project-note">
-        <div class="project-path" aria-label="Project path">
-          <span>Discovery prototype</span><b aria-hidden="true">·</b><span>Company website</span><b
-            aria-hidden="true">·</b
-          ><span>Team ownership</span>
-        </div>
-        <p class="eyebrow red">Travel</p><h3>Test a channel. Follow the evidence.</h3><p>
-          A travel business was exploring a possible AI customer-discovery channel. The work started
-          with a prototype to investigate that opportunity.
-        </p><p>
-          The findings helped redirect investment towards a customer-facing agent on the company’s
-          own website. The development team was supported and trained to take ownership of the
-          implementation.
-        </p><p>
-          The useful outcome was a better-informed direction and work the team could take forward.
-        </p>
-      </article><article id="ev-project">
-        <p class="eyebrow red">EV sector</p><h3>Back the people carrying it forward.</h3><p>
-          Work with an EV sector company included AI experiments across management teams and
-          training for an in-house AI specialist.
-        </p><p>
-          Alongside exploring applications, the work supported someone inside the business to
-          develop the knowledge and confidence to carry it forward. That combination of practical
-          exploration and internal ownership informs how I approach fractional support.
-        </p>
-      </article>
-    </div>
+  <div class="narrative-panorama" aria-hidden="true">
+    <img
+      src="/images/narrative/workbench-panorama-1800.webp"
+      srcset="/images/narrative/workbench-panorama-900.webp 900w, /images/narrative/workbench-panorama-1800.webp 1800w"
+      sizes="100vw"
+      width="1800"
+      height="600"
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
   </div>
   <section class="faq-section section" id="questions">
     <div class="wrap reading-layout">
       <div>
-        <p class="eyebrow">The practical bits</p><h2>A few things<br />you might ask.</h2>
+        <p class="eyebrow">The practical bits</p><h2>Scope, fees &amp;<br />working together.</h2>
       </div><div class="faqs">
         <article class="faq-answer">
           <h3>Can you work alongside our CTO?</h3><p>

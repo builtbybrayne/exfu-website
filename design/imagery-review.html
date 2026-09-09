@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>ExFu — compare imagery directions</title>
+<style>
+@font-face{font-family:Work;src:url('./imagery-options/work-sans-variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+*{box-sizing:border-box}body{margin:0;font-family:Work,Arial,sans-serif;background:#f5f3ee;color:#25231f}button,select{font:inherit;color:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #af3323;outline-offset:4px}::selection{background:#eac9bb}header{background:#fcfbf8;border-bottom:1px solid #c9c2b7;padding:22px clamp(20px,4vw,64px)}.topline{display:flex;gap:24px;align-items:baseline;justify-content:space-between}h1{font-size:26px;letter-spacing:-.035em;margin:0;font-weight:650}.review-note{font-size:13px;color:#625e57;margin:0}.switcher{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 16px}.switcher button{background:transparent;border:1px solid #bcb5aa;padding:12px 18px;min-height:46px;border-radius:3px;font-weight:500}.switcher button[aria-pressed=true]{background:#af3323;color:#fff;border-color:#af3323}.switcher button:hover{border-color:#af3323}.tools{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center;justify-content:space-between}.tools p{margin:0;font-size:13px;color:#625e57}.background-control{display:flex;gap:10px;align-items:center;font-size:14px}.background-control select{padding:9px 12px;background:#fff;border:1px solid #bcb5aa;border-radius:3px}.stage{--ground:#f5f3ee;--text:#25231f;--secondary:#625e57;--rule:#c9c2b7;background:var(--ground);color:var(--text);min-height:540px}.stage[data-scheme=putty]{--ground:#dfd8ce;--secondary:#514c45;--rule:#b8b0a4}.stage[data-scheme=dark]{--ground:#4b463e;--text:#fcfbf8;--secondary:#e0d8cd;--rule:#8d8578}.page-copy{max-width:1120px;margin:0 auto;padding:30px 32px;display:grid;grid-template-columns:1fr 1.25fr;gap:50px;align-items:start}.page-copy h2{font-size:clamp(23px,2.5vw,34px);line-height:1.15;letter-spacing:-.035em;margin:0;font-weight:620;text-wrap:balance}.page-copy p{font-size:17px;line-height:1.6;margin:0;color:var(--secondary);max-width:58ch}.image-break{width:100%;height:clamp(145px,19vw,260px);display:grid;place-items:center;padding:0 20px}.image-break img{display:block;grid-area:1/1;width:100%;height:100%;object-fit:contain;min-height:0;max-width:1600px}.image-break img[hidden]{display:none}.below{border-top:1px solid var(--rule);padding-top:28px}.caption{border-top:1px solid #c9c2b7;padding:22px clamp(20px,4vw,64px);display:flex;justify-content:space-between;align-items:center;gap:22px;background:#fcfbf8}.caption h2{font-size:19px;margin:0 0 6px;letter-spacing:-.02em}.caption p{font-size:14px;line-height:1.5;margin:0;max-width:68ch;color:#625e57}.arrows{display:flex;gap:10px;flex-shrink:0}.arrows button{padding:12px 16px;min-height:44px;background:#f5f3ee;border:1px solid #bcb5aa;border-radius:3px}.arrows button:hover{background:#e8e0d3}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}footer{padding:14px 24px;text-align:center;font-size:12px;color:#625e57}a{color:#af3323;text-underline-offset:3px}@media(max-width:650px){.topline{display:block}.review-note{margin-top:8px}.switcher{gap:8px}.switcher button{flex:1 1 140px;font-size:14px;padding:10px}.tools{gap:12px}.page-copy{grid-template-columns:1fr;gap:14px;padding:24px}.page-copy p{font-size:16px}.image-break{height:155px;padding:0 8px}.caption{display:block}.arrows{margin-top:18px}.arrows button{flex:1}.stage{min-height:0}}
+</style>
+</head>
+<body>
+<header>
+<div class="topline"><h1>ExFu · Three imagery directions</h1><p class="review-note">Visual exploration · no final direction chosen</p></div>
+<div class="switcher" role="group" aria-label="Image direction">
+<button type="button" data-option="0" aria-pressed="true">A · Abstract editorial</button>
+<button type="button" data-option="1" aria-pressed="false">B · Landscape-like</button>
+<button type="button" data-option="2" aria-pressed="false">C · Recognisable work</button>
+</div>
+<div class="tools"><p>Same position and size. Use the buttons or your left / right arrow keys.</p><label class="background-control">Page background <select id="background"><option value="paper">Warm paper</option><option value="putty">Putty</option><option value="dark">Warm dark</option></select></label></div>
+</header>
+<main>
+<section class="stage" id="stage" data-scheme="paper" aria-label="Illustration in page context">
+<div class="page-copy"><h2>Give the work somewhere to start.</h2><p>A first project gives us something concrete to learn from. Choose a useful goal, test the assumptions and build with your team.</p></div>
+<div class="image-break">
+<img src="./imagery-options/a-abstract.webp" alt="Paper fragments and fine threads coming into an arrangement." width="1800" height="600" data-art="0" />
+<img src="./imagery-options/b-landscape.webp" alt="A path through low hills crosses a footbridge and reaches a clearing." width="1800" height="600" data-art="1" hidden />
+<img src="./imagery-options/c-recognisable.webp" alt="Documents connect through a few modules to an organised briefing." width="1800" height="600" data-art="2" hidden />
+</div>
+<div class="page-copy below"><h2>Scope, fees &amp; working together.</h2><p>We discuss the outcome, the work involved and the level of support before agreeing an engagement. You can send an initial brief even if the scope is still taking shape.</p></div>
+</section>
+<div class="caption"><div><h2 id="direction-name">A · Abstract editorial</h2><p id="direction-description">Fragments and threads suggest making sense of complexity. The most abstract and graphic of the three.</p></div><div class="arrows"><button type="button" id="previous" aria-label="Previous imagery direction">Previous</button><button type="button" id="next" aria-label="Next imagery direction">Next</button></div></div>
+<p class="sr-only" id="status" role="status" aria-live="polite"></p>
+</main>
+<footer>All three images have real transparent backgrounds. <a href="http://127.0.0.1:4387/fractional-support/" target="_blank" rel="noopener">Open the website preview</a></footer>
+<script>
+const options=[
+{name:'A · Abstract editorial',description:'Fragments and threads suggest making sense of complexity. The most abstract and graphic of the three.'},
+{name:'B · Landscape-like',description:'A path, a crossing and a clearing suggest finding a way forward. More atmospheric and gently metaphorical.'},
+{name:'C · Recognisable work',description:'Information becomes a usable briefing. More explicit about the work, with simplified shapes and no desk scene.'}
+];
+const buttons=[...document.querySelectorAll('[data-option]')];
+const images=[...document.querySelectorAll('[data-art]')];
+let current=Math.max(0,['a','b','c'].indexOf(location.hash.slice(1).toLowerCase()));
+function show(index,announce=true){current=(index+options.length)%options.length;buttons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===current)));images.forEach((image,i)=>image.hidden=i!==current);document.querySelector('#direction-name').textContent=options[current].name;document.querySelector('#direction-description').textContent=options[current].description;if(announce)document.querySelector('#status').textContent=options[current].name;history.replaceState(null,'','#'+['a','b','c'][current]);}
+buttons.forEach((button,i)=>button.addEventListener('click',()=>show(i)));
+document.querySelector('#previous').addEventListener('click',()=>show(current-1));
+document.querySelector('#next').addEventListener('click',()=>show(current+1));
+document.querySelector('#background').addEventListener('change',event=>document.querySelector('#stage').dataset.scheme=event.target.value);
+document.addEventListener('keydown',event=>{if(event.target instanceof HTMLSelectElement||event.altKey||event.metaKey||event.ctrlKey)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();show(current+(event.key==='ArrowRight'?1:-1));}});
+show(current,false);
+</script>
+</body>
+</html>

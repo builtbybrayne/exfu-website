@@ -1,0 +1,22 @@
+---
+interface Props {
+  name: 'working-together' | 'a-place-to-return';
+  alt: string;
+  caption: string;
+}
+const { name, alt, caption } = Astro.props;
+---
+
+<figure class="narrative-image">
+  <img
+    src={`/images/narrative/${name}-1200.webp`}
+    srcset={`/images/narrative/${name}-600.webp 600w, /images/narrative/${name}-1200.webp 1200w`}
+    sizes="(max-width: 799px) calc(100vw - 40px), (max-width: 1100px) 65vw, 740px"
+    width="1200"
+    height="400"
+    alt={alt}
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption>{caption} <span>Illustration</span></figcaption>
+</figure>

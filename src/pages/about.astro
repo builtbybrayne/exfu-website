@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import WorkingNote from '../components/WorkingNote.astro';
 import Invitation from '../components/Invitation.astro';
 ---
 
@@ -30,90 +29,83 @@ import Invitation from '../components/Invitation.astro';
       </figure>
     </div>
   </section>
-  <div class="wrap reading-layout section">
+  <div class="wrap reading-layout section editorial-layout">
     <nav class="contents" aria-label="On this page">
       <p>On this page</p><a href="#approach">How I approach the work</a><a href="#experience"
         >Experience & CVs</a
       ><a href="#tools">Tools out in the open</a><a href="#working">Working together</a>
-    </nav><div class="prose">
+    </nav><div class="prose editorial-prose">
       <section id="approach">
-        <h2>The work has to make sense for the people doing it.</h2><p class="lead">
-          A good technical idea is only part of a useful implementation.
-        </p><p>
-          There is also the question of what the business needs, who will use the result, and what
-          it will take to keep it working. I bring those questions into the room with the
-          engineering.
-        </p><p>
-          I have spent more than 20 years building software and leading technical work, including as
-          a CTO. Running an AI-enabled product startup has also meant making the decisions about
-          what to prioritise, what to test, and where to spend limited time.
-        </p><p>
-          Alongside that, I retrained as a psychotherapist. It informs how I listen, how I support
-          someone learning an unfamiliar tool, and how I think about change inside a team. In ExFu
-          engagements, the work is AI consultancy.
-        </p><p>
-          I’m particularly interested in applications that make room for useful work nobody
-          currently has the capacity to do. That might be exploring a revenue opportunity,
-          connecting knowledge across a business, or supporting someone with the admin that keeps
-          piling up.
+        <h2>Business judgement. Hands-on engineering. An understanding of people.</h2>
+        <p class="lead">Three perspectives shape how I approach the same piece of work.</p>
+        <div class="perspective-map" aria-label="Three perspectives brought to the work">
+          <div><span>Founder</span><p>Is it worth doing?</p></div>
+          <div><span>Engineer</span><p>Can we make it work?</p></div>
+          <div><span>Psychotherapist</span><p>How will people use it?</p></div>
+        </div>
+        <p>
+          A useful implementation needs to make sense for the business and for the people using it.
+          I bring those questions into the room with the engineering, and stay close to the work as
+          we try something concrete.
         </p>
       </section>
-      <div class="perspective-map" aria-label="Three perspectives brought to the work">
-        <div><span>Founder</span><p>Is it worth doing?</p></div><div>
-          <span>Engineer</span><p>Can we make it work?</p>
-        </div><div><span>Psychotherapist</span><p>How will people use it?</p></div>
-      </div>
       <section id="experience">
-        <h2>Experience you can look into.</h2><div class="experience-list">
-          <div>
-            <h3>AI product & consultancy</h3><p>
-              Five years building an LLM-enabled product startup, alongside consultancy across
-              personal agent setup, internal AI work and customer-facing agents. Recent engagements
-              include travel and EV sector businesses.
-            </p>
-          </div><div>
-            <h3>Software engineering & technical leadership</h3><p>
-              More than two decades of full-stack development and technical leadership, including
-              CTO work. Enough hands-on experience to move between the business question and the
-              implementation.
-            </p>
-          </div><div>
-            <h3>People & psychology</h3><p>
-              A degree in AI with psychology, followed by psychotherapy training. An interest in how
-              people think, learn and work runs through what I do.
-            </p>
-          </div>
-        </div><div class="download-links">
+        <h2>Experience behind the approach.</h2>
+        <div class="download-links">
           <a
             href="/downloads/alastair-brayne-commercial-cv.pdf"
             target="_blank"
             rel="noopener noreferrer">Commercial CV <span>PDF ↗</span></a
-          ><a
+          >
+          <a
             href="/downloads/alastair-brayne-technical-cv.pdf"
             target="_blank"
             rel="noopener noreferrer">Technical CV <span>PDF ↗</span></a
           >
-        </div><p>
-          For more detail, <a
+        </div>
+        <div class="service-rows experience-rows">
+          <article>
+            <div>
+              <h3>Founder</h3><p class="row-answer">Choosing where to put limited time.</p>
+            </div><p>
+              Five years building an LLM-enabled product startup, alongside consultancy across
+              personal agent setup, internal AI work and customer-facing agents. Recent engagements
+              include travel and EV sector businesses.
+            </p>
+          </article>
+          <article>
+            <div>
+              <h3>Engineer &amp; technical leader</h3><p class="row-answer">
+                Moving between the question and the build.
+              </p>
+            </div><p>
+              More than two decades of full-stack development and technical leadership, including
+              CTO work. I can stay hands-on with the implementation as the business decisions
+              develop.
+            </p>
+          </article>
+          <article>
+            <div>
+              <h3>People &amp; psychology</h3><p class="row-answer">
+                Helping people learn and work with change.
+              </p>
+            </div><p>
+              A degree in AI with psychology, followed by psychotherapy training. That informs how I
+              listen, support someone learning an unfamiliar tool, and think about change inside a
+              team. ExFu engagements are AI consultancy.
+            </p>
+          </article>
+        </div>
+        <p>
+          Read the <a href="/fractional-support/#recent-experience">recent project accounts</a>, or <a
             href="https://www.linkedin.com/in/albrayne"
             target="_blank"
             rel="noopener noreferrer">find me on LinkedIn</a
-          > or read the <a href="/fractional-support/#recent-experience">recent project accounts</a
           >.
         </p>
       </section>
-      <WorkingNote
-        label="How I like to work"
-        title="Close to the question. Close to the build."
-        items={[
-          'Understand the business need',
-          'Try something concrete',
-          'Keep the people involved',
-        ]}
-        note="Advice and implementation inform each other as the work develops."
-      />
       <section id="tools">
-        <h2>Some of the tools are out in the open.</h2><p>
+        <h2>Open tools, and a visible way of working.</h2><p>
           I build and share agent tooling through the ExFu marketplace. It includes approaches to
           managing context, planning work and recording the decisions agents make along the way.
         </p><p>
@@ -128,7 +120,7 @@ import Invitation from '../components/Invitation.astro';
         >
       </section>
       <section id="working">
-        <h2>Working together.</h2><p>
+        <h2>Fractional and contract work.</h2><p>
           I take on fractional and contract engagements, with remote work preferred. I’m based in
           Bristol and can arrange in-person sessions.
         </p><p>

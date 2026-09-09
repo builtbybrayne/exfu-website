@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-09",
+  "method": "Built-in image_gen tool",
+  "supersedes": "Initial opaque 3:2 illustrations and opaque panorama in narrative-image-prompts.json",
+  "userDirection": "All imagery should be shallow panoramas with transparent backgrounds.",
+  "images": [
+    {
+      "name": "workbench-panorama",
+      "prompt": "Edit this illustration for a website. Preserve the exquisite graphite crosshatching, warm subtle watercolour palette and the four groups of objects (loose notes, folded paper prototype and pencil, rust-red notebook, laptop). REMOVE THE ENTIRE BACKGROUND and ALL wooden workbench/table surface. Return these foreground objects as a single coherent ULTRA-WIDE panoramic composition on a GENUINELY TRANSPARENT background with an alpha channel, not white, ivory, a checkerboard or simulated transparency. Only the illustrated objects and tiny soft grounding shadows remain. Objects arranged horizontally at the same baseline with ample horizontal separation. 3:1 canvas or wider, objects within middle vertical band; height of objects no more than 50% of image height. Crisp softly organic illustrated edges. No rectangular ground, no text, no people, no extra objects. Preserve proportions and illustration detail. This is a shallow visual interlude, not a tall picture."
+    },
+    {
+      "name": "a-place-to-return",
+      "prompt": "Create a transparent-background PNG illustration, actual alpha channel. Wide landscape panoramic asset, 3:1 ratio. Hand-drawn editorial graphite pencil with restrained warm watercolour, cream paper and a little brick red. A few illustrated objects arranged left-to-right along one low horizontal baseline: loose paper notes, an open notebook containing a few simple unlabelled lines, a rust-red pencil, a modest open laptop. Near the notebook one natural hand is placing a loose note into it, the sleeve enters from the lower edge. No background or table surface: completely isolated cutout with transparent negative space surrounding the objects. No words, numbers or logos. Quiet and spacious with the main objects in the central horizontal band and generous clear space around them. Intended to blend into an existing cream website page as a short visual pause, without any rectangular image background."
+    },
+    {
+      "name": "working-together",
+      "prompt": "Create a transparent-background PNG illustration, actual alpha channel. Wide landscape panoramic asset, 3:1 ratio. Hand-drawn editorial graphite pencil with restrained warm watercolour, cream paper and a little brick red. A small collaborative paper prototype scene arranged left-to-right along one low horizontal baseline: a natural hand holding a rust-red pencil from the left, a large simple paper prototype in the centre, a second natural hand holding a blank note at right next to a modest laptop. Just hands, cuffed sleeves, papers and laptop; no heads or bodies. No background or table surface: completely isolated cutout with transparent negative space surrounding the objects. No words, numbers, logos, cups or plants. Quiet and spacious, delicately drawn human hands. Main objects fit the central horizontal band. Intended to blend into an existing cream website page as a short visual pause, without any rectangular image background."
+    }
+  ]
+}
