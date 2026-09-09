@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import WorkingNote from '../components/WorkingNote.astro';
 import Invitation from '../components/Invitation.astro';
 ---
 
@@ -45,6 +46,16 @@ import Invitation from '../components/Invitation.astro';
           over.
         </p>
       </section>
+      <WorkingNote
+        label="A starting point, on paper"
+        title="One job. A little context. Something to try."
+        items={[
+          'The task you want help with',
+          'The information it needs',
+          'What you want to check yourself',
+        ]}
+        note="Bring a real example. We can work through the setup together."
+      />
       <section id="setup">
         <h2>Give your agent some context.</h2><p>
           A useful agent needs to understand your work. We can set up a library of context, reusable
@@ -64,6 +75,13 @@ import Invitation from '../components/Invitation.astro';
           will know whether they worked.
         </p>
       </section>
+      <div class="context-map" aria-label="How a personal agent setup fits together">
+        <div><span>Context</span><p>What it needs to know</p></div><b aria-hidden="true">+</b><div>
+          <span>Skills</span><p>How you want it to work</p>
+        </div><b aria-hidden="true">=</b><div>
+          <span>A working routine</span><p>Something you can return to</p>
+        </div>
+      </div>
       <section id="fit">
         <h2>For a busy mind, and a real workload.</h2><p>
           I work with business owners, leaders, coaches and people managing their own work. You do

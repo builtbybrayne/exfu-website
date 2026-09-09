@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { toolFamilies } from '../data/tools';
+---
+
+<Layout
+  title="ExFu tools & documentation"
+  description="Find the ExFu Agent Library, planning and delegating tools, plan visualiser and humane agents. Source, documentation and setup support."
+  ><section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow red">ExFu tools</p><h1>Pick up where<br />you left off.</h1><p
+        class="lead tools-lead"
+      >
+        Find your tools, installation instructions and documentation. If you’re new here, the
+        marketplace is the place to explore what’s available.
+      </p><a class="button" href="https://github.com/ExFu/exfu-marketplace"
+        >Open the marketplace ↗</a
+      >
+    </div>
+  </section><section class="section">
+    <div class="wrap">
+      <h2>Tools for working with agents.</h2><div class="tool-directory">
+        {
+          toolFamilies.map((tool, i) => (
+            <article>
+              <>
+                <span class="tool-mark" aria-hidden="true">
+                  {['↳', '⇄', '◎', '≋'][i]}
+                </span>
+                <div>
+                  <>
+                    <h3>{tool.name}</h3>
+                    <p>{tool.description}</p>
+                    <p>{tool.detail}</p>
+                    <a class="text-link" href={tool.href}>
+                      Source, installation & documentation ↗
+                    </a>
+                  </>
+                </div>
+              </>
+            </article>
+          ))
+        }
+      </div><div class="tools-help">
+        <h2>Need a hand with your setup?</h2><p>
+          If you’re already using the tools, tell me which one and where you’re getting stuck. If
+          you want help setting up agents around your work, personal support may be a useful
+          starting point.
+        </p><div>
+          <a class="button" href="mailto:al@exfu.ai">Ask Alastair ↗</a><a
+            class="text-link"
+            href="/personal-support/">Explore personal support</a
+          >
+        </div>
+      </div>
+    </div>
+  </section></Layout
+>

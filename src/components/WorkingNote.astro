@@ -1,0 +1,22 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  items: string[];
+  note: string;
+}
+const { label, title, items, note } = Astro.props;
+---
+
+<aside class="working-note">
+  <div><p class="eyebrow">{label}</p><h3>{title}</h3><p>{note}</p></div><ul>
+    {
+      items.map((item) => (
+        <li>
+          <span aria-hidden="true">✓</span>
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+</aside>

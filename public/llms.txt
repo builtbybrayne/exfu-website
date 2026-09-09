@@ -4,9 +4,10 @@
 
 ## Services and experience
 - [Home](https://exfu.ai/): Overview and ways to work together.
-- [Fractional AI support](https://exfu.ai/fractional-support/): Opportunity assessment, leadership business cases, agents, integrations and internal ownership. Includes anonymous accounts of travel and EV mapping engagements.
+- [Fractional AI support](https://exfu.ai/fractional-support/): Opportunity assessment, leadership business cases, agents, integrations and internal ownership. Includes anonymous accounts of travel and EV sector engagements.
 - [Personal AI support](https://exfu.ai/personal-support/): Hands-on agent setup around a person's own workload, context and reusable skills.
 - [About Alastair](https://exfu.ai/about/): Software and CTO experience, AI startup work, psychotherapy training, and downloadable CVs.
+- [Tools](https://exfu.ai/tools/): Documentation and source for the Agent Library, planning and delegating, plan visualiser and humane agents.
 - [Enquire](https://exfu.ai/enquire/): Short optional quiz and a human enquiry. Email al@exfu.ai.
 - [Open-source tools](https://github.com/exfu/exfu-marketplace): ExFu agent tooling marketplace.
 

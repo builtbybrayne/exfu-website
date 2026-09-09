@@ -11,9 +11,10 @@ for (const [name, path] of [
   ['fractional', '/fractional-support/'],
   ['personal', '/personal-support/'],
   ['about', '/about/'],
+  ['tools', '/tools/'],
   ['enquire', '/enquire/'],
 ]) {
-  await page.goto(`http://127.0.0.1:4321${path}`);
+  await page.goto(`http://127.0.0.1:4387${path}`);
   await page.evaluate(async () => {
     await document.fonts.ready;
     await Promise.all(
@@ -31,7 +32,7 @@ for (const [name, path] of [
   ['fractional', '/fractional-support/'],
   ['enquire', '/enquire/?quiz=1'],
 ]) {
-  await page.goto(`http://127.0.0.1:4321${path}`);
+  await page.goto(`http://127.0.0.1:4387${path}`);
   await page.evaluate(async () => {
     await document.fonts.ready;
     await Promise.all(

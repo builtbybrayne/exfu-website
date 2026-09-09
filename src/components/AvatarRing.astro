@@ -1,0 +1,69 @@
+---
+import { roles } from '../data/roles';
+// All 36 original illustrations, interleaved by variant so every role is encountered first.
+const portraits = [2, 1, 3].flatMap((variant) =>
+  roles.map((role) => ({ ...role, image: `${role.id}${variant === 1 ? '' : `-${variant}`}.webp` })),
+);
+---
+
+<section class="people-section audience-section section" aria-labelledby="people-title">
+  <div class="wrap audience-heading">
+    <div>
+      <h2 id="people-title">Different people.<br />Familiar sticking points.</h2><p>
+        You might be leading the change, backing a team, or trying to get on top of your own work.
+      </p>
+    </div><div class="ring-controls" hidden>
+      <p id="ring-hint">Drag or swipe the cards. Use the arrows to explore.</p><div>
+        <button type="button" data-ring-prev aria-label="Show previous avatar">←</button><button
+          type="button"
+          data-ring-next
+          aria-label="Show next avatar">→</button
+        ><button type="button" data-ring-pause aria-pressed="false">Pause movement</button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="role-ring"
+    tabindex="0"
+    role="group"
+    aria-label="Illustrated client situations"
+    aria-describedby="ring-hint"
+  >
+    {
+      portraits.map((role, i) => (
+        <div class="role-slot" data-index={i}>
+          <a class="role-card" href={role.href} draggable="false">
+            <>
+              <img
+                src={`/images/avatars/${role.image}`}
+                width="480"
+                height="480"
+                alt=""
+                loading="lazy"
+                draggable="false"
+              />
+              <span class="role-name">{role.name}</span>
+              <span class="role-question">{role.question}</span>
+            </>
+          </a>
+        </div>
+      ))
+    }
+  </div>
+  <div class="wrap ring-bottom">
+    <p>Illustrated situations, not client portraits. Choose whatever feels relevant.</p><details
+      class="role-directory"
+    >
+      <summary>See all roles as a list</summary><ul>
+        {
+          roles.map((role) => (
+            <li>
+              <a href={role.href}>{role.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </details>
+  </div>
+  <script src="../scripts/avatar-ring.ts"></script>
+</section>

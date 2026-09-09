@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import WorkingNote from '../components/WorkingNote.astro';
 import Invitation from '../components/Invitation.astro';
 import Process from '../components/Process.astro';
 ---
@@ -57,6 +58,12 @@ import Process from '../components/Process.astro';
           worthwhile, with the people affected involved from the start.
         </p>
       </section>
+      <WorkingNote
+        label="The first useful deliverable"
+        title="A decision you can make."
+        items={['One business goal', 'An assumption to test', 'Evidence for the next step']}
+        note="Something concrete for leadership to assess, before a larger commitment."
+      />
       <section id="what-we-can-do">
         <h2>What we can work on.</h2><p>
           Your needs determine the mix of advice, engineering and team support. An engagement can
@@ -90,7 +97,12 @@ import Process from '../components/Process.astro';
         Two examples of how the work can develop. Client names are omitted here.
       </p>
     </aside><div class="prose">
-      <h2>Recent experience.</h2><article id="travel">
+      <h2>Recent experience.</h2><article id="travel" class="project-note">
+        <div class="project-path" aria-label="Project path">
+          <span>Discovery prototype</span><b aria-hidden="true">↗</b><span>Company website</span><b
+            aria-hidden="true">↗</b
+          ><span>Team ownership</span>
+        </div>
         <p class="eyebrow red">Travel</p><h3>Test a channel. Follow the evidence.</h3><p>
           A travel business was exploring a possible AI customer-discovery channel. The work started
           with a prototype to investigate that opportunity.
@@ -101,9 +113,9 @@ import Process from '../components/Process.astro';
         </p><p>
           The useful outcome was a better-informed direction and work the team could take forward.
         </p>
-      </article><article id="ev-mapping">
-        <p class="eyebrow red">EV mapping</p><h3>Back the people carrying it forward.</h3><p>
-          Work with an EV mapping company included AI experiments across management teams and
+      </article><article id="ev-project">
+        <p class="eyebrow red">EV sector</p><h3>Back the people carrying it forward.</h3><p>
+          Work with an EV sector company included AI experiments across management teams and
           training for an in-house AI specialist.
         </p><p>
           Alongside exploring applications, the work supported someone inside the business to

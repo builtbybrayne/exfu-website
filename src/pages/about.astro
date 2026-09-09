@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import WorkingNote from '../components/WorkingNote.astro';
 import Invitation from '../components/Invitation.astro';
 ---
 
@@ -57,24 +58,29 @@ import Invitation from '../components/Invitation.astro';
           piling up.
         </p>
       </section>
+      <div class="perspective-map" aria-label="Three perspectives brought to the work">
+        <div><span>Founder</span><p>Is it worth doing?</p></div><div>
+          <span>Engineer</span><p>Can we make it work?</p>
+        </div><div><span>Psychotherapist</span><p>How will people use it?</p></div>
+      </div>
       <section id="experience">
         <h2>Experience you can look into.</h2><div class="experience-list">
           <div>
+            <h3>AI product & consultancy</h3><p>
+              Five years building an LLM-enabled product startup, alongside consultancy across
+              personal agent setup, internal AI work and customer-facing agents. Recent engagements
+              include travel and EV sector businesses.
+            </p>
+          </div><div>
             <h3>Software engineering & technical leadership</h3><p>
               More than two decades of full-stack development and technical leadership, including
               CTO work. Enough hands-on experience to move between the business question and the
               implementation.
             </p>
           </div><div>
-            <h3>AI product & consultancy</h3><p>
-              Five years building an LLM-enabled product startup, alongside consultancy across
-              personal agent setup, internal AI work and customer-facing agents. Recent engagements
-              include travel and EV mapping businesses.
-            </p>
-          </div><div>
             <h3>People & psychology</h3><p>
-              A background in AI and psychology, followed by psychotherapy training. An interest in
-              how people think, learn and work runs through what I do.
+              A degree in AI with psychology, followed by psychotherapy training. An interest in how
+              people think, learn and work runs through what I do.
             </p>
           </div>
         </div><div class="download-links">
@@ -85,6 +91,16 @@ import Invitation from '../components/Invitation.astro';
           the <a href="/fractional-support/#recent-experience">recent project accounts</a>.
         </p>
       </section>
+      <WorkingNote
+        label="How I like to work"
+        title="Close to the question. Close to the build."
+        items={[
+          'Understand the business need',
+          'Try something concrete',
+          'Keep the people involved',
+        ]}
+        note="Advice and implementation inform each other as the work develops."
+      />
       <section id="tools">
         <h2>Some of the tools are out in the open.</h2><p>
           I build and share agent tooling through the ExFu marketplace. It includes approaches to
@@ -99,7 +115,7 @@ import Invitation from '../components/Invitation.astro';
       <section id="working">
         <h2>Working together.</h2><p>
           I take on fractional and contract engagements, with remote work preferred. I’m based in
-          Bristol and can arrange in-person sessions around the calendar.
+          Bristol and can arrange in-person sessions.
         </p><p>
           If you are a founder, a CTO, an internal advocate or a recruiter with a suitable brief,
           I’d be glad to hear what you are trying to move forward. If you are looking for help with

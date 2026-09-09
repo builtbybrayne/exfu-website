@@ -1,6 +1,6 @@
-# Project state — generated 2026-09-08T16:53:20Z
+# Project state — generated 2026-09-09T14:08:42Z
 
-**Total events:** 51  ·  **Draft:** 2  ·  **Live:** 5  ·  **Dormant:** 0  ·  **Closed:** 1  ·  **Orphaned:** 0
+**Total events:** 61  ·  **Draft:** 2  ·  **Live:** 5  ·  **Dormant:** 0  ·  **Closed:** 2  ·  **Orphaned:** 0
 
 ## Live work
 
@@ -25,8 +25,8 @@
 ## Awaiting operator
 
 **Acceptance ceremonies pending** (draft plans — the draft gate blocks implementation against them):
-- `M1-reviewable-design` (authored 2026-09-08, 2 commit(s) ago)
-- `T3-review-home-and-service` (authored 2026-09-08, 2 commit(s) ago)
+- `M1-reviewable-design` (authored 2026-09-08, 3 commit(s) ago)
+- `T3-review-home-and-service` (authored 2026-09-08, 3 commit(s) ago)
 
 **Closure ceremonies pending** (all scheduled T3s closed; milestone still live):
 - `M2-publish-ready`
@@ -51,6 +51,7 @@ _No orphaned entities._
 ## Recently closed
 
 - `T3-build-static-site` (plan)
+- `T3-refine-visitor-journeys` (plan)
 
 ## Notable patterns
 
@@ -59,7 +60,7 @@ _No flapping closures._
 ## Milestone progress
 
 - **M1-reviewable-design**: 0/1 T3 complete (0%); 0 live
-- **M2-publish-ready**: 1/1 T3 complete (100%); 0 live
+- **M2-publish-ready**: 2/2 T3 complete (100%); 0 live
 
 ---
-_8 entities · 11 relationships · 8 decisions._
+_9 entities · 14 relationships · 9 decisions._

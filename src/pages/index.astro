@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Invitation from '../components/Invitation.astro';
 import RecentWork from '../components/RecentWork.astro';
-const portraits = ['cto', 'ceo-2', 'ceo', 'owner-2', 'coach'];
+import AvatarRing from '../components/AvatarRing.astro';
+import ToolsSection from '../components/ToolsSection.astro';
 ---
 
 <Layout
@@ -26,7 +27,7 @@ const portraits = ['cto', 'ceo-2', 'ceo', 'owner-2', 'coach'];
       </div>
       <div class="paper-scene" aria-label="From an opportunity to work your team can own">
         <span class="paper-orbit" aria-hidden="true"></span>
-        <p class="scene-note">From potential<br />to progress.</p>
+
         <ol class="paper-stack">
           <li class="paper paper-one">
             <span class="paper-number" aria-hidden="true">1</span><span
@@ -52,12 +53,13 @@ const portraits = ['cto', 'ceo-2', 'ceo', 'owner-2', 'coach'];
         <p class="eyebrow">Someone in your corner</p><h2>
           Fractional support for the person moving AI forward.
         </h2><p>
-          ExFu is Alastair Brayne’s AI consultancy. I work alongside founders, CTOs and internal
-          advocates to assess opportunities, make the case to leadership, and deliver agents and
-          workflows your team can own.
+          ExFu is Alastair Brayne’s AI consultancy. I work alongside founders and CEOs, CTOs and
+          internal advocates to assess opportunities, make the case to leadership, and deliver
+          agents and workflows your team can own.
         </p><p>
-          That could mean customer research, shared business knowledge, integrations, internal tools
-          or a customer-facing agent. We choose the work around a business goal.
+          That could mean AI-enabled revenue channels, customer research, shared business knowledge,
+          integrations, internal tools or a customer-facing agent. We choose the work around a
+          business goal.
         </p><a class="button" href="/fractional-support/"
           >Explore fractional support <span aria-hidden="true">↗</span></a
         >
@@ -82,43 +84,8 @@ const portraits = ['cto', 'ceo-2', 'ceo', 'owner-2', 'coach'];
       </aside>
     </div>
   </section>
-  <section class="people-section section" aria-labelledby="people-title">
-    <div class="wrap people-grid">
-      <div class="people-copy">
-        <h2 id="people-title">Different people.<br />Familiar sticking points.</h2><p>
-          You might be leading the change, backing a team, or trying to get on top of your own work.
-        </p>
-      </div>
-      <figure class="avatar-figure">
-        <div class="avatar-fan" aria-hidden="true">
-          {
-            portraits.map((name, i) => (
-              <div class={`portrait portrait-${i}`}>
-                <img
-                  src={`/images/avatars/${name}.webp`}
-                  width="480"
-                  height="480"
-                  loading="lazy"
-                  alt=""
-                />
-              </div>
-            ))
-          }
-        </div><figcaption>Illustrated examples. Perhaps you recognise the situation.</figcaption>
-      </figure>
-      <div class="situation-links">
-        <a href="/fractional-support/#making-the-case"
-          ><span>I need to get the business on board.</span><span aria-hidden="true">↗</span></a
-        >
-        <a href="/fractional-support/#what-we-can-do"
-          ><span>We have ideas. We need help delivering.</span><span aria-hidden="true">↗</span></a
-        >
-        <a href="/personal-support/"
-          ><span>I know AI could help with my workload.</span><span aria-hidden="true">↗</span></a
-        >
-      </div>
-    </div>
-  </section>
+  <AvatarRing />
+  <Invitation />
   <RecentWork />
   <section class="about-strip">
     <div class="wrap about-strip-inner">
@@ -131,6 +98,7 @@ const portraits = ['cto', 'ceo-2', 'ceo', 'owner-2', 'coach'];
       >
     </div>
   </section>
+  <ToolsSection />
   <section class="definitions section" aria-label="What ExFu means">
     <div class="wrap definitions-grid">
       <div>
@@ -154,5 +122,4 @@ const portraits = ['cto', 'ceo-2', 'ceo', 'owner-2', 'coach'];
       </dl>
     </div>
   </section>
-  <Invitation />
 </Layout>

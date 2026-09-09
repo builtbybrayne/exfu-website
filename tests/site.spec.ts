@@ -6,6 +6,7 @@ const routes = [
   '/fractional-support/',
   '/personal-support/',
   '/about/',
+  '/tools/',
   '/enquire/',
   '/privacy/',
   '/thanks/',
@@ -31,7 +32,7 @@ for (const path of routes) {
         nodes.map((n) => n.getAttribute('href')!).filter((h) => h.startsWith('/')),
       );
     for (const href of [...new Set(links)]) {
-      const url = new URL(href, 'http://127.0.0.1:4321');
+      const url = new URL(href, 'http://127.0.0.1:4391');
       const response = await request.get(url.pathname);
       expect(response.ok(), href).toBeTruthy();
       if (url.hash)
@@ -79,7 +80,7 @@ test('quiz validates, retains back navigation, builds a brief and preserves edit
   await expect(page.getByLabel('AI across my business', { exact: false })).toBeChecked();
   await page.getByRole('button', { name: /Next question/ }).click();
   await page.getByRole('button', { name: /Next question/ }).click();
-  await expect(page.getByRole('alert')).toContainText('Choose one answer');
+  await expect(page.getByRole('alert')).toContainText('Choose at least one');
   await page.getByLabel('Making the case to others', { exact: true }).check();
   await page.getByRole('button', { name: /Next question/ }).click();
   await page.getByRole('button', { name: 'Back', exact: true }).click();
@@ -88,8 +89,11 @@ test('quiz validates, retains back navigation, builds a brief and preserves edit
   await page.getByLabel('I have an opportunity in mind', { exact: true }).check();
   await page.getByRole('button', { name: /See my starting point/ }).click();
   await expect(page.locator('#support')).toHaveValue('Fractional AI support');
-  await expect(page.locator('#message')).toHaveValue(/Making the case to others/);
+  await expect(page.locator('#message')).toHaveValue(/making the case to others/);
+  await expect(page.locator('#enquiry-form')).toBeHidden();
+  await page.locator('#discuss-plan').click();
   await page.locator('#message').fill('My own edited brief. Please keep this.');
+  await page.locator('#back-to-plan').click();
   await page.getByRole('button', { name: 'Change my answers' }).click();
   await page.getByRole('button', { name: /Next question/ }).click();
   await page.getByRole('button', { name: /Next question/ }).click();
@@ -135,7 +139,7 @@ for (const fail of [false, true]) {
         await route.fulfill({ status: fail ? 503 : 200, body: fail ? 'Unavailable' : 'OK' });
       } else {
         const response = await page.request.get(
-          `http://127.0.0.1:4321${url.pathname}${url.search}`,
+          `http://127.0.0.1:4391${url.pathname}${url.search}`,
         );
         if (url.pathname === '/enquire/') {
           // Netlify removes this marker during deployment when form detection is enabled.
@@ -167,14 +171,14 @@ test('without JavaScript the navigation, substantive content and native form rem
     viewport: { width: 390, height: 844 },
   });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4321/enquire/?quiz=1');
+  await page.goto('http://127.0.0.1:4391/enquire/?quiz=1');
   await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
   const form = page.locator('#enquiry-form');
   await expect(form).toBeVisible();
   await expect(form).toHaveAttribute('method', 'POST');
   await expect(form).toHaveAttribute('action', '/thanks/');
   await expect(page.locator('#email')).toHaveAttribute('required', '');
-  await page.goto('http://127.0.0.1:4321/fractional-support/');
+  await page.goto('http://127.0.0.1:4391/fractional-support/');
   await expect(page.locator('#what-we-can-do')).toContainText('MCP servers');
   await page.getByText('How are scope and fees agreed?', { exact: true }).click();
   await expect(
@@ -224,4 +228,51 @@ test('the mobile quiz stays accessible at every step and puts the first question
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
     .analyze();
   expect(results.violations).toEqual([]);
+});
+
+test('multiple answers produce an ungated plan with all relevant support options', async ({
+  page,
+}) => {
+  await page.goto('/enquire/?quiz=1');
+  for (const value of ['business', 'project', 'personal'])
+    await page.locator(`input[value="${value}"]`).check();
+  await page.locator('#quiz-next').click();
+  await page.getByLabel('Making the case to others', { exact: true }).check();
+  await page.getByLabel('Time or experience to build it', { exact: true }).check();
+  await page.locator('#quiz-next').click();
+  await page.getByLabel('Ready to bring in help', { exact: true }).check();
+  await page.locator('#quiz-next').click();
+  await expect(page.locator('#result-title')).toHaveText('Make one opportunity easy to assess.');
+  await expect(page.locator('#result-steps')).toContainText('Remove one build uncertainty');
+  await expect(page.locator('#result-offers article')).toHaveCount(3);
+  await expect(page.locator('#email')).toBeHidden();
+  await page.evaluate(() =>
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: async () => {
+          throw new Error('denied');
+        },
+      },
+    }),
+  );
+  await page.locator('#copy-plan').click();
+  await expect(page.locator('#copy-fallback')).toBeVisible();
+  await expect(page.locator('#copy-fallback')).toHaveValue(/Write a one-page case/);
+});
+test('avatar ring includes all portraits and supports paused keyboard rotation', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const ring = page.locator('.role-ring');
+  await expect(page.locator('.role-card')).toHaveCount(36);
+  await ring.scrollIntoViewIfNeeded();
+  const before = await ring.getAttribute('data-angle');
+  await ring.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(ring).not.toHaveAttribute('data-angle', before!);
+  for (const src of await page
+    .locator('.role-card img')
+    .evaluateAll((images) => images.map((img) => img.getAttribute('src')!)))
+    expect(existsSync(`public${src}`)).toBeTruthy();
 });

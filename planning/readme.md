@@ -25,3 +25,7 @@ The user approved proceeding until the site is ready to publish, supplied `al@ex
 ## Current handoff
 
 The implementation is now under `src/`, with a production build in ignored `dist/`. Read `README.md` for running, testing and the operator's Netlify deployment steps. `design/build-decisions.md` explains the translation from mockups to code and the launch trade-offs. The initial design-only draft paragraphs above are preserved history; they are superseded by the explicit development approval. M2-publish-ready tracks the handoff and final operator-owned delivery check. No new confirmation is needed to perform routine local checks or fixes within the accepted build scope.
+
+## Review revisions, 2026-09-09
+
+See completed `T3-refine-visitor-journeys.md` and the dated decision history for the multi-select ungated quiz, Tools directory, 36-portrait ring and interior-page/copy updates. Preview is 127.0.0.1:4387; test preview is 4391.

@@ -44,59 +44,62 @@ import Layout from '../layouts/Layout.astro';
             >
           </div>
           <div class="progress-track" aria-hidden="true"><span id="quiz-progress-bar"></span></div>
-          <fieldset data-step="0">
+          <p id="multi-select-hint" class="multi-select-hint">
+            Choose all that apply on each question.
+          </p>
+          <fieldset data-step="0" aria-describedby="multi-select-hint">
             <legend tabindex="-1">Where would you like help?</legend><label class="choice"
-              ><input type="radio" name="quiz-need" value="business" /><span
+              ><input type="checkbox" name="quiz-need" value="business" /><span
                 >AI across my business<small
                   >Direction, leadership backing and ongoing support.</small
                 ></span
               ></label
             ><label class="choice"
-              ><input type="radio" name="quiz-need" value="project" /><span
+              ><input type="checkbox" name="quiz-need" value="project" /><span
                 >A specific project<small>An idea or brief I want to move forward.</small></span
               ></label
             ><label class="choice"
-              ><input type="radio" name="quiz-need" value="personal" /><span
+              ><input type="checkbox" name="quiz-need" value="personal" /><span
                 >My own workload<small>Hands-on help getting agents working for me.</small></span
               ></label
             >
           </fieldset>
-          <fieldset data-step="1" hidden>
+          <fieldset data-step="1" aria-describedby="multi-select-hint" hidden>
             <legend tabindex="-1">What is getting in the way?</legend><label class="choice"
-              ><input type="radio" name="quiz-obstacle" value="Knowing where to start" /><span
+              ><input type="checkbox" name="quiz-obstacle" value="Knowing where to start" /><span
                 >Knowing where to start</span
               ></label
             ><label class="choice"
-              ><input type="radio" name="quiz-obstacle" value="Making the case to others" /><span
+              ><input type="checkbox" name="quiz-obstacle" value="Making the case to others" /><span
                 >Making the case to others</span
               ></label
             ><label class="choice"
               ><input
-                type="radio"
+                type="checkbox"
                 name="quiz-obstacle"
                 value="Time or experience to build it"
               /><span>Time or experience to build it</span></label
             ><label class="choice"
-              ><input type="radio" name="quiz-obstacle" value="Making it work day to day" /><span
+              ><input type="checkbox" name="quiz-obstacle" value="Making it work day to day" /><span
                 >Making it work day to day</span
               ></label
             >
           </fieldset>
-          <fieldset data-step="2" hidden>
+          <fieldset data-step="2" aria-describedby="multi-select-hint" hidden>
             <legend tabindex="-1">How far along are you?</legend><label class="choice"
-              ><input type="radio" name="quiz-stage" value="Exploring what is possible" /><span
+              ><input type="checkbox" name="quiz-stage" value="Exploring what is possible" /><span
                 >Exploring what is possible</span
               ></label
             ><label class="choice"
-              ><input type="radio" name="quiz-stage" value="Have an opportunity in mind" /><span
+              ><input type="checkbox" name="quiz-stage" value="Have an opportunity in mind" /><span
                 >I have an opportunity in mind</span
               ></label
             ><label class="choice"
-              ><input type="radio" name="quiz-stage" value="Already trying things" /><span
+              ><input type="checkbox" name="quiz-stage" value="Already trying things" /><span
                 >Already trying things</span
               ></label
             ><label class="choice"
-              ><input type="radio" name="quiz-stage" value="Ready to bring in help" /><span
+              ><input type="checkbox" name="quiz-stage" value="Ready to bring in help" /><span
                 >Ready to bring in help</span
               ></label
             >
@@ -109,13 +112,41 @@ import Layout from '../layouts/Layout.astro';
             >
           </div>
         </section>
-        <div id="contact-panel">
-          <div id="quiz-result" class="quiz-result" hidden>
-            <p class="eyebrow">Your starting point</p><h2 id="result-title"></h2><p
-              id="result-description"
-            >
-            </p><button type="button" id="edit-answers" class="text-link">Change my answers</button>
+        <section id="quiz-result" class="quiz-result" aria-labelledby="result-title" hidden>
+          <p class="eyebrow red">Your starting plan</p>
+          <h2 id="result-title" tabindex="-1"></h2>
+          <p id="result-description" class="result-lead"></p>
+          <div class="result-basis">
+            <h3>Based on what you told me</h3><p id="result-answers"></p>
           </div>
+          <h3 class="result-steps-title">Try this first</h3><ol id="result-steps"></ol>
+          <div class="result-question">
+            <h3>A question to keep handy</h3><p id="result-question"></p>
+          </div>
+          <p id="result-pacing"></p>
+          <h3>Where ExFu could help</h3><div id="result-offers"></div>
+          <p class="result-note">
+            This is a starting suggestion from your answers. The right scope depends on the actual
+            work. Your plan is yours to use, with no email needed.
+          </p>
+          <div class="result-actions">
+            <button type="button" id="copy-plan" class="text-link">Copy my plan</button><button
+              type="button"
+              id="edit-answers"
+              class="text-link">Change my answers</button
+            >
+          </div>
+          <p id="copy-status" role="status" hidden></p><textarea
+            id="copy-fallback"
+            aria-label="Your plan, ready to copy"
+            readonly
+            hidden></textarea>
+          <button type="button" id="discuss-plan" class="button"
+            >Talk through this plan with Alastair ↗</button
+          >
+        </section>
+        <div id="contact-panel">
+          <button id="back-to-plan" class="text-link" type="button" hidden>Back to my plan</button>
           <h2 class="form-title" tabindex="-1">What’s on your mind?</h2>
           <form
             name="enquiry"
