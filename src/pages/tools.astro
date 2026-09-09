@@ -6,7 +6,7 @@ import { toolFamilies, marketplace } from '../data/tools';
 
 <Layout
   title="ExFu agent tools & setup"
-  description="Explore ExFu plugins, add the marketplace and follow setup instructions for the tool you choose. Help for Cowork and Claude Code users."
+  description="Explore ExFu plugins, add the marketplace and follow setup instructions for the tool you choose. Help for Cowork, Claude Code, ChatGPT and Codex users."
 >
   <section class="page-hero">
     <div class="wrap">
@@ -60,9 +60,9 @@ import { toolFamilies, marketplace } from '../data/tools';
       </section>
       <section id="marketplace" class="tools-chapter">
         <p class="eyebrow red">Step 1 · Once per app</p><h2>Add the ExFu marketplace.</h2><p>
-          The marketplace is the catalogue Claude uses to find ExFu plugins. Add it once, then
-          choose whichever plugins you want. If you have already added it, <a href="#setup"
-            >go straight to your plugin</a
+          The marketplace is the catalogue of ExFu plugins. Choose your app below to see how to
+          access it, then choose whichever plugins you want. If you have already added it, <a
+            href="#setup">go straight to your plugin</a
           >.
         </p>
         <fieldset class="app-picker" hidden>
@@ -87,6 +87,22 @@ import { toolFamilies, marketplace } from '../data/tools';
                 value="code"
                 aria-describedby="app-choice-help"
               /> Claude Code</label
+            >
+            <label
+              ><input
+                type="radio"
+                name="setup-app"
+                value="codex"
+                aria-describedby="app-choice-help"
+              /> Codex</label
+            >
+            <label
+              ><input
+                type="radio"
+                name="setup-app"
+                value="chatgpt"
+                aria-describedby="app-choice-help"
+              /> ChatGPT</label
             >
           </div>
           <p id="app-selection-status" role="status">Showing Cowork instructions.</p>
@@ -116,6 +132,41 @@ import { toolFamilies, marketplace } from '../data/tools';
               rel="noopener noreferrer">Claude Code plugin guide ↗</a
             >
           </article>
+          <article class="setup-option" data-setup-app="codex">
+            <h3>In Codex</h3><p>
+              With the Codex CLI installed, run this in your terminal to add the marketplace:
+            </p>
+            <CopyBlock
+              text="codex plugin marketplace add ExFu/exfu-marketplace"
+              label="Copy Codex marketplace command"
+            />
+            <p>
+              Then install your chosen plugin in step 2. Use the same local account for the CLI and
+              the Codex app.
+            </p>
+            <a
+              href="https://developers.openai.com/codex/plugins"
+              target="_blank"
+              rel="noopener noreferrer">OpenAI’s plugin guide ↗</a
+            >
+          </article>
+          <article class="setup-option" data-setup-app="chatgpt">
+            <h3>In ChatGPT</h3><p>
+              Open <strong>Plugins</strong>, if available, and look for the ExFu plugin you want.
+              Availability depends on your account and workspace. Apps connects services; it does
+              not install this GitHub marketplace.
+            </p>
+            <p>
+              In a managed workspace, ask your administrator about importing the ExFu marketplace
+              from GitHub. A plugin marked <strong>Desktop only</strong> needs a supported desktop app.
+            </p>
+            <CopyBlock text={marketplace} label="Copy marketplace address for your administrator" />
+            <a
+              href="https://help.openai.com/en/articles/20001256/"
+              target="_blank"
+              rel="noopener noreferrer">ChatGPT plugin availability and setup ↗</a
+            >
+          </article>
         </div>
       </section>
       <section id="setup" class="tools-chapter plugin-workspace">
@@ -140,7 +191,7 @@ import { toolFamilies, marketplace } from '../data/tools';
           >
             <article class="setup-option" data-setup-app="cowork">
               <h3>In Cowork</h3><p>
-                Browse your ExFu marketplace and find <strong id="selected-plugin-name"
+                Browse your ExFu marketplace and find <strong data-selected-plugin-name
                   >exfu-agent-library-solo</strong
                 >. Choose Install, then check that it is enabled.
               </p>
@@ -155,24 +206,77 @@ import { toolFamilies, marketplace } from '../data/tools';
                 id="selected-slash"
               />
             </article>
+            <article class="setup-option" data-setup-app="codex">
+              <h3>In Codex</h3><p>Install the selected plugin from your terminal:</p>
+              <CopyBlock
+                text="codex plugin add exfu-agent-library-solo@exfu-marketplace"
+                id="selected-codex"
+                label="Copy Codex plugin install command"
+              />
+              <p>
+                Start a fresh local task in the Codex app or CLI and check that the plugin’s skills
+                are available.
+              </p>
+            </article>
+            <article class="setup-option" data-setup-app="chatgpt">
+              <h3>In ChatGPT</h3><p>
+                If <strong data-selected-plugin-name>exfu-agent-library-solo</strong> is available in
+                your plugin directory, open it, review its requirements and choose <strong
+                  >Install plugin</strong
+                >. Connect any required apps when prompted.
+              </p>
+              <p>
+                If it is unavailable, use the Projects starting point below or choose Codex for
+                local plugin setup. A repository link in a chat does not install the plugin.
+              </p>
+            </article>
           </div>
           <section id="first-session" class="setup-next">
             <p class="eyebrow red">Step 3 · Try your chosen plugin</p><p>
-              Start a fresh session. If the plugin has not appeared, restart Claude and check that
-              it is enabled.
-            </p>{
-              toolFamilies.map((tool, i) => (
-                <div data-plugin-first={tool.pkg} hidden={i !== 0}>
-                  <>
-                    <h3>{tool.setupTitle}</h3>
-                    <p>{tool.preparation}</p>
-                    <p>Paste this to begin:</p>
-                    <CopyBlock text={tool.setupPrompt} label={`Copy ${tool.name} setup prompt`} />
-                    <p>{tool.setupNote}</p>
-                  </>
-                </div>
-              ))
-            }
+              Start a fresh session in the app where the plugin is installed. Check that its skills
+              are available before asking it to run setup.
+            </p><div data-setup-app="cowork code codex">
+              {
+                toolFamilies.map((tool, i) => (
+                  <div data-plugin-first={tool.pkg} hidden={i !== 0}>
+                    <>
+                      <h3>{tool.setupTitle}</h3>
+                      <p>{tool.preparation}</p>
+                      <p>Paste this to begin:</p>
+                      <CopyBlock text={tool.setupPrompt} label={`Copy ${tool.name} setup prompt`} />
+                      <p>{tool.setupNote}</p>
+                    </>
+                  </div>
+                ))
+              }
+            </div>
+            <div data-setup-app="chatgpt">
+              <h3>Start with one useful task.</h3>
+              <p>
+                If installed, select the plugin with an @ mention or the + menu when available. Ask
+                it which of its skills can run in this chat before starting.
+              </p>
+              <CopyBlock
+                text="Check whether the selected ExFu plugin and its skills are available in this chat. Explain what can run here and any setup needed. Then help me try it on one real task."
+                label="Copy ChatGPT plugin starting prompt"
+              />
+              <h3>If the plugin is not available</h3>
+              <p>
+                Create a ChatGPT Project for your work. Add relevant reference files and project
+                instructions describing the outcome, your preferences and what you want to review.
+                This gives you a place to continue the work; it does not run the ExFu plugin or its
+                local automation.
+              </p>
+              <CopyBlock
+                text="Help me set up this project around one recurring task. Ask what I want to achieve, which reference files will help and what I want to review myself. Then draft concise project instructions and help me try them on a small example."
+                label="Copy ChatGPT Project starting prompt"
+              />
+              <a
+                href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt"
+                target="_blank"
+                rel="noopener noreferrer">ChatGPT Projects guide ↗</a
+              >
+            </div>
           </section>
         </div>
       </section>
@@ -186,10 +290,10 @@ import { toolFamilies, marketplace } from '../data/tools';
             it.
           </p>
         </article><article class="faq-answer">
-          <h3>Claude doesn’t recognise the setup.</h3><p>
+          <h3>My app doesn’t recognise the setup.</h3><p>
             Start a new session in the app where you installed the plugin. Select your working
-            folder and ask whether Claude can see the plugin’s skills. If not, restart the app and
-            check your installed plugins.
+            folder and ask whether your agent can see the plugin’s skills. If not, restart the app
+            and check your installed plugins.
           </p>
         </article><div class="tools-help">
           <h3>Still stuck?</h3><p>

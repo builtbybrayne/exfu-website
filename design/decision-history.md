@@ -129,3 +129,9 @@ The user selected option C, recognisable work. Applied the exact chosen illustra
 ## About portrait resolved, 2026-09-09
 
 Located the user-requested existing pencil portrait at `/Users/al/Studio/projects/exfu_website/public/images/alastair-avatar.webp`. Copied it unchanged to this project and replaced the About photo reference, alt text and intrinsic dimensions (480 by 480). Previous site remains unchanged. This resolves the earlier pending sketch-file note. Build passed; source and copy are byte-identical and built About HTML references the copied sketch.
+
+## About spacing and OpenAI tool guidance, 2026-09-09
+
+User requested whitespace above the About project-account/LinkedIn paragraph and ChatGPT/Codex-focused tool instructions. Added a scoped 2rem top margin. Extended the existing app selector to Cowork, Claude Code, Codex and ChatGPT; plugin choice persists across app changes. Codex includes marketplace and selected-plugin CLI commands. ChatGPT includes conditional plugin access and an explicitly separate Projects starting point when the plugin is unavailable. Local filesystem setup remains in the local-app path. Shared preparation copy now addresses the agent rather than Claude.
+
+Evidence: local `codex plugin marketplace add --help` and `codex plugin add --help` verified syntax; installed ExFu plugin skills corroborate local Codex availability. OpenAI documentation reviewed 2026-09-09: https://help.openai.com/en/articles/20001256/ and https://help.openai.com/en/articles/10169521-projects-in-chatgpt plus https://developers.openai.com/codex/plugins . No claim that every ExFu plugin is publicly listed in ChatGPT, and no real installation or account change performed.

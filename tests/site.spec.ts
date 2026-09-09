@@ -379,7 +379,7 @@ test('plugin selection updates installation, copied text and first-session guida
     'exfu-agent-library-solo',
   ]) {
     await page.selectOption('#plugin-choice', pkg);
-    await expect(page.locator('#selected-plugin-name')).toHaveText(pkg);
+    await expect(page.locator('[data-selected-plugin-name]').first()).toHaveText(pkg);
     await expect(page.locator('#selected-slash code')).toHaveText(
       `/plugin install ${pkg}@exfu-marketplace`,
     );
@@ -467,7 +467,7 @@ test('without JavaScript both app instructions and narrative content remain read
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4391/tools/');
   await expect(page.locator('.app-picker')).toBeHidden();
-  await expect(page.locator('[data-setup-app]:visible')).toHaveCount(4);
+  await expect(page.locator('[data-setup-app]:visible')).toHaveCount(10);
   for (const route of ['/fractional-support/', '/personal-support/']) {
     await page.goto(`http://127.0.0.1:4391${route}`);
     await expect(page.locator('.narrative-image')).toBeVisible();
@@ -479,4 +479,32 @@ test('without JavaScript both app instructions and narrative content remain read
     await expect(page.locator('.faq-answer')).not.toHaveCount(0);
   }
   await context.close();
+});
+
+test('Codex and ChatGPT show appropriate setup and preserve the selected plugin', async ({
+  page,
+}) => {
+  await page.goto('/tools/');
+  await page.getByRole('radio', { name: 'Codex', exact: true }).check();
+  await page.locator('#plugin-choice').selectOption('exfu-agent-plan-visualiser');
+  await expect(page.locator('#selected-codex code')).toHaveText(
+    'codex plugin add exfu-agent-plan-visualiser@exfu-marketplace',
+  );
+  await expect(page.locator('[data-plugin-first="exfu-agent-plan-visualiser"]')).toBeVisible();
+  await page.getByRole('radio', { name: 'ChatGPT', exact: true }).check();
+  await expect(page.locator('#selected-codex')).toBeHidden();
+  await expect(page.locator('[data-plugin-first="exfu-agent-plan-visualiser"]')).toBeHidden();
+  await expect(
+    page.getByRole('button', { name: 'Copy ChatGPT Project starting prompt', exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('[data-setup-app="chatgpt"] [data-selected-plugin-name]')).toHaveText(
+    'exfu-agent-plan-visualiser',
+  );
+  expect(
+    (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+      .violations,
+  ).toEqual([]);
+  await page.getByRole('radio', { name: 'Codex', exact: true }).check();
+  await expect(page.locator('#plugin-choice')).toHaveValue('exfu-agent-plan-visualiser');
+  await expect(page.locator('#selected-codex')).toBeVisible();
 });

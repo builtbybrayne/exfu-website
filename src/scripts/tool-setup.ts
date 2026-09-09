@@ -5,7 +5,11 @@ if (selector) {
   function updatePlugin() {
     const tool = toolFamilies.find((tool) => tool.pkg === selector!.value)!;
     document.querySelector('#selected-tool-title')!.textContent = `Install ${tool.name}.`;
-    document.querySelector('#selected-plugin-name')!.textContent = tool.pkg;
+    document.querySelectorAll<HTMLElement>('[data-selected-plugin-name]').forEach((el) => {
+      el.textContent = tool.pkg;
+    });
+    document.querySelector('#selected-codex code')!.textContent =
+      `codex plugin add ${tool.pkg}@exfu-marketplace`;
     document.querySelector('#selected-plugin-description')!.textContent = tool.detail;
     document.querySelector('#selected-terminal code')!.textContent =
       `claude plugin install ${tool.pkg}@exfu-marketplace`;
@@ -55,9 +59,11 @@ if (appPicker) {
   const appInputs = Array.from(appPicker.querySelectorAll<HTMLInputElement>('input'));
   const updateApp = () => {
     const selected = appInputs.find((input) => input.checked)?.value ?? 'cowork';
-    const name = selected === 'code' ? 'Claude Code' : 'Cowork';
+    const name =
+      { cowork: 'Cowork', code: 'Claude Code', codex: 'Codex', chatgpt: 'ChatGPT' }[selected] ??
+      'Cowork';
     document.querySelectorAll<HTMLElement>('[data-setup-app]').forEach((panel) => {
-      panel.hidden = panel.dataset.setupApp !== selected;
+      panel.hidden = !panel.dataset.setupApp!.split(' ').includes(selected);
     });
     document.querySelectorAll<HTMLElement>('[data-current-app]').forEach((el) => {
       el.textContent = name;
