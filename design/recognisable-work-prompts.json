@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-09",
+  "method": "Built-in image_gen",
+  "decision": "User selected recognisable work (option C).",
+  "reference": "design/imagery-options/c-recognisable.webp",
+  "prompts": [
+    "Use case: illustration-story. Create a new 3:1 panoramic illustration using the attached image ONLY as a style reference: same tactile gouache paper forms, fine graphite details, cream and putty, mushroom grey, restrained rust red. Foreground objects on GENUINE transparent alpha background; no painted checkerboard or opaque background. No hands, people, desk, laptop, scenery, readable text, logos or arrows. Objects in a shallow horizontal band, ample transparent margins, nothing cut off. Subject: a personal routine taking shape. Three loose notes at left, a small open notebook with simple abstract checklist marks at centre, and a compact calendar page beside a neatly filed note at right. A fine understated graphite line links the groups. Warm, practical and quiet. Match the reference's simple recognisable work artefacts and scale.",
+    "Use case: illustration-story. Create a new 3:1 panoramic illustration using the attached image ONLY as a style reference: same tactile gouache paper forms, fine graphite details, cream and putty, mushroom grey, restrained rust red. Foreground objects on GENUINE transparent alpha background; no painted checkerboard or opaque background. No hands, people, desk, laptop, scenery, readable text, logos or arrows. Objects in a shallow horizontal band, ample transparent margins, nothing cut off. Subject: a small project becoming useful. An open project folder and a few brief sheets at left, two interlocking simple prototype modules in the middle, a compact organised set of result sheets with a small rust tick at right. Spread the three groups across a low panoramic band, with fine graphite links. Warm, practical and quiet. Match reference's simple recognisable work artefacts and scale."
+  ]
+}
