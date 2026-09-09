@@ -180,7 +180,7 @@ test('without JavaScript the navigation, substantive content and native form rem
   await expect(page.locator('#email')).toHaveAttribute('required', '');
   await page.goto('http://127.0.0.1:4391/fractional-support/');
   await expect(page.locator('#what-we-can-do')).toContainText('MCP servers');
-  await page.getByText('How are scope and fees agreed?', { exact: true }).click();
+  await expect(page.locator('.faqs details')).toHaveCount(0);
   await expect(
     page.getByText('We discuss the outcome, the work involved', { exact: false }),
   ).toBeVisible();
@@ -265,7 +265,7 @@ test('avatar ring includes all portraits and supports paused keyboard rotation',
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   const ring = page.locator('.role-ring');
-  await expect(page.locator('.role-card')).toHaveCount(36);
+  await expect(page.locator('.role-card')).toHaveCount(12);
   await ring.scrollIntoViewIfNeeded();
   const before = await ring.getAttribute('data-angle');
   await ring.focus();
@@ -275,4 +275,42 @@ test('avatar ring includes all portraits and supports paused keyboard rotation',
     .locator('.role-card img')
     .evaluateAll((images) => images.map((img) => img.getAttribute('src')!)))
     expect(existsSync(`public${src}`)).toBeTruthy();
+});
+
+test('each persona cycles portraits and the pause control stops the cycle', async ({ page }) => {
+  await page.goto('/');
+  const ring = page.locator('.role-ring');
+  await ring.scrollIntoViewIfNeeded();
+  await ring.hover();
+  const portrait = page.locator('.role-card').first().locator('img.is-current');
+  const first = await portrait.getAttribute('src');
+  await expect(portrait).not.toHaveAttribute('src', first!, { timeout: 8000 });
+  await page.locator('[data-ring-pause]').click();
+  const paused = await portrait.getAttribute('src');
+  await page.waitForTimeout(5500);
+  await expect(portrait).toHaveAttribute('src', paused!);
+});
+test('setup commands copy exact text and FAQs are permanently visible', async ({ page }) => {
+  await page.goto('/tools/');
+  await page.evaluate(() =>
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: async (text: string) => {
+          (window as any).copied = text;
+        },
+      },
+    }),
+  );
+  await page
+    .getByRole('button', { name: 'Copy Agent Library install command', exact: true })
+    .click();
+  expect(await page.evaluate(() => (window as any).copied)).toBe(
+    'claude plugin marketplace add ExFu/exfu-marketplace && claude plugin install exfu-agent-library-solo@exfu-marketplace',
+  );
+  for (const route of ['/fractional-support/', '/personal-support/']) {
+    await page.goto(route);
+    await expect(page.locator('.faqs details')).toHaveCount(0);
+    for (const answer of await page.locator('.faq-answer p').all())
+      await expect(answer).toBeVisible();
+  }
 });

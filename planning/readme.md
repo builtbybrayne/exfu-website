@@ -29,3 +29,5 @@ The implementation is now under `src/`, with a production build in ignored `dist
 ## Review revisions, 2026-09-09
 
 See completed `T3-refine-visitor-journeys.md` and the dated decision history for the multi-select ungated quiz, Tools directory, 36-portrait ring and interior-page/copy updates. Preview is 127.0.0.1:4387; test preview is 4391.
+
+The second review is tracked in `T3-support-and-visual-polish.md`: cycling persona portraits, stronger buttons, open FAQs and guided tool installation.

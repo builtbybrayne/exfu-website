@@ -61,10 +61,24 @@ if (ring) {
       render();
     }
   }
+  let portraitTime = 0;
+  const variants = slots.map(() => 0);
   function frame(time: number) {
     const dt = Math.min(0.05, lastTime ? (time - lastTime) / 1000 : 0);
     lastTime = time;
     if (visible && !document.hidden) {
+      if (!paused && !reduced.matches) {
+        portraitTime += dt;
+        slots.forEach((slot, index) => {
+          const next = Math.floor((portraitTime + index * 0.45) / 5) % 3;
+          if (variants[index] !== next) {
+            variants[index] = next;
+            slot
+              .querySelectorAll('img')
+              .forEach((img, i) => img.classList.toggle('is-current', i === next));
+          }
+        });
+      }
       if (target !== null) {
         const diff = target - angle;
         angle += diff * Math.min(1, dt * 10);

@@ -63,12 +63,12 @@ With a preview running at port 4387, `npm run test:visual` writes desktop/mobile
 
 ## Content and launch choices
 
-Fractional/contract work has the principal commercial route. Personal support remains easy to find. Remote work is preferred; Bristol sessions are by arrangement. Anonymous project accounts are grounded in the supplied CVs and conversation, without client logos, endorsements or invented revenue results. The avatar portraits are labelled illustrations.
+Fractional/contract work has the principal commercial route. Personal support remains easy to find. Remote work is preferred; Bristol sessions are by arrangement. Anonymous project accounts are grounded in the supplied CVs and conversation, without client logos, endorsements or invented revenue results. The avatar portraits are labelled illustrations: 12 persona cards each crossfade through three variants. Pause and reduced motion stop the cycling. Service FAQs are permanently visible. The Tools page includes Cowork and Claude Code setup paths, copyable commands and first-session guidance.
 
 The quiz asks about need, obstacle and stage. All three questions accept multiple selections. It provides a practical starting plan, explains the fit and suggests relevant support before asking for contact details. Visitors can copy the plan without sharing an email. It creates an editable brief in the browser and sends nothing until the visitor submits. There is no newsletter opt-in, marketing tracking or cookie banner because this implementation adds no marketing analytics or cookies.
 
 Search context lives in visible service prose, FAQs, the About page and CVs, with matching structured data. `llms.txt` is a short directory to that public content, not a promise of search visibility. No agent API is required.
 
-Old `/you`, `/business`, `/teams`, `/therapists` and `/contact` links lead to the corresponding new pages. `/tools/` is the new tool directory; `/install` and `/start` lead to the public marketplace, whose documentation can stay current. `/prepare` leads to personal setup information. `/for-agents` leads to the public content directory. The old agent backend is not modified by this project; any separately hosted `agent.exfu.ai` service remains outside this release.
+Old `/you`, `/business`, `/teams`, `/therapists` and `/contact` links lead to the corresponding new pages. `/tools/` is the new tool directory; `/install`, `/start` and `/prepare` lead to the guided setup on `/tools/#setup`. `/for-agents` leads to the public content directory. The old agent backend is not modified by this project; any separately hosted `agent.exfu.ai` service remains outside this release.
 
 The original `/Users/al/Studio/projects/exfu_website` project is read-only reference material and has not been edited.

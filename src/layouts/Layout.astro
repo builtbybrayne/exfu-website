@@ -99,7 +99,11 @@ const links = [
         <nav id="site-nav" aria-label="Main navigation">
           {
             links.map(([href, label]) => (
-              <a href={href} aria-current={path === href ? 'page' : undefined}>
+              <a
+                class:list={{ 'nav-tools': href === '/tools/' }}
+                href={href}
+                aria-current={path === href ? 'page' : undefined}
+              >
                 {label}
               </a>
             ))

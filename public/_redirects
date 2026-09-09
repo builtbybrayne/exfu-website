@@ -3,7 +3,7 @@
 /teams        /fractional-support/                        301
 /contact      /enquire/                                   301
 /therapists   /personal-support/                          301
-/install      https://github.com/exfu/exfu-marketplace     301
-/start        https://github.com/exfu/exfu-marketplace     301
-/prepare      /personal-support/#setup                    301
+/install      /tools/#setup                               301
+/start        /tools/#setup                               301
+/prepare      /tools/#setup                               301
 /for-agents   /llms.txt                                   301

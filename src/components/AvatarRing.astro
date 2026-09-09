@@ -1,9 +1,5 @@
 ---
 import { roles } from '../data/roles';
-// All 36 original illustrations, interleaved by variant so every role is encountered first.
-const portraits = [2, 1, 3].flatMap((variant) =>
-  roles.map((role) => ({ ...role, image: `${role.id}${variant === 1 ? '' : `-${variant}`}.webp` })),
-);
 ---
 
 <section class="people-section audience-section section" aria-labelledby="people-title">
@@ -30,18 +26,23 @@ const portraits = [2, 1, 3].flatMap((variant) =>
     aria-describedby="ring-hint"
   >
     {
-      portraits.map((role, i) => (
+      roles.map((role, i) => (
         <div class="role-slot" data-index={i}>
           <a class="role-card" href={role.href} draggable="false">
             <>
-              <img
-                src={`/images/avatars/${role.image}`}
-                width="480"
-                height="480"
-                alt=""
-                loading="lazy"
-                draggable="false"
-              />
+              <span class="portrait-stack">
+                {[2, 1, 3].map((variant, index) => (
+                  <img
+                    class:list={{ 'is-current': index === 0 }}
+                    src={`/images/avatars/${role.id}${variant === 1 ? '' : `-${variant}`}.webp`}
+                    width="480"
+                    height="480"
+                    alt=""
+                    loading="lazy"
+                    draggable="false"
+                  />
+                ))}
+              </span>
               <span class="role-name">{role.name}</span>
               <span class="role-question">{role.question}</span>
             </>

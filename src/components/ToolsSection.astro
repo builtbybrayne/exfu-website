@@ -1,5 +1,6 @@
 ---
-import { toolFamilies } from '../data/tools';
+import CopyBlock from './CopyBlock.astro';
+import { toolFamilies, marketplace, installLibrary } from '../data/tools';
 ---
 
 <section id="tools" class="tools-section section" aria-labelledby="tools-title">
@@ -16,7 +17,7 @@ import { toolFamilies } from '../data/tools';
           <article>
             <>
               <h3>
-                <a href={tool.href}>
+                <a href={marketplace}>
                   {tool.name} <span aria-hidden="true">↗</span>
                 </a>
               </h3>
@@ -26,7 +27,15 @@ import { toolFamilies } from '../data/tools';
         ))
       }
     </div><p class="tools-footnote">
-      Open-source agent tooling. Browse the source, read the docs or get help with your setup.
+      Public agent tooling. Browse the source, read the docs or get help with your setup.
     </p>
+    <div class="home-install">
+      <h3>Start with the Agent Library.</h3><p>
+        Already using Claude Code? Paste this into your terminal.
+      </p><CopyBlock text={installLibrary} label="Copy Agent Library install command" /><a
+        class="text-link"
+        href="/tools/#setup">New to plugins? Follow the setup guide ↗</a
+      >
+    </div>
   </div>
 </section>
