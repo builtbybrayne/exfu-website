@@ -95,3 +95,7 @@ User clarified that the three specific-needs routes should remain most salient. 
 ## Privacy spacing review, 2026-09-09
 
 User reviewed the remaining pages and said the other pages looked fine. Requested more separation before Privacy headings and below its title. Added page-scoped 48px spacing before subsequent section headings and 28px above the updated date. Privacy wording and date unchanged.
+
+## Final copy and push, 2026-09-09
+
+User changed the agent introduction to “Want an AI to read this website for you?” and requested everything on main be pushed. Fetch confirmed main and origin/main were aligned before this remaining copy commit. Production build passes with nine pages.
