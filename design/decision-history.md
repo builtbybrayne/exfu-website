@@ -99,3 +99,7 @@ User reviewed the remaining pages and said the other pages looked fine. Requeste
 ## Final copy and push, 2026-09-09
 
 User changed the agent introduction to “Want an AI to read this website for you?” and requested everything on main be pushed. Fetch confirmed main and origin/main were aligned before this remaining copy commit. Production build passes with nine pages.
+
+## Copy cleanup and main handoff, 2026-09-09
+
+User requested “Different clients. Familiar sticking points” and removal of the outgoing arrow on the internal footer Tools link, followed by capture/commit/merge/push. Both edits are on main. Current origin is git@github.com:builtbybrayne/exfu-website.git; fetch confirms main aligned with origin before this commit.
