@@ -3441,36 +3441,35 @@ p + a.button {
   margin-bottom: 0;
 }
 .invitation .quiz-general {
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  margin: 30px auto 14px;
-  max-width: 780px;
-  width: 100%;
-  min-height: 100px;
-  padding: 26px 34px;
-  background: var(--red);
-  color: white;
-  font-size: clamp(23px, 3vw, 33px);
+  margin: 8px auto 14px;
+  max-width: 100%;
+  min-height: 68px;
+  padding: 18px 28px;
+  background: #e8e0d3;
+  color: #92291c;
+  border: 2px solid var(--red);
+  font-size: clamp(20px, 2vw, 24px);
   font-weight: 600;
-  box-shadow: 7px 7px 0 #d5c8b6;
 }
 .invitation .quiz-general:hover {
-  background: #85291d;
-  transform: translateY(-2px);
+  background: var(--red);
+  color: white;
 }
 .invitation .needs-links {
   margin-top: 30px;
 }
 .invitation .needs-links a {
-  background: transparent;
-  color: var(--red);
-  min-height: 95px;
-  font-size: 21px;
+  background: var(--red);
+  color: white;
+  min-height: 120px;
+  font-size: clamp(23px, 2.4vw, 29px);
 }
 .invitation .needs-links a:hover {
+  background: #85291d;
   color: white;
-  background: var(--red);
 }
 .tool-grid {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));

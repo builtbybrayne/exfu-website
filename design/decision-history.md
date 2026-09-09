@@ -87,3 +87,7 @@ The general quiz CTA now leads the needs block, with the three known-need routes
 ## Prompt panel refinement, 2026-09-09
 
 User requested a darker, code-adjacent prompt treatment with contained scrolling. Added warm charcoal, light monospace text, a fixed 260px scroll area and a persistent copy button outside the scroller. Full prompt remains in HTML and copying remains unchanged. Build passes; focused Chromium accessibility scan has no violations; scrolling verified at 1200px and 390px without page overflow.
+
+## CTA hierarchy and outgoing links, 2026-09-09
+
+User clarified that the three specific-needs routes should remain most salient. Restored large filled red cards above a substantial outlined general quiz button. External websites, CV PDFs and non-page resources now use target=_blank with noopener noreferrer in static HTML; internal page navigation remains in-tab. Mail links retain the mailto handler with the same target attribute. Build passes; all nine pages audited for outgoing link attributes; a commercial CV click opened a new browser tab; focused CTA accessibility scan found no violations and screenshot inspected. Pages without explicit user feedback in the conversation are Privacy, Thanks and 404; standalone enquiry form merits final review separately from the reviewed quiz.
