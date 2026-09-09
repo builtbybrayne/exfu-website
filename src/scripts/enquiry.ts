@@ -119,7 +119,7 @@ if (form && quiz && panel && start && support && message && error) {
     );
     if (choice) choice.checked = true;
   }
-  if (params.get('quiz') === '1') showStep(0, false);
+  if (params.get('quiz') === '1') showStep(Object.hasOwn(routes, need) ? 1 : 0, false);
   document.querySelector('#start-quiz')?.addEventListener('click', () => showStep(0));
   document.querySelector('#edit-answers')?.addEventListener('click', () => showStep(0));
   document.querySelector('#skip-quiz')?.addEventListener('click', () => showContact());

@@ -3223,3 +3223,146 @@ p + a.button {
     transition: none;
   }
 }
+
+/* The animated ring is clipped, never a native scrolling/snap container. */
+.role-ring.ring-ready {
+  overflow: clip;
+  scroll-snap-type: none;
+  overflow-anchor: none;
+}
+.ring-ready .role-slot {
+  scroll-snap-align: none;
+}
+.role-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+.role-detail {
+  background: var(--white);
+  padding: clamp(24px, 3vw, 40px);
+  border-top: 3px solid var(--red);
+  scroll-margin-top: 110px;
+}
+.role-detail-content header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.role-detail-content header img {
+  width: 85px;
+  height: 100px;
+  object-fit: cover;
+}
+.role-detail-content h3 {
+  font-size: clamp(24px, 2.5vw, 32px);
+}
+.role-detail-content ul {
+  padding-left: 22px;
+  margin-block: 24px;
+}
+.role-detail-content li {
+  margin-bottom: 10px;
+}
+.role-reassurance {
+  border-left: 2px solid var(--red);
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+.role-reassurance h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.role-reassurance p {
+  margin-bottom: 0;
+}
+#role-popover {
+  border: 0;
+  background: var(--white);
+  color: var(--ink);
+  width: min(660px, calc(100% - 32px));
+  max-height: calc(100dvh - 40px);
+  padding: 30px;
+  overflow-y: auto;
+  box-shadow: 0 24px 100px #0004;
+}
+#role-popover::backdrop {
+  background: #24211cd0;
+}
+.popover-close {
+  display: block;
+  margin: 0 0 24px auto;
+  border: 1px solid var(--red);
+  color: var(--red);
+  background: transparent;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+.persona-open {
+  overflow: hidden;
+}
+.invitation .quiz-general {
+  background: transparent;
+  color: var(--red);
+  border: 1px solid var(--red);
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+.invitation .quiz-general:hover {
+  background: var(--red);
+  color: white;
+}
+@media (max-width: 760px) {
+  .role-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.tools-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-block: 24px;
+  border-bottom: 1px solid #cfc8bc;
+}
+.tools-index a {
+  padding: 12px 18px;
+  background: #e8e3db;
+  text-decoration: none;
+  font-weight: 600;
+}
+.tools-index a:hover {
+  background: var(--red);
+  color: white;
+}
+#first-session,
+#troubleshooting,
+#tool-catalogue,
+#setup {
+  scroll-margin-top: 110px;
+}
+.plugin-picker {
+  padding: 24px;
+  background: #e8e3db;
+  margin-top: 28px;
+  max-width: 780px;
+}
+.plugin-picker label {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.plugin-picker select {
+  width: 100%;
+  padding: 16px;
+  font: inherit;
+  border: 1px solid #777;
+  color: var(--ink);
+  background: var(--white);
+}
+.plugin-picker p {
+  margin: 12px 0 0;
+  font-size: 14px;
+}

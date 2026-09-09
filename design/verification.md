@@ -29,3 +29,7 @@ Final format/types/build pass (27 checked files, nine static routes). 50/50 Play
 ## Second review, 2026-09-09
 
 Astro check: 28 files, zero diagnostics. Nine-route build and formatting pass. Browser run: 52 passed, two new copy tests flagged duplicate accessible labels. Labels corrected; all four targeted copy/FAQ and affected Fractional accessibility/link checks pass afterwards in Chromium/Firefox. Portrait cycling and pause passed in both browsers. Desktop Home, Tools, Fractional and mobile Home screenshots inspected. Existing responsive checks cover all routes down to 320px. Install syntax/alias verified against the public manifest and official Claude documentation; execution on a fresh user account remains untested and no local installation was attempted.
+
+## Persona and selector revision, 2026-09-09
+
+All 60 Playwright tests pass in Chromium and Firefox, including native anchor scroll prevention, accessible persona dialog and Escape/focus return, full-card detail layout at 320px, Q2 shortcuts and general Q1 route, and four plugin choices updating commands, copied text and first-session panels. Types: 31 files, zero diagnostics. Build: nine routes. Browser motion samples at 250ms intervals: -0.0178, -0.2081, -0.2958, -0.3280, -0.3374, -0.3418, -0.3460, -0.3502 radians; decay reaches steady movement within 1.2 seconds. Visually reviewed desktop persona dialog/grid and mobile Plan visualiser setup selection.

@@ -2,11 +2,12 @@
 interface Props {
   text: string;
   label?: string;
+  id?: string;
 }
-const { text, label = 'Copy command' } = Astro.props;
+const { text, label = 'Copy command', id } = Astro.props;
 ---
 
-<div class="copy-block">
+<div class="copy-block" id={id}>
   <pre tabindex="0"><code>{text}</code></pre>
   <button type="button" data-copy aria-label={label} hidden>Copy</button>
   <p class="copy-status" role="status" hidden></p>

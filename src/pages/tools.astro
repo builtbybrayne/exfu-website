@@ -19,17 +19,28 @@ import { toolFamilies, marketplace, installLibrary } from '../data/tools';
       >
     </div>
   </section>
+  <nav class="tools-index wrap" aria-label="Tools page sections">
+    <a href="#setup">1. Choose & install</a><a href="#first-session">2. First session</a><a
+      href="#troubleshooting">3. Get unstuck</a
+    ><a href="#tool-catalogue">All featured tools</a>
+  </nav>
   <section id="setup" class="section">
     <div class="wrap">
       <div class="setup-intro">
         <p class="eyebrow red">Installing for the first time?</p><h2>Let’s get you set up.</h2><p>
-          The Agent Library is a good starting point for your own work. It gives Claude a place for
-          your context, preferences and ongoing tasks. Install it first, then let Claude walk you
-          through setting up your library.
+          Choose the plugin you want to install. The Agent Library is one example; each tool has its
+          own starting point. The marketplace may include more plugins and editions than this page
+          lists, so check it for the full catalogue and current details.
         </p><p>
           You’ll need Claude Desktop with Cowork available, or Claude Code already installed and
           signed in. Choose the route you use below.
         </p>
+      </div>
+      <div class="plugin-picker" hidden>
+        <label for="plugin-choice">Which plugin would you like to set up?</label><select
+          id="plugin-choice"
+          >{toolFamilies.map((tool) => <option value={tool.pkg}>{tool.name}</option>)}</select
+        ><p id="plugin-selection-status" role="status">Showing Agent Library instructions.</p>
       </div>
       <div class="setup-options">
         <article class="setup-option">
@@ -39,8 +50,12 @@ import { toolFamilies, marketplace, installLibrary } from '../data/tools';
               repository. Paste this address:
             </li>
           </ol><CopyBlock text={marketplace} label="Copy marketplace address" /><p>
-            Browse the added marketplace and install <strong>exfu-agent-library-solo</strong>.
-            That’s the Agent Library for individuals.
+            Browse the added marketplace and install <strong id="selected-plugin-name"
+              >exfu-agent-library-solo</strong
+            >.
+            <span id="selected-plugin-description"
+              >For people who want their agent to pick up the thread between sessions.</span
+            >
           </p><p>
             <a href="https://support.claude.com/en/articles/13837440-use-plugins-in-claude"
               >Claude’s illustrated plugin guide ↗</a
@@ -49,12 +64,15 @@ import { toolFamilies, marketplace, installLibrary } from '../data/tools';
         </article>
         <article class="setup-option">
           <h3>In Claude Code</h3><p>
-            Open your terminal and run this command. It adds the marketplace and installs the Agent
-            Library.
-          </p><CopyBlock text={installLibrary} label="Copy Agent Library install command" /><p>
+            Open your terminal and run this command. It adds the marketplace and installs your
+            selected plugin.
+          </p><div id="selected-terminal">
+            <CopyBlock text={installLibrary} label="Copy Agent Library install command" />
+          </div><p>
             Already inside a Claude Code conversation? Run these two commands there, one at a time:
           </p><CopyBlock text="/plugin marketplace add ExFu/exfu-marketplace" /><CopyBlock
             text="/plugin install exfu-agent-library-solo@exfu-marketplace"
+            id="selected-slash"
           /><p>
             <a href="https://code.claude.com/docs/en/discover-plugins"
               >Claude Code plugin instructions ↗</a
@@ -63,34 +81,38 @@ import { toolFamilies, marketplace, installLibrary } from '../data/tools';
         </article>
       </div>
       <div class="setup-next" id="first-session">
-        <p class="eyebrow red">Once it’s installed</p><h2>Give your library a home.</h2><p>
-          Create a folder called <strong>ExFu Library</strong> somewhere you can find it again. Start
-          a fresh Claude session with access to that folder. If the plugin hasn’t appeared yet, restart
-          Claude first.
-        </p><p>Paste this to begin:</p><CopyBlock
-          text="I’ve installed the ExFu Agent Library and created an ExFu Library folder. Help me get set up using the ExFu setup skill. Ask me where the folder is, then walk me through it one step at a time."
-          label="Copy setup prompt"
-        /><p>
-          Bring one real task you’d like help with. Claude can ask about your work and preferences,
-          help organise the context, and explain what it’s creating. You can add more as you go.
-        </p><p>
-          Next time, choose the same library folder. Ask for the ExFu guides whenever you want to
-          understand the setup or learn what else you can do.
+        <p class="eyebrow red">Once it’s installed</p>
+        <p>
+          Start a fresh session after installation. If the plugin has not appeared, restart Claude
+          and check it is enabled.
         </p>
+        {
+          toolFamilies.map((tool, i) => (
+            <div data-plugin-first={tool.pkg} hidden={i !== 0}>
+              <>
+                <h2>{tool.setupTitle}</h2>
+                <p>{tool.preparation}</p>
+                <p>Paste this to begin:</p>
+                <CopyBlock text={tool.setupPrompt} label={`Copy ${tool.name} setup prompt`} />
+                <p>{tool.setupNote}</p>
+              </>
+            </div>
+          ))
+        }
       </div>
-      <h3>Something not working?</h3><div class="setup-options">
+      <h3 id="troubleshooting">Something not working?</h3><div class="setup-options">
         <article>
           <h4>I can’t find the plugin.</h4><p>
-            Check that the ExFu marketplace was added and the Agent Library is installed and
+            Check that the ExFu marketplace was added and your selected plugin is installed and
             enabled. Start a new session after installing. On a managed work account, your
             administrator may need to allow it.
           </p>
         </article>
         <article>
           <h4>Claude doesn’t recognise the setup.</h4><p>
-            Check you’re using the app where you installed the plugin and have selected your library
-            folder. Ask Claude whether it can see the ExFu setup skill. If it cannot, restart the
-            app and check the installed plugins again.
+            Check you’re using the app where you installed the plugin and have selected the folder
+            you want to work in. Ask Claude whether it can see the selected plugin’s skills. If it
+            cannot, restart the app and check the installed plugins again.
           </p>
         </article>
       </div><p>
@@ -100,7 +122,10 @@ import { toolFamilies, marketplace, installLibrary } from '../data/tools';
     </div>
   </section><section class="section">
     <div class="wrap">
-      <h2>Tools for working with agents.</h2><div class="tool-directory">
+      <h2 id="tool-catalogue">Tools for working with agents.</h2><p>
+        These are the main tools featured here. <a href={marketplace}>Explore the marketplace</a> for
+        the full and evolving catalogue.
+      </p><div class="tool-directory">
         {
           toolFamilies.map((tool, i) => (
             <article>
@@ -140,5 +165,5 @@ import { toolFamilies, marketplace, installLibrary } from '../data/tools';
         </div>
       </div>
     </div>
-  </section></Layout
+  </section><script src="../scripts/tool-setup.ts"></script></Layout
 >

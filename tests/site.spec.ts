@@ -77,8 +77,8 @@ test('quiz validates, retains back navigation, builds a brief and preserves edit
   page,
 }) => {
   await page.goto('/enquire/?quiz=1&need=business');
+  await expect(page.locator('#quiz-progress')).toHaveText('Question 2 of 3');
   await expect(page.getByLabel('AI across my business', { exact: false })).toBeChecked();
-  await page.getByRole('button', { name: /Next question/ }).click();
   await page.getByRole('button', { name: /Next question/ }).click();
   await expect(page.getByRole('alert')).toContainText('Choose at least one');
   await page.getByLabel('Making the case to others', { exact: true }).check();
@@ -312,5 +312,80 @@ test('setup commands copy exact text and FAQs are permanently visible', async ({
     await expect(page.locator('.faqs details')).toHaveCount(0);
     for (const answer of await page.locator('.faq-answer p').all())
       await expect(answer).toBeVisible();
+  }
+});
+
+test('persona details open as an accessible modal and as full cards without moving the fan anchor', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const ring = page.locator('.role-ring');
+  await ring.scrollIntoViewIfNeeded();
+  await ring.evaluate((el) => (el.scrollLeft = 180));
+  expect(await ring.evaluate((el) => el.scrollLeft)).toBe(0);
+  const card = page.locator('.role-card[data-role="ceo"]');
+  await card.click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByRole('dialog')).toContainText(
+    'Will this turn into another strategy deck?',
+  );
+  expect(
+    (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+      .violations,
+  ).toEqual([]);
+  await page.keyboard.press('Escape');
+  await expect(card).toBeFocused();
+  expect(await ring.evaluate((el) => el.scrollLeft)).toBe(0);
+  await page.locator('#show-roles').click();
+  await expect(page.locator('#role-directory')).toBeVisible();
+  await expect(page.locator('#role-directory article')).toHaveCount(12);
+  for (const detail of await page.locator('#role-directory .role-reassurance').all())
+    await expect(detail).toBeVisible();
+  await page.setViewportSize({ width: 320, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+});
+test('needs buttons skip known question and general quiz keeps it', async ({ page }) => {
+  for (const need of ['business', 'project', 'personal']) {
+    await page.goto('/');
+    await page.locator(`.needs-links a[href$="need=${need}"]`).click();
+    await expect(page.locator('#quiz-progress')).toHaveText('Question 2 of 3');
+    await page.locator('#quiz-back').click();
+    await expect(page.locator(`input[name="quiz-need"][value="${need}"]`)).toBeChecked();
+  }
+  await page.goto('/');
+  await page.locator('.quiz-general').click();
+  await expect(page.locator('#quiz-progress')).toHaveText('Question 1 of 3');
+});
+test('plugin selection updates installation, copied text and first-session guidance', async ({
+  page,
+}) => {
+  await page.goto('/tools/');
+  await page.evaluate(() =>
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: async (text: string) => {
+          (window as any).copied = text;
+        },
+      },
+    }),
+  );
+  for (const pkg of [
+    'exfu-agent-plan-visualiser',
+    'exfu-humane-agents',
+    'exfu-agent-planning-and-delegating',
+    'exfu-agent-library-solo',
+  ]) {
+    await page.selectOption('#plugin-choice', pkg);
+    await expect(page.locator('#selected-plugin-name')).toHaveText(pkg);
+    await expect(page.locator('#selected-slash code')).toHaveText(
+      `/plugin install ${pkg}@exfu-marketplace`,
+    );
+    await expect(page.locator(`[data-plugin-first="${pkg}"]`)).toBeVisible();
+    await expect(page.locator('[data-plugin-first]:visible')).toHaveCount(1);
+    await page.locator('#selected-terminal button').click();
+    expect(await page.evaluate(() => (window as any).copied)).toContain(
+      `install ${pkg}@exfu-marketplace`,
+    );
   }
 });

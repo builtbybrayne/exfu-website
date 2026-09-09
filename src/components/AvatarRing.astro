@@ -1,4 +1,5 @@
 ---
+import RoleDetail from './RoleDetail.astro';
 import { roles } from '../data/roles';
 ---
 
@@ -28,7 +29,7 @@ import { roles } from '../data/roles';
     {
       roles.map((role, i) => (
         <div class="role-slot" data-index={i}>
-          <a class="role-card" href={role.href} draggable="false">
+          <a class="role-card" href={`#role-${role.id}`} data-role={role.id} draggable="false">
             <>
               <span class="portrait-stack">
                 {[2, 1, 3].map((variant, index) => (
@@ -52,19 +53,28 @@ import { roles } from '../data/roles';
     }
   </div>
   <div class="wrap ring-bottom">
-    <p>Illustrated situations, not client portraits. Choose whatever feels relevant.</p><details
-      class="role-directory"
+    <p>Illustrated situations, not client portraits. Choose whatever feels relevant.</p><button
+      type="button"
+      class="text-link"
+      id="show-roles"
+      aria-expanded="true"
+      aria-controls="role-directory"
+      hidden>Show all roles</button
     >
-      <summary>See all roles as a list</summary><ul>
-        {
-          roles.map((role) => (
-            <li>
-              <a href={role.href}>{role.name}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </details>
   </div>
+  <div id="role-directory" class="wrap role-details-grid">
+    {
+      roles.map((role) => (
+        <article id={`role-${role.id}`} class="role-detail">
+          <RoleDetail role={role} />
+        </article>
+      ))
+    }
+  </div>
+  <dialog id="role-popover" aria-labelledby="popover-heading">
+    <button type="button" class="popover-close" aria-label="Close persona details">Close ×</button
+    ><div class="popover-content"></div>
+  </dialog>
+  <script src="../scripts/role-details.ts"></script>
   <script src="../scripts/avatar-ring.ts"></script>
 </section>

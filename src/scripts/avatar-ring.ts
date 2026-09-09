@@ -14,7 +14,8 @@ if (ring) {
   let angle = 0,
     velocity = 0,
     target: number | null = null,
-    lastTime = 0;
+    lastTime = 0,
+    enteredAt = 0;
   let hovered = false,
     focused = false,
     visible = false,
@@ -66,7 +67,11 @@ if (ring) {
   function frame(time: number) {
     const dt = Math.min(0.05, lastTime ? (time - lastTime) / 1000 : 0);
     lastTime = time;
-    if (visible && !document.hidden) {
+    if (
+      visible &&
+      !document.hidden &&
+      !document.documentElement.classList.contains('persona-open')
+    ) {
       if (!paused && !reduced.matches) {
         portraitTime += dt;
         slots.forEach((slot, index) => {
@@ -88,7 +93,11 @@ if (ring) {
         }
         render();
       } else if (!dragging && !focused && !hovered && !paused && !reduced.matches) {
-        angle += (Math.abs(velocity) > 0.001 ? velocity : -spacing / 14) * dt;
+        angle +=
+          (Math.abs(velocity) > 0.001
+            ? velocity
+            : -spacing * (1 / 8 + 8 * Math.pow(Math.max(0, 1 - (time - enteredAt) / 1200), 3))) *
+          dt;
         velocity *= Math.pow(0.025, dt);
         render();
       }
@@ -99,6 +108,7 @@ if (ring) {
   ring.addEventListener('pointerdown', (event) => {
     if (event.button !== 0 || !event.isPrimary) return;
     dragging = { x: event.clientX, angle, id: event.pointerId, moved: false };
+    enteredAt = 0;
     lastX = event.clientX;
     lastMove = performance.now();
     velocity = 0;
@@ -194,9 +204,14 @@ if (ring) {
     velocity = 0;
     syncPause();
   });
-  new IntersectionObserver((entries) => {
-    visible = entries[0].isIntersecting;
-  }).observe(ring);
+  new IntersectionObserver(
+    (entries) => {
+      const nextVisible = entries[0].isIntersecting;
+      if (nextVisible && !visible) enteredAt = performance.now();
+      visible = nextVisible;
+    },
+    { threshold: 0.2 },
+  ).observe(ring);
   new ResizeObserver(measure).observe(ring);
   measure();
   syncPause();
