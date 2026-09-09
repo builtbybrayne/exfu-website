@@ -1,169 +1,161 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CopyBlock from '../components/CopyBlock.astro';
-import { toolFamilies, marketplace, installLibrary } from '../data/tools';
+import { toolFamilies, marketplace } from '../data/tools';
 ---
 
 <Layout
-  title="ExFu tools & documentation"
-  description="Find the ExFu Agent Library, planning and delegating tools, plan visualiser and humane agents. Source, documentation and setup support."
-  ><section class="page-hero">
+  title="ExFu agent tools & setup"
+  description="Explore ExFu plugins, add the marketplace and follow setup instructions for the tool you choose. Help for Cowork and Claude Code users."
+>
+  <section class="page-hero">
     <div class="wrap">
-      <p class="eyebrow red">ExFu tools</p><h1>Pick up where<br />you left off.</h1><p
-        class="lead tools-lead"
-      >
-        Find your tools, installation instructions and documentation. If you’re new here, the
-        marketplace is the place to explore what’s available.
-      </p><a class="button" href="https://github.com/ExFu/exfu-marketplace"
-        >Open the marketplace ↗</a
-      >
+      <p class="eyebrow red">ExFu agent tools</p><h1>
+        Tools for agents.<br />Help getting started.
+      </h1><p class="lead tools-lead">
+        Explore the plugins, choose what would help, and get it working. Everything you need to
+        start is below.
+      </p><a class="button" href={marketplace}>Explore the full marketplace ↗</a>
     </div>
   </section>
-  <nav class="tools-index wrap" aria-label="Tools page sections">
-    <a href="#setup">1. Choose & install</a><a href="#first-session">2. First session</a><a
-      href="#troubleshooting">3. Get unstuck</a
-    ><a href="#tool-catalogue">All featured tools</a>
-  </nav>
-  <section id="setup" class="section">
-    <div class="wrap">
-      <div class="setup-intro">
-        <p class="eyebrow red">Installing for the first time?</p><h2>Let’s get you set up.</h2><p>
-          Choose the plugin you want to install. The Agent Library is one example; each tool has its
-          own starting point. The marketplace may include more plugins and editions than this page
-          lists, so check it for the full catalogue and current details.
-        </p><p>
-          You’ll need Claude Desktop with Cowork available, or Claude Code already installed and
-          signed in. Choose the route you use below.
-        </p>
-      </div>
-      <div class="plugin-picker" hidden>
-        <label for="plugin-choice">Which plugin would you like to set up?</label><select
-          id="plugin-choice"
-          >{toolFamilies.map((tool) => <option value={tool.pkg}>{tool.name}</option>)}</select
-        ><p id="plugin-selection-status" role="status">Showing Agent Library instructions.</p>
-      </div>
-      <div class="setup-options">
-        <article class="setup-option">
-          <h3>In Cowork</h3><p>Use the buttons in Claude Desktop. No terminal needed.</p><ol>
-            <li>Open Cowork, then <strong>Customize → Plugins</strong>.</li><li>
-              Under Personal plugins, choose <strong>+ → Add marketplace</strong>, then add from a
-              repository. Paste this address:
-            </li>
-          </ol><CopyBlock text={marketplace} label="Copy marketplace address" /><p>
-            Browse the added marketplace and install <strong id="selected-plugin-name"
-              >exfu-agent-library-solo</strong
-            >.
-            <span id="selected-plugin-description"
-              >For people who want their agent to pick up the thread between sessions.</span
+  <div class="wrap tools-layout">
+    <nav class="tools-sidebar" aria-label="Tools page sections">
+      <p class="eyebrow">On this page</p><a href="#tool-catalogue">Explore the tools</a><a
+        href="#marketplace">1. Add the marketplace</a
+      ><a href="#setup">2. Choose & install</a><a href="#first-session">3. First session</a><a
+        href="#troubleshooting">Get unstuck</a
+      >
+    </nav>
+    <div class="tools-main">
+      <section id="tool-catalogue" class="tools-chapter">
+        <p class="eyebrow red">Find your starting point</p><h2>What would help your agent?</h2><p>
+          These are a few of the main plugins. The <a href={marketplace}>marketplace</a> often has more
+          tools and editions than we list here, along with their current documentation.
+        </p><div class="tools-choices">
+          {
+            toolFamilies.map((tool) => (
+              <article>
+                <>
+                  <h3>{tool.name}</h3>
+                  <p>{tool.description}</p>
+                  <a href="#setup" data-choose-plugin={tool.pkg} class="text-link">
+                    Set up this plugin ↗
+                  </a>
+                </>
+              </article>
+            ))
+          }<article class="more-tools">
+            <h3>And more</h3><p>
+              See what else is available, including other editions and new additions.
+            </p><a class="text-link" href={marketplace}>Browse the marketplace ↗</a>
+          </article>
+        </div>
+      </section>
+      <section id="marketplace" class="tools-chapter">
+        <p class="eyebrow red">Step 1 · Once per app</p><h2>Add the ExFu marketplace.</h2><p>
+          The marketplace is the catalogue Claude uses to find ExFu plugins. Add it once, then
+          choose whichever plugins you want. If you have already added it, <a href="#setup"
+            >go straight to your plugin</a
+          >.
+        </p><div class="setup-options">
+          <article class="setup-option">
+            <h3>In Cowork</h3><p>
+              In Claude Desktop, open Cowork, then <strong>Customize → Plugins</strong>. Under
+              Personal plugins, choose <strong>+ → Add marketplace</strong> and add from a repository.
+            </p><CopyBlock text={marketplace} label="Copy marketplace address" /><a
+              href="https://support.claude.com/en/articles/13837440-use-plugins-in-claude"
+              >Claude’s plugin guide ↗</a
             >
-          </p><p>
-            <a href="https://support.claude.com/en/articles/13837440-use-plugins-in-claude"
-              >Claude’s illustrated plugin guide ↗</a
+          </article><article class="setup-option">
+            <h3>In Claude Code</h3><p>
+              With Claude Code installed and signed in, paste this into your terminal:
+            </p><CopyBlock
+              text="claude plugin marketplace add ExFu/exfu-marketplace"
+              label="Copy terminal marketplace command"
+            /><p>Or, inside a Claude Code conversation:</p><CopyBlock
+              text="/plugin marketplace add ExFu/exfu-marketplace"
+              label="Copy conversation marketplace command"
+            /><a href="https://code.claude.com/docs/en/discover-plugins"
+              >Claude Code plugin guide ↗</a
             >
-          </p>
-        </article>
-        <article class="setup-option">
-          <h3>In Claude Code</h3><p>
-            Open your terminal and run this command. It adds the marketplace and installs your
-            selected plugin.
-          </p><div id="selected-terminal">
-            <CopyBlock text={installLibrary} label="Copy Agent Library install command" />
-          </div><p>
-            Already inside a Claude Code conversation? Run these two commands there, one at a time:
-          </p><CopyBlock text="/plugin marketplace add ExFu/exfu-marketplace" /><CopyBlock
-            text="/plugin install exfu-agent-library-solo@exfu-marketplace"
-            id="selected-slash"
-          /><p>
-            <a href="https://code.claude.com/docs/en/discover-plugins"
-              >Claude Code plugin instructions ↗</a
-            >
-          </p>
-        </article>
-      </div>
-      <div class="setup-next" id="first-session">
-        <p class="eyebrow red">Once it’s installed</p>
-        <p>
-          Start a fresh session after installation. If the plugin has not appeared, restart Claude
-          and check it is enabled.
-        </p>
-        {
-          toolFamilies.map((tool, i) => (
-            <div data-plugin-first={tool.pkg} hidden={i !== 0}>
-              <>
-                <h2>{tool.setupTitle}</h2>
-                <p>{tool.preparation}</p>
-                <p>Paste this to begin:</p>
-                <CopyBlock text={tool.setupPrompt} label={`Copy ${tool.name} setup prompt`} />
-                <p>{tool.setupNote}</p>
-              </>
-            </div>
-          ))
-        }
-      </div>
-      <h3 id="troubleshooting">Something not working?</h3><div class="setup-options">
-        <article>
-          <h4>I can’t find the plugin.</h4><p>
-            Check that the ExFu marketplace was added and your selected plugin is installed and
-            enabled. Start a new session after installing. On a managed work account, your
-            administrator may need to allow it.
-          </p>
-        </article>
-        <article>
-          <h4>Claude doesn’t recognise the setup.</h4><p>
-            Check you’re using the app where you installed the plugin and have selected the folder
-            you want to work in. Ask Claude whether it can see the selected plugin’s skills. If it
-            cannot, restart the app and check the installed plugins again.
-          </p>
-        </article>
-      </div><p>
-        Still stuck? Email <a href="mailto:al@exfu.ai">al@exfu.ai</a> with the app you’re using, the step
-        you reached and the error message. Leave out passwords and private client information.
-      </p>
-    </div>
-  </section><section class="section">
-    <div class="wrap">
-      <h2 id="tool-catalogue">Tools for working with agents.</h2><p>
-        These are the main tools featured here. <a href={marketplace}>Explore the marketplace</a> for
-        the full and evolving catalogue.
-      </p><div class="tool-directory">
-        {
-          toolFamilies.map((tool, i) => (
-            <article>
-              <>
-                <span class="tool-mark" aria-hidden="true">
-                  {['↳', '⇄', '◎', '≋'][i]}
-                </span>
-                <div>
+          </article>
+        </div>
+      </section>
+      <section id="setup" class="tools-chapter plugin-workspace">
+        <div class="plugin-picker" hidden>
+          <p class="eyebrow red">Step 2 · Your chosen plugin</p><label for="plugin-choice"
+            >What are we installing?</label
+          ><select id="plugin-choice"
+            >{toolFamilies.map((tool) => <option value={tool.pkg}>{tool.name}</option>)}</select
+          ><p id="plugin-selection-status" role="status">Showing Agent Library instructions.</p>
+        </div><div class="selected-plugin-body">
+          <h2 id="selected-tool-title">Install the Agent Library.</h2><p
+            id="selected-plugin-description"
+          >
+            {toolFamilies[0].detail}
+          </p><p>Marketplace added? These instructions install just this plugin.</p><div
+            class="setup-options"
+          >
+            <article class="setup-option">
+              <h3>In Cowork</h3><p>
+                Browse your ExFu marketplace and find <strong id="selected-plugin-name"
+                  >exfu-agent-library-solo</strong
+                >. Choose Install, then check that it is enabled.
+              </p>
+            </article><article class="setup-option">
+              <h3>In Claude Code</h3><p>In your terminal:</p><div id="selected-terminal">
+                <CopyBlock
+                  text="claude plugin install exfu-agent-library-solo@exfu-marketplace"
+                  label="Copy Agent Library install command"
+                />
+              </div><p>Or in a Claude Code conversation:</p><CopyBlock
+                text="/plugin install exfu-agent-library-solo@exfu-marketplace"
+                id="selected-slash"
+              />
+            </article>
+          </div>
+          <section id="first-session" class="setup-next">
+            <p class="eyebrow red">Step 3 · Try your chosen plugin</p><p>
+              Start a fresh session. If the plugin has not appeared, restart Claude and check that
+              it is enabled.
+            </p>{
+              toolFamilies.map((tool, i) => (
+                <div data-plugin-first={tool.pkg} hidden={i !== 0}>
                   <>
-                    <h3>{tool.name}</h3>
-                    <p>{tool.description}</p>
-                    <p>{tool.detail}</p>
-                    <p>Claude Code terminal · after adding the marketplace:</p>
-                    <CopyBlock
-                      text={`claude plugin install ${tool.pkg}@exfu-marketplace`}
-                      label={`Copy ${tool.name} plugin command`}
-                    />
-                    <a class="text-link" href={marketplace}>
-                      Find it in the marketplace ↗
-                    </a>
+                    <h3>{tool.setupTitle}</h3>
+                    <p>{tool.preparation}</p>
+                    <p>Paste this to begin:</p>
+                    <CopyBlock text={tool.setupPrompt} label={`Copy ${tool.name} setup prompt`} />
+                    <p>{tool.setupNote}</p>
                   </>
                 </div>
-              </>
-            </article>
-          ))
-        }
-      </div><div class="tools-help">
-        <h2>Need a hand with your setup?</h2><p>
-          If you’re already using the tools, tell me which one and where you’re getting stuck. If
-          you want help setting up agents around your work, personal support may be a useful
-          starting point.
-        </p><div>
-          <a class="button" href="mailto:al@exfu.ai">Ask Alastair ↗</a><a
-            class="text-link"
-            href="/personal-support/">Explore personal support</a
-          >
+              ))
+            }
+          </section>
         </div>
-      </div>
+      </section>
+      <section id="troubleshooting" class="tools-chapter">
+        <p class="eyebrow red">A little support</p><h2>Something not working?</h2><article
+          class="faq-answer"
+        >
+          <h3>I can’t find the plugin.</h3><p>
+            Check that the ExFu marketplace was added in the app you are using, and the plugin is
+            installed and enabled. On a managed work account, your administrator may need to allow
+            it.
+          </p>
+        </article><article class="faq-answer">
+          <h3>Claude doesn’t recognise the setup.</h3><p>
+            Start a new session in the app where you installed the plugin. Select your working
+            folder and ask whether Claude can see the plugin’s skills. If not, restart the app and
+            check your installed plugins.
+          </p>
+        </article><div class="tools-help">
+          <h3>Still stuck?</h3><p>
+            Email <a href="mailto:al@exfu.ai">al@exfu.ai</a> with the app you’re using, the step you reached
+            and the error message. Leave out passwords and private client information.
+          </p><a class="text-link" href="/personal-support/">Prefer to get set up together? ↗</a>
+        </div>
+      </section>
     </div>
-  </section><script src="../scripts/tool-setup.ts"></script></Layout
+  </div><script src="../scripts/tool-setup.ts"></script></Layout
 >

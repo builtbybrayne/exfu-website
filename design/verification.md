@@ -33,3 +33,7 @@ Astro check: 28 files, zero diagnostics. Nine-route build and formatting pass. B
 ## Persona and selector revision, 2026-09-09
 
 All 60 Playwright tests pass in Chromium and Firefox, including native anchor scroll prevention, accessible persona dialog and Escape/focus return, full-card detail layout at 320px, Q2 shortcuts and general Q1 route, and four plugin choices updating commands, copied text and first-session panels. Types: 31 files, zero diagnostics. Build: nine routes. Browser motion samples at 250ms intervals: -0.0178, -0.2081, -0.2958, -0.3280, -0.3374, -0.3418, -0.3460, -0.3502 radians; decay reaches steady movement within 1.2 seconds. Visually reviewed desktop persona dialog/grid and mobile Plan visualiser setup selection.
+
+## Agent handoff and Tools redesign, 2026-09-09
+
+32-file type check and nine-route build pass. Initial browser suite: 62 passed, two Tools checks failed one contrast finding on the And more link; corrected and both affected checks pass afterwards. New tests verify the copied fit prompt and absence of booking claims, structured-map page destinations, homepage tool code removal, catalogue plugin choice, plugin-only install command and sticky/current-section navigation. Desktop Home/Tools and mobile Home screenshots reviewed.

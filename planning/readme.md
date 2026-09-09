@@ -33,3 +33,5 @@ See completed `T3-refine-visitor-journeys.md` and the dated decision history for
 The second review is tracked in `T3-support-and-visual-polish.md`: cycling persona portraits, stronger buttons, open FAQs and guided tool installation.
 
 Latest review: completed `T3-persona-details-and-setup-selection.md` covers the fan anchor correction, introductory motion, rich persona details, Q2 shortcuts and selectable tool guidance.
+
+Latest work: `T3-agent-handoff-and-tools-journey.md` covers the homepage agent prompt/map, general quiz emphasis and redesigned installation journey.

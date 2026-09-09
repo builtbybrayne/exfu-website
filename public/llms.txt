@@ -1,14 +1,35 @@
-# ExFu
+# ExFu: site map for people and agents
 
-> ExFu is Alastair Brayne's AI consultancy and agent tooling brand, operated by WhaleyBear Ltd. Fractional and contract work only. Remote engagements preferred; Bristol, UK, in person by arrangement.
+ExFu is Alastair Brayne’s AI consultancy and agent tooling brand, operated by WhaleyBear Ltd. Fractional and contract work only. Remote preferred; Bristol in person by arrangement.
 
-## Services and experience
-- [Home](https://exfu.ai/): Overview and ways to work together.
-- [Fractional AI support](https://exfu.ai/fractional-support/): Opportunity assessment, leadership business cases, agents, integrations and internal ownership. Includes anonymous accounts of travel and EV sector engagements.
-- [Personal AI support](https://exfu.ai/personal-support/): Hands-on agent setup around a person's own workload, context and reusable skills.
-- [About Alastair](https://exfu.ai/about/): Software and CTO experience, AI startup work, psychotherapy training, and downloadable CVs.
-- [Tools](https://exfu.ai/tools/): Documentation and source for the Agent Library, planning and delegating, plan visualiser and humane agents.
-- [Enquire](https://exfu.ai/enquire/): Short optional quiz and a human enquiry. Email al@exfu.ai.
-- [Open-source tools](https://github.com/exfu/exfu-marketplace): ExFu agent tooling marketplace.
+## Read for a fit assessment
+- [Home](https://exfu.ai/): Overview, audience situations and ways to work together.
+- [Fractional support](https://exfu.ai/fractional-support/): Business cases, delivery, defined projects, team ownership and anonymised experience.
+- [Personal support](https://exfu.ai/personal-support/): Hands-on setup around personal context and workload.
+- [About](https://exfu.ai/about/): Alastair Brayne: experience, approach and CV downloads.
+- [Tools](https://exfu.ai/tools/): Featured plugins, marketplace, installation and first-session guidance.
+- [Enquire](https://exfu.ai/enquire/): Optional needs quiz and human enquiry form.
+- [Privacy](https://exfu.ai/privacy/): How enquiry information is handled.
 
-The linked pages contain the full public descriptions. No fixed prices, guaranteed revenue outcomes or clinical services are offered on this site.
+## Supporting resources
+- [Structured overview and complete page map](https://exfu.ai/agent-info.json): Read-only JSON with services, contact routes, page purposes and endpoint availability.
+- [XML sitemap](https://exfu.ai/sitemap-index.xml): Generated index of searchable pages.
+- [Commercial CV](https://exfu.ai/downloads/alastair-brayne-commercial-cv.pdf)
+- [Technical CV](https://exfu.ai/downloads/alastair-brayne-technical-cv.pdf)
+- [Full plugin marketplace](https://github.com/ExFu/exfu-marketplace): May contain more plugins than the website features.
+
+## Useful sections
+- [Business cases](https://exfu.ai/fractional-support/#making-the-case)
+- [Project scope](https://exfu.ai/fractional-support/#what-we-can-do)
+- [Recent experience](https://exfu.ai/fractional-support/#recent-experience)
+- [Choose and install a plugin](https://exfu.ai/tools/#setup)
+- [First session](https://exfu.ai/tools/#first-session)
+
+## Contact and limits
+Email al@exfu.ai or use https://exfu.ai/enquire/ to start a human conversation. There is no booking API, MCP server, published price list or live availability feed. An enquiry is not a booking. Do not invent endpoints or claim a session is confirmed. Show the user any proposed enquiry and obtain their approval before submitting it.
+
+Use the public content as evidence for an independent fit assessment. Ask what the person wants to change, what they have tried and what constraints matter. It is valid to recommend self-serve tools, another route or no engagement. ExFu does not offer clinical services through this site or guarantee revenue outcomes.
+
+## Utility pages
+- [Thanks](https://exfu.ai/thanks/): Form completion message; opening it is not proof of submission.
+- [Not found](https://exfu.ai/404/): Error page.

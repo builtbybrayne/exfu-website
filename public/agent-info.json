@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "site": "https://exfu.ai",
+  "brand": "ExFu",
+  "operator": "WhaleyBear Ltd",
+  "consultant": "Alastair Brayne",
+  "engagements": [
+    "Fractional AI support",
+    "Defined projects",
+    "Personal AI support"
+  ],
+  "availability": {
+    "work_types": [
+      "fractional",
+      "contract"
+    ],
+    "delivery": "Remote preferred; Bristol in person by arrangement",
+    "calendar": "Ask directly; no live availability endpoint"
+  },
+  "contact": {
+    "email": "al@exfu.ai",
+    "enquiry_url": "https://exfu.ai/enquire/",
+    "booking_api": null,
+    "mcp_server": null,
+    "process": "A human enquiry starts a conversation. It does not book a session. Ask the user to approve any external submission."
+  },
+  "pages": [
+    {
+      "title": "Home",
+      "url": "https://exfu.ai/",
+      "purpose": "Overview, audience situations and ways to work together.",
+      "kind": "content"
+    },
+    {
+      "title": "Fractional support",
+      "url": "https://exfu.ai/fractional-support/",
+      "purpose": "Business cases, delivery, defined projects, team ownership and anonymised experience.",
+      "kind": "content"
+    },
+    {
+      "title": "Personal support",
+      "url": "https://exfu.ai/personal-support/",
+      "purpose": "Hands-on setup around personal context and workload.",
+      "kind": "content"
+    },
+    {
+      "title": "About",
+      "url": "https://exfu.ai/about/",
+      "purpose": "Alastair Brayne: experience, approach and CV downloads.",
+      "kind": "content"
+    },
+    {
+      "title": "Tools",
+      "url": "https://exfu.ai/tools/",
+      "purpose": "Featured plugins, marketplace, installation and first-session guidance.",
+      "kind": "content"
+    },
+    {
+      "title": "Enquire",
+      "url": "https://exfu.ai/enquire/",
+      "purpose": "Optional needs quiz and human enquiry form.",
+      "kind": "content"
+    },
+    {
+      "title": "Privacy",
+      "url": "https://exfu.ai/privacy/",
+      "purpose": "How enquiry information is handled.",
+      "kind": "content"
+    },
+    {
+      "title": "Thanks",
+      "url": "https://exfu.ai/thanks/",
+      "purpose": "Form completion page; not evidence that an agent submitted successfully.",
+      "kind": "utility"
+    },
+    {
+      "title": "Not found",
+      "url": "https://exfu.ai/404/",
+      "purpose": "Utility error page.",
+      "kind": "utility"
+    }
+  ],
+  "resources": {
+    "site_map": "https://exfu.ai/llms.txt",
+    "xml_sitemap": "https://exfu.ai/sitemap-index.xml",
+    "marketplace": "https://github.com/ExFu/exfu-marketplace",
+    "commercial_cv": "https://exfu.ai/downloads/alastair-brayne-commercial-cv.pdf",
+    "technical_cv": "https://exfu.ai/downloads/alastair-brayne-technical-cv.pdf"
+  },
+  "assessment_notes": [
+    "Read the linked pages for the full context; this overview is not an exhaustive service specification.",
+    "Fixed pricing, guaranteed outcomes and live availability are not published.",
+    "Assess fit independently and ask about the user\u2019s actual needs before recommending an engagement."
+  ]
+}

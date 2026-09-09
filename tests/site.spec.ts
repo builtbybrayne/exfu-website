@@ -305,7 +305,7 @@ test('setup commands copy exact text and FAQs are permanently visible', async ({
     .getByRole('button', { name: 'Copy Agent Library install command', exact: true })
     .click();
   expect(await page.evaluate(() => (window as any).copied)).toBe(
-    'claude plugin marketplace add ExFu/exfu-marketplace && claude plugin install exfu-agent-library-solo@exfu-marketplace',
+    'claude plugin install exfu-agent-library-solo@exfu-marketplace',
   );
   for (const route of ['/fractional-support/', '/personal-support/']) {
     await page.goto(route);
@@ -388,4 +388,43 @@ test('plugin selection updates installation, copied text and first-session guida
       `install ${pkg}@exfu-marketplace`,
     );
   }
+});
+
+test('agent handoff is copyable and the structured map has real local destinations', async ({
+  page,
+  request,
+}) => {
+  await page.goto('/');
+  await page.evaluate(() =>
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: async (text: string) => {
+          (window as any).copied = text;
+        },
+      },
+    }),
+  );
+  await page.getByRole('button', { name: 'Copy agent fit prompt' }).click();
+  expect(await page.evaluate(() => (window as any).copied)).toContain('independent assessment');
+  expect(await page.evaluate(() => (window as any).copied)).toContain('not a booking API');
+  const data = await (await request.get('/agent-info.json')).json();
+  expect(data.contact.booking_api).toBeNull();
+  for (const entry of data.pages.filter((entry: any) => entry.kind === 'content'))
+    expect((await request.get(new URL(entry.url).pathname)).ok()).toBeTruthy();
+  await expect(page.locator('.tools-section pre')).toHaveCount(0);
+  await expect(page.locator('.tools-section .more-tools')).toContainText('And more');
+});
+test('tools catalogue selects the correct plugin and sidebar stays available', async ({ page }) => {
+  await page.goto('/tools/');
+  await page.locator('[data-choose-plugin="exfu-humane-agents"]').click();
+  await expect(page.locator('#plugin-choice')).toHaveValue('exfu-humane-agents');
+  await expect(page.locator('#selected-tool-title')).toHaveText('Install Humane agents.');
+  await expect(page.locator('#selected-terminal code')).not.toContainText('marketplace add');
+  await page.locator('#first-session').scrollIntoViewIfNeeded();
+  await expect(page.getByRole('navigation', { name: 'Tools page sections' })).toBeInViewport();
+  await page.locator('#troubleshooting').scrollIntoViewIfNeeded();
+  await expect(page.locator('.tools-sidebar a[href="#troubleshooting"]')).toHaveAttribute(
+    'aria-current',
+    'location',
+  );
 });
