@@ -9,7 +9,9 @@ import Layout from '../layouts/Layout.astro';
   <section class="section">
     <div class="wrap reading-layout">
       <div>
-        <p class="eyebrow red">Your information</p><h1>Privacy.</h1><p>Updated 8 September 2026</p>
+        <p class="eyebrow red">Your information</p><h1>Privacy.</h1><p class="privacy-updated">
+          Updated 8 September 2026
+        </p>
       </div><div class="prose">
         <h2>Who handles your enquiry</h2><p>
           ExFu is a trading name of WhaleyBear Ltd. Alastair Brayne handles enquiries. You can
@@ -49,3 +51,12 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 </Layout>
+
+<style>
+  .privacy-updated {
+    margin-top: 28px;
+  }
+  .prose h2:not(:first-child) {
+    margin-top: 48px;
+  }
+</style>

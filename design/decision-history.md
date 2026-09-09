@@ -91,3 +91,7 @@ User requested a darker, code-adjacent prompt treatment with contained scrolling
 ## CTA hierarchy and outgoing links, 2026-09-09
 
 User clarified that the three specific-needs routes should remain most salient. Restored large filled red cards above a substantial outlined general quiz button. External websites, CV PDFs and non-page resources now use target=_blank with noopener noreferrer in static HTML; internal page navigation remains in-tab. Mail links retain the mailto handler with the same target attribute. Build passes; all nine pages audited for outgoing link attributes; a commercial CV click opened a new browser tab; focused CTA accessibility scan found no violations and screenshot inspected. Pages without explicit user feedback in the conversation are Privacy, Thanks and 404; standalone enquiry form merits final review separately from the reviewed quiz.
+
+## Privacy spacing review, 2026-09-09
+
+User reviewed the remaining pages and said the other pages looked fine. Requested more separation before Privacy headings and below its title. Added page-scoped 48px spacing before subsequent section headings and 28px above the updated date. Privacy wording and date unchanged.
