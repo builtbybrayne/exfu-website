@@ -125,3 +125,7 @@ The user asked to generate all three proposed alternatives and flip between them
 ## Recognisable work selected, 2026-09-09
 
 The user selected option C, recognisable work. Applied the exact chosen illustration to Fractional support and generated two matching hand-free transparent panoramas for personal routines and the full-width project break. Existing shallow layout retained. Updated alt text and fractional caption to describe the new content. Responsive WebP assets remain in public/images/narrative; exact derivative prompts are in design/recognisable-work-prompts.json. Alpha metadata and fully transparent pixels checked for all three sources. Production build and whitespace check passed. About sketch file still pending.
+
+## About portrait resolved, 2026-09-09
+
+Located the user-requested existing pencil portrait at `/Users/al/Studio/projects/exfu_website/public/images/alastair-avatar.webp`. Copied it unchanged to this project and replaced the About photo reference, alt text and intrinsic dimensions (480 by 480). Previous site remains unchanged. This resolves the earlier pending sketch-file note. Build passed; source and copy are byte-identical and built About HTML references the copied sketch.
