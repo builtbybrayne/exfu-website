@@ -1,0 +1,6 @@
+Tool: built-in image_gen.imagegen
+Edit target: public/images/narrative/workbench-panorama-1800.webp
+Generated source: /Users/al/.codex/generated_images/01a08c6e-8a14-71e0-8763-aa0ad224a0a5/exec-c29b398c-b3ed-4d0b-9e05-dbab6830629c.png
+Production assets: public/images/narrative/workbench-action-panorama-{900,1800}.webp (Sharp resize, WebP quality 88; alpha retained)
+
+Edit this website panorama (precise-object-edit). Preserve the existing wide 3:1 composition, all documents, folder, cables and two cubes, their positions, the warm textured cut-paper illustration style, muted cream/tan palette and terracotta accents. Preserve genuinely transparent background. Add one clearly recognisable medium-size terracotta paper-textured cog/gear with a cream central hole on the RIGHT OUTPUT side, in front of and slightly to the right of the completed document stack, to communicate taking action as well as producing documents. Cog should sit fully within canvas with ample transparent padding, no cropping. No text, no other new elements. Output wide 3:1 transparent PNG.

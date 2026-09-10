@@ -213,3 +213,13 @@ Verification timing correction: the first arrow rerun passed Firefox but Chromiu
 ## Upper-card falling sway, 2026-09-10
 
 User clarified that wiggle should apply to the upper cards dropping while the lowest enters the slot. Added independently phased lateral sway and small X/Z rotations during their downward travel. The vertical fall remains continuous; sampled damped oscillation avoids stopping at each direction change and settles into the existing slot-entry motion. Bottom-first timing remains unchanged.
+
+## Homepage and fractional review tweaks, 2026-09-10
+
+User requested explicit AI wording in the top hero card, slightly more separated card animations, removal or first-person rewriting of the consultancy introduction, better service icons, warmer audience wording, a quiz invitation inside the fan, explicit Home/Tools navigation states, and a smaller uncropped second panorama with an action symbol on its output side.
+
+Implemented “Find the AI opportunity”; removed the redundant consultancy sentence so the paragraph starts “I work alongside…”; chose “A variety of clients.” Matching red SVG line icons depict ongoing support, scoped checklist work and connected screens. The fan contains “Which are you?” and a direct general-quiz button, positioned separately from the draggable cards. Home is underlined when current; Tools is outlined ordinarily and filled/underlined when current. Default hero card staggering increased from 80ms to 280ms; the automatic AI panel introduction now waits 3100ms so it follows the finished hero sequence.
+
+The panorama is 80% wide (capped at 1200px, with mobile gutters), uses its natural aspect ratio without cropping, and includes a terracotta cog on the output side. Built-in image generation edited the existing transparent illustration; original assets are preserved. Responsive derivatives are `public/images/narrative/workbench-action-panorama-900.webp` and `workbench-action-panorama-1800.webp`. Exact prompt: `design/panorama-action-prompt.txt`.
+
+Verification: Astro check and production build passed. 44 selected Chromium/Firefox checks passed covering route accessibility and links, 320–1440px overflow, keyboard navigation, no-JavaScript content, fan interaction/persona modals and hero/prompt timing. Local screenshots are under ignored `artifacts/visual/tweaks/`. Deployment remains user-owned.

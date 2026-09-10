@@ -258,7 +258,7 @@ if (review) {
             final(i),
           ],
           2400,
-          i * 80,
+          i * 280,
         );
         Array.from(card.querySelectorAll<HTMLElement>(':scope > span')).forEach((part, j) => {
           const z = [100, 65, 35][j];
@@ -277,7 +277,7 @@ if (review) {
               { transform: 'translate3d(0,0,0)', offset: 1 },
             ],
             2100 + j * 100,
-            i * 80,
+            i * 280,
           );
         });
       });

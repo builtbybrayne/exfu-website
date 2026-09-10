@@ -48,7 +48,7 @@ if (candidate) {
   let remaining = 1800;
   let initialPending = true;
   let initialTimer = 0;
-  let initialRemaining = 2500;
+  let initialRemaining = 3100;
   let initialDeadline = 0;
   function scheduleInitial() {
     if (!initialPending || document.hidden) return;

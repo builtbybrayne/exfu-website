@@ -6,7 +6,7 @@ import { roles } from '../data/roles';
 <section class="people-section audience-section section" aria-labelledby="people-title">
   <div class="wrap audience-heading">
     <div>
-      <h2 id="people-title">Different clients.<br />Familiar sticking points</h2><p>
+      <h2 id="people-title">A variety of clients.<br />Familiar sticking points</h2><p>
         You might be leading the change, backing a team, or trying to get on top of your own work.
       </p>
     </div><div class="ring-controls" hidden>
@@ -19,38 +19,45 @@ import { roles } from '../data/roles';
       </div>
     </div>
   </div>
-  <div
-    class="role-ring"
-    tabindex="0"
-    role="group"
-    aria-label="Illustrated client situations"
-    aria-describedby="ring-hint"
-  >
-    {
-      roles.map((role, i) => (
-        <div class="role-slot" data-index={i}>
-          <a class="role-card" href={`#role-${role.id}`} data-role={role.id} draggable="false">
-            <>
-              <span class="portrait-stack">
-                {[2, 1, 3].map((variant, index) => (
-                  <img
-                    class:list={{ 'is-current': index === 0 }}
-                    src={`/images/avatars/${role.id}${variant === 1 ? '' : `-${variant}`}.webp`}
-                    width="480"
-                    height="480"
-                    alt=""
-                    loading="lazy"
-                    draggable="false"
-                  />
-                ))}
-              </span>
-              <span class="role-name">{role.name}</span>
-              <span class="role-question">{role.question}</span>
-            </>
-          </a>
-        </div>
-      ))
-    }
+  <div class="ring-stage">
+    <div
+      class="role-ring"
+      tabindex="0"
+      role="group"
+      aria-label="Illustrated client situations"
+      aria-describedby="ring-hint"
+    >
+      {
+        roles.map((role, i) => (
+          <div class="role-slot" data-index={i}>
+            <a class="role-card" href={`#role-${role.id}`} data-role={role.id} draggable="false">
+              <>
+                <span class="portrait-stack">
+                  {[2, 1, 3].map((variant, index) => (
+                    <img
+                      class:list={{ 'is-current': index === 0 }}
+                      src={`/images/avatars/${role.id}${variant === 1 ? '' : `-${variant}`}.webp`}
+                      width="480"
+                      height="480"
+                      alt=""
+                      loading="lazy"
+                      draggable="false"
+                    />
+                  ))}
+                </span>
+                <span class="role-name">{role.name}</span>
+                <span class="role-question">{role.question}</span>
+              </>
+            </a>
+          </div>
+        ))
+      }
+    </div>
+    <div class="ring-quiz">
+      <p>Which are you?</p><a class="button" href="/enquire/?quiz=1"
+        >Take the quiz <span aria-hidden="true">↗</span></a
+      >
+    </div>
   </div>
   <div class="wrap ring-bottom">
     <p>Illustrated situations, not client portraits. Choose whatever feels relevant.</p><button
