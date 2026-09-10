@@ -173,3 +173,7 @@ User requested one card at a time, starting at the bottom, still quickly. Each c
 User requested the remaining popover cards drop into vacated space with juicy animation, and also asked for homepage hero card animation. The popover now runs three 260ms stages: each bottom card docks while those above fall to the new stack bottom, overshooting by 7px with a small rotation before settling. Cancellation remains revision guarded. Total collapse is 790ms including tray settlement.
 
 Hero cards now deal in with staggered depth/rotation, overshoot and a quiet settle over about 1.1 seconds. Fine-pointer hover adds a small lift and tilt; card edges have matching shallow depth. No repeating animation and reduced-motion users retain static cards. Browser screenshots reviewed entrance and settled composition. Type/build checks and four Chromium/Firefox collapse/replay/interruption tests passed; the final CSS build and whitespace check passed.
+
+## Cover accent and stable colour, 2026-09-10
+
+User requested more accent on the For your AI cover and questioned changing background colours. Added a red heading and top rule on a flat pale paper surface, removed contrasting backside fills, and kept cards opaque through movement until the final docking instant. Build passed; six Chromium/Firefox interaction and reduced-motion accessibility checks passed before the final opacity timing adjustment, which was build verified. User subsequently rejected the hero entrance as boring and requested alternative concepts; no replacement hero concept has been approved yet.

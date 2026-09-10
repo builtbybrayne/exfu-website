@@ -105,7 +105,7 @@ if (candidate) {
     if (wasClosed)
       cards.forEach((card, i) => {
         card.style.transform = docked(i);
-        card.style.opacity = '0';
+        card.style.opacity = '1';
         card.style.boxShadow = '0 1px 0 #302e2930';
       });
     const fresh = wasClosed;
@@ -158,7 +158,10 @@ if (candidate) {
         const moves = [
           animate(
             cards[i],
-            [{ transform: docked(i), opacity: 0, boxShadow: '0 1px 0 #302e2930' }],
+            [
+              { transform: docked(i), opacity: 1, boxShadow: '0 1px 0 #302e2930', offset: 0.96 },
+              { transform: docked(i), opacity: 0, boxShadow: '0 1px 0 #302e2930' },
+            ],
             260,
           ),
         ];
