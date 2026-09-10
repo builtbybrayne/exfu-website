@@ -539,15 +539,18 @@ test('AI prompt panel fits mobile and works without JavaScript', async ({ browse
   await context.close();
 });
 
-test('real popover assembles, docks once and supports replay', async ({ page }) => {
+test('real popover assembles on every load, docks swiftly and supports replay', async ({
+  page,
+}) => {
   await page.goto('/');
   const launcher = page.locator('.agent-launcher');
   await expect(launcher).toHaveAttribute('open', '');
   await expect(launcher).toHaveClass(/is-assembling/);
-  await expect(launcher).not.toHaveAttribute('open', { timeout: 13000 });
+  await expect(launcher).not.toHaveAttribute('open', { timeout: 6000 });
   await page.reload();
-  await expect(launcher).not.toHaveAttribute('open');
-  await launcher.locator('summary').click();
+  await expect(launcher).toHaveAttribute('open', '');
+  await expect(launcher).toHaveClass(/is-assembling/);
+  await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();
   await page.getByRole('button', { name: 'Replay assembly' }).click();
   await expect(launcher).toHaveClass(/is-assembling/);
   await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();

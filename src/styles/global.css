@@ -4078,20 +4078,20 @@ p + a.button {
   display: none;
 }
 .is-assembling .agent-panel {
-  animation: agent-dock 10s cubic-bezier(0.2, 0.75, 0.15, 1) both;
+  animation: agent-dock 3.8s cubic-bezier(0.2, 0.75, 0.15, 1) both;
   overflow: visible;
 }
 .is-assembling .agent-title-layer {
-  animation: agent-title-orbit 10s cubic-bezier(0.18, 0.85, 0.2, 1) both;
+  animation: agent-title-orbit 3.8s cubic-bezier(0.18, 0.85, 0.2, 1) both;
 }
 .is-assembling .agent-prompt {
-  animation: agent-prompt-orbit 10s cubic-bezier(0.18, 0.85, 0.2, 1) both;
+  animation: agent-prompt-orbit 3.8s cubic-bezier(0.18, 0.85, 0.2, 1) both;
 }
 .is-assembling .agent-foot-layer {
-  animation: agent-foot-orbit 10s cubic-bezier(0.18, 0.85, 0.2, 1) both;
+  animation: agent-foot-orbit 3.8s cubic-bezier(0.18, 0.85, 0.2, 1) both;
 }
 .is-assembling > summary {
-  animation: agent-button-receive 10s cubic-bezier(0.2, 0.75, 0.15, 1) both;
+  animation: agent-button-receive 3.8s cubic-bezier(0.2, 0.75, 0.15, 1) both;
 }
 .assembly-paused .agent-panel,
 .assembly-paused .agent-layer,
@@ -4233,4 +4233,33 @@ p + a.button {
 
 .people-section #show-roles {
   color: #a12e20;
+}
+
+/* Thin laminated edges give each moving surface physical thickness. */
+.agent-panel {
+  perspective: 850px;
+}
+.agent-layer {
+  transform-style: preserve-3d;
+}
+.agent-layer,
+.agent-panel .agent-prompt {
+  box-shadow:
+    0 1px 0 #b7aa95,
+    0 2px 0 #a79a85,
+    1px 3px 0 #978a75,
+    2px 4px 0 #887b69,
+    3px 7px 9px #302e2930,
+    7px 15px 24px #302e2926,
+    inset 0 1px 0 #ffffff66;
+}
+.agent-panel .agent-prompt {
+  box-shadow:
+    0 1px 0 #555047,
+    0 2px 0 #49443c,
+    1px 3px 0 #3c3831,
+    2px 4px 0 #25231f,
+    3px 7px 9px #302e2938,
+    7px 15px 24px #302e2926,
+    inset 0 1px 0 #ffffff1a;
 }

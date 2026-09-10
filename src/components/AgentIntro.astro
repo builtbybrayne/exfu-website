@@ -76,20 +76,7 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
       launcher.classList.add('is-assembling');
       launcher.classList.toggle('assembly-paused', document.hidden);
     };
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem('exfu-agent-assembly-v2') === 'seen';
-    } catch {
-      /* Optional storage. */
-    }
-    if (!seen) {
-      assemble();
-      try {
-        sessionStorage.setItem('exfu-agent-assembly-v2', 'seen');
-      } catch {
-        /* Optional storage. */
-      }
-    }
+    assemble();
     panel.addEventListener('animationend', (event) => {
       if (autoRunning && event.target === panel && event.animationName === 'agent-dock') dismiss();
     });
