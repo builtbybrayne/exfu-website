@@ -223,3 +223,9 @@ Implemented “Find the AI opportunity”; removed the redundant consultancy sen
 The panorama is 80% wide (capped at 1200px, with mobile gutters), uses its natural aspect ratio without cropping, and includes a terracotta cog on the output side. Built-in image generation edited the existing transparent illustration; original assets are preserved. Responsive derivatives are `public/images/narrative/workbench-action-panorama-900.webp` and `workbench-action-panorama-1800.webp`. Exact prompt: `design/panorama-action-prompt.txt`.
 
 Verification: Astro check and production build passed. 44 selected Chromium/Firefox checks passed covering route accessibility and links, 320–1440px overflow, keyboard navigation, no-JavaScript content, fan interaction/persona modals and hero/prompt timing. Local screenshots are under ignored `artifacts/visual/tweaks/`. Deployment remains user-owned.
+
+## Homepage line wrapping and About wording, 2026-09-10
+
+User questioned the hero card line breaks and requested a homepage-wide cleanup, plus “How will people engage?” on About. Removed manual `<br>` breaks from homepage hero cards, audience heading, project headings and AI-panel caption. Card labels use balanced wrapping and keep the verb phrase “hand over” together. The main headline groups complete sentences into blocks, each wrapping responsively, with smaller type on narrow phones to avoid an isolated “You”. About now uses the exact requested question.
+
+Verified Astro check/build, final screenshots and overflow at 320, 390, 768, 1024 and 1440px, and presence of the updated About question. Screenshots: ignored `artifacts/visual/tweaks/wrapping-*.png`.

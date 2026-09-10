@@ -4665,3 +4665,18 @@ p + a.button {
 .ring-quiz .button {
   margin-top: 0;
 }
+
+/* Hero labels wrap to their available space, keeping phrases balanced. */
+.paper > span:nth-child(2),
+.agent-title-caption {
+  text-wrap: balance;
+}
+
+.hero-copy h1 > span {
+  display: block;
+}
+@media (max-width: 599px) {
+  .hero-copy h1 {
+    font-size: clamp(44px, 13vw, 56px);
+  }
+}

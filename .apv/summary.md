@@ -1,6 +1,6 @@
-# Project state — generated 2026-09-10T17:55:07Z
+# Project state — generated 2026-09-10T18:14:23Z
 
-**Total events:** 186  ·  **Draft:** 2  ·  **Live:** 5  ·  **Dormant:** 0  ·  **Closed:** 5  ·  **Orphaned:** 0
+**Total events:** 189  ·  **Draft:** 2  ·  **Live:** 5  ·  **Dormant:** 0  ·  **Closed:** 5  ·  **Orphaned:** 0
 
 ## Live work
 
@@ -11,7 +11,7 @@
 
 - **(T2 itself)**
   - `T2-content-and-enquiries` (4 events): relationship.spawns → entity.accepted → entity.progressed
-  - `T2-implementation` (55 events): verification.tested → entity.progressed → verification.tested
+  - `T2-implementation` (57 events): verification.tested → entity.progressed → verification.tested
   - `T2-visual-language` (4 events): relationship.spawns → entity.accepted → entity.progressed
 
 - **(milestone)**
@@ -25,8 +25,8 @@
 ## Awaiting operator
 
 **Acceptance ceremonies pending** (draft plans — the draft gate blocks implementation against them):
-- `M1-reviewable-design` (authored 2026-09-08, 33 commit(s) ago)
-- `T3-review-home-and-service` (authored 2026-09-08, 33 commit(s) ago)
+- `M1-reviewable-design` (authored 2026-09-08, 34 commit(s) ago)
+- `T3-review-home-and-service` (authored 2026-09-08, 34 commit(s) ago)
 
 **Closure ceremonies pending** (all scheduled T3s closed; milestone still live):
 - `M2-publish-ready`
