@@ -63,6 +63,21 @@ export function createFabStudies(
       const pose = (y: number, rx = 0, rz = 0, sway = 0) =>
         `translate3d(${dx + sway}px,${y}px,0) scale(${scale}) rotateX(${rx}deg) rotateZ(${rz}deg)`;
       const frames: Keyframe[] = [];
+      if (start > 0 && kind === 'slot') {
+        // Keep the fall continuous while each sheet gently rocks independently.
+        // Sampling the sway avoids an ease-to-rest at every change of direction.
+        const direction = i === 1 ? -1 : 1;
+        for (let step = 1; step < 16; step++) {
+          const t = step / 16;
+          const sway = Math.sin(t * Math.PI * (i === 0 ? 3 : 2)) * (1 - 0.45 * t) * direction;
+          frames.push({
+            transform: `translate3d(${sway * 5}px,${drop * t}px,${Math.sin(t * Math.PI) * 3}px) rotateX(${sway * 1.5}deg) rotateZ(${sway * 2.3}deg)`,
+            opacity: 1,
+            clipPath: 'inset(0% 0% 0% 0%)',
+            offset: start * t,
+          });
+        }
+      }
       if (start > 0)
         frames.push({
           transform: `translate3d(0,${drop}px,0)`,

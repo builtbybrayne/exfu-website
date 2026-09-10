@@ -209,3 +209,7 @@ User asked to remove the scroll-to-read hint and add interactive up/down glyphs 
 Type/build and whitespace checks passed. Six Chromium/Firefox collapse and interruption checks passed; four accessibility/keyboard-scroll checks passed after adding arrows. Two arrow-control tests passed after replacing a platform-specific End shortcut with actual repeated arrow clicks; verifies both limits and arrows placed beside the text box.
 
 Verification timing correction: the first arrow rerun passed Firefox but Chromium caught a race between checking the button state and its final disabling. The earlier capture recorded both as passed prematurely. The test now waits for each scroll step to complete; the final rerun passed in both browsers (2/2).
+
+## Upper-card falling sway, 2026-09-10
+
+User clarified that wiggle should apply to the upper cards dropping while the lowest enters the slot. Added independently phased lateral sway and small X/Z rotations during their downward travel. The vertical fall remains continuous; sampled damped oscillation avoids stopping at each direction change and settles into the existing slot-entry motion. Bottom-first timing remains unchanged.
