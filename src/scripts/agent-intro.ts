@@ -150,14 +150,38 @@ if (candidate) {
     stopAuto();
     if (!launcher.open) return;
     setState('closing');
-    const moves = cards.map((card, i) =>
-      animate(
-        card,
-        [{ transform: docked(i), opacity: 0, boxShadow: '0 1px 0 #302e2930' }],
-        240,
-        [480, 240, 0][i],
-      ),
-    );
+    const bottom = cards[2].offsetTop + cards[2].offsetHeight;
+    // As each sheet docks, the remaining stack falls into its vacated space.
+    const collapseCards = async () => {
+      for (let i = cards.length - 1; i >= 0; i--) {
+        if (revision !== run) return;
+        const moves = [
+          animate(
+            cards[i],
+            [{ transform: docked(i), opacity: 0, boxShadow: '0 1px 0 #302e2930' }],
+            260,
+          ),
+        ];
+        const drop = i > 0 ? bottom - cards[i - 1].offsetTop - cards[i - 1].offsetHeight : 0;
+        for (let j = 0; j < i; j++) {
+          moves.push(
+            animate(
+              cards[j],
+              [
+                {
+                  transform: `translate3d(0,${drop + 7}px,0) rotateZ(${j === 0 ? -0.7 : 0.9}deg)`,
+                  offset: 0.76,
+                },
+                { transform: `translate3d(0,${drop}px,0) rotateZ(0deg)` },
+              ],
+              260,
+            ),
+          );
+        }
+        await Promise.all(moves);
+      }
+    };
+    const moves = [collapseCards()];
     moves.push(animate(thread, [{ strokeDashoffset: -1, opacity: 0 }], 600));
     moves.push(
       animate(
@@ -169,12 +193,12 @@ if (candidate) {
             boxShadow: '0 3px 0 #1e1c19, 0 7px 16px #302e2926',
           },
         ],
-        730,
+        790,
       ),
     );
-    moves.push(animate(label, [{ opacity: 1 }], 240, 480));
+    moves.push(animate(label, [{ opacity: 1 }], 260, 520));
     moves.push(
-      animate(mark, [{ transform: 'translateY(0px) rotate(0deg)', opacity: 1 }], 240, 240),
+      animate(mark, [{ transform: 'translateY(0px) rotate(0deg)', opacity: 1 }], 260, 260),
     );
     moves.push(animate(arrow, [{ opacity: 1, transform: 'rotate(0deg)' }], 450, 160));
     await Promise.all(moves);

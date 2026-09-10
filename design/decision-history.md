@@ -167,3 +167,9 @@ Visual browser inspection caught and corrected backside paint obscuring content 
 ## Sequential collapse, 2026-09-10
 
 User requested one card at a time, starting at the bottom, still quickly. Each card now takes 240ms: footer, prompt, then heading, with no overlap. Total card return is 720ms; the tray finishes at 730ms. The button icon and label restore alongside their corresponding cards.
+
+## Falling stack and hero card motion, 2026-09-10
+
+User requested the remaining popover cards drop into vacated space with juicy animation, and also asked for homepage hero card animation. The popover now runs three 260ms stages: each bottom card docks while those above fall to the new stack bottom, overshooting by 7px with a small rotation before settling. Cancellation remains revision guarded. Total collapse is 790ms including tray settlement.
+
+Hero cards now deal in with staggered depth/rotation, overshoot and a quiet settle over about 1.1 seconds. Fine-pointer hover adds a small lift and tilt; card edges have matching shallow depth. No repeating animation and reduced-motion users retain static cards. Browser screenshots reviewed entrance and settled composition. Type/build checks and four Chromium/Firefox collapse/replay/interruption tests passed; the final CSS build and whitespace check passed.
