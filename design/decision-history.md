@@ -155,3 +155,11 @@ Build and type checks passed. Initial focused suite passed 14 checks and exposed
 ## Faster assembly and card depth, 2026-09-10
 
 User requested opening on every page load, faster assembly/collapse and perceived card thickness. Removed session gating, shortened the full sequence from 10 to 3.8 seconds and added 850px perspective, preserved layer transforms, four-pixel laminated edge shadows, inset highlights and deeper cast shadows. Interaction still cancels auto-close; reduced motion remains static. Build and four Chromium/Firefox reload, replay, keyboard and mobile reduced-motion tests passed.
+
+## Connected stationery motion system, 2026-09-10
+
+User rated the previous animation 2/5 and approved rebuilding its component design and integrated choreography. Added a folded paper cover, dark brief with a red tab and raised copy button, perforated footer, shallow button tray and layered paper icon. A fine red path links the open cards to the button arrow. The actual cards unfold from measured button destinations and return to the label, icon and bottom edge; there is no separate decorative teaser.
+
+Replaced independent CSS timelines with one interruptible Web Animations controller. Replacement transitions sample their current rendered frame, stale completions cannot close a reopened panel, and hidden tabs pause both movement and the remaining hold time. Opens on every load in about one second, holds 1.6 seconds and closes in 0.73 seconds unless engaged. Reduced motion stays open without automatic movement. Native details remains usable without JavaScript.
+
+Visual browser inspection caught and corrected backside paint obscuring content during rotation. Browser tests exposed and corrected pointer entry during closing cancelling dismissal. Astro check, production build and ten Chromium/Firefox checks passed, including copying, every-load opening, replay, Escape/focus return, interrupted close/reopen, no-JavaScript mobile bounds and reduced-motion mobile Axe checks. The design quality remains for Alastair to judge; test results do not establish a subjective 5/5 rating.

@@ -545,16 +545,16 @@ test('real popover assembles on every load, docks swiftly and supports replay', 
   await page.goto('/');
   const launcher = page.locator('.agent-launcher');
   await expect(launcher).toHaveAttribute('open', '');
-  await expect(launcher).toHaveClass(/is-assembling/);
+  await expect(launcher).toHaveAttribute('data-motion', 'opening');
   await expect(launcher).not.toHaveAttribute('open', { timeout: 6000 });
   await page.reload();
   await expect(launcher).toHaveAttribute('open', '');
-  await expect(launcher).toHaveClass(/is-assembling/);
+  await expect(launcher).toHaveAttribute('data-motion', 'opening');
   await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();
   await page.getByRole('button', { name: 'Replay assembly' }).click();
-  await expect(launcher).toHaveClass(/is-assembling/);
+  await expect(launcher).toHaveAttribute('data-motion', 'opening');
   await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();
-  await expect(launcher).not.toHaveClass(/is-assembling/);
+  await expect(launcher).toHaveAttribute('data-motion', 'open');
   await expect(launcher).toHaveAttribute('open', '');
   await page.keyboard.press('Escape');
   await expect(launcher).not.toHaveAttribute('open');
@@ -578,4 +578,25 @@ test('reduced motion has a stable usable popover on mobile', async ({ page }) =>
   ).toEqual([]);
   await page.getByRole('button', { name: 'Close AI prompt' }).click();
   await expect(panel).toBeHidden();
+});
+
+test('AI motion can reverse a close without a stale transition hiding the panel', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const launcher = page.locator('.agent-launcher');
+  const summary = launcher.locator('summary');
+  await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();
+  await expect(launcher).toHaveAttribute('data-motion', 'open');
+  await page.keyboard.press('Escape');
+  await expect(launcher).toHaveAttribute('data-motion', 'closing');
+  // Keyboard activation remains available while the cards are returning.
+  await summary.focus();
+  await page.keyboard.press('Enter');
+  await expect(launcher).toHaveAttribute('data-motion', 'open');
+  await page.waitForTimeout(1000);
+  await expect(launcher).toHaveAttribute('open', '');
+  await expect(page.getByRole('button', { name: 'Copy agent fit prompt' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(launcher).not.toHaveAttribute('open');
 });

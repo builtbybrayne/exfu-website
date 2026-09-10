@@ -12,18 +12,22 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
 ---
 
 <details class="agent-launcher">
-  <summary aria-label="For your AI"
-    ><span class="agent-button-mark" aria-hidden="true">▱</span> For your AI <span
-      aria-hidden="true">↗</span
-    ></summary
-  >
+  <summary aria-label="For your AI">
+    <span class="agent-tray" aria-hidden="true"></span>
+    <span class="agent-button-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="agent-button-label">For your AI</span>
+    <span class="agent-button-arrow" aria-hidden="true">↗</span>
+  </summary>
   <section class="agent-panel" aria-labelledby="agent-intro-title">
+    <svg class="agent-binding" aria-hidden="true" fill="none"
+      ><path class="agent-binding-path" pathLength="1"></path></svg
+    >
     <div class="agent-layer agent-title-layer">
+      <span class="agent-fold" aria-hidden="true"></span>
       <div class="agent-panel-heading">
         <div>
-          <p class="eyebrow">A second opinion</p><h2 id="agent-intro-title">
-            Let your AI<br />get to know ExFu.
-          </h2>
+          <h2 id="agent-intro-title">For your AI</h2>
+          <p class="agent-title-caption">An independent<br />second opinion.</p>
         </div>
         <button type="button" class="agent-panel-close" aria-label="Close AI prompt" hidden
           >×</button
@@ -32,6 +36,7 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
       <p>Give your AI the context. Ask it whether we’re a fit.</p>
     </div>
     <div class="agent-layer agent-prompt">
+      <div class="agent-prompt-tab" aria-hidden="true">The brief</div>
       <CopyBlock text={prompt} label="Copy agent fit prompt" />
     </div>
     <div class="agent-layer agent-foot-layer">
@@ -45,77 +50,4 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
     </div>
   </section>
 </details>
-<script>
-  const launcher = document.querySelector<HTMLDetailsElement>('.agent-launcher');
-  if (launcher) {
-    const trigger = launcher.querySelector('summary')!;
-    const panel = launcher.querySelector<HTMLElement>('.agent-panel')!;
-    const close = launcher.querySelector<HTMLButtonElement>('.agent-panel-close')!;
-    const replay = launcher.querySelector<HTMLButtonElement>('.agent-replay')!;
-    const motion = matchMedia('(prefers-reduced-motion: reduce)');
-    close.hidden = false;
-    replay.hidden = false;
-    let autoRunning = false;
-    let replayPointer = false;
-    const settle = () => {
-      autoRunning = false;
-      launcher.classList.remove('is-assembling', 'assembly-paused');
-    };
-    const dismiss = (returnFocus = false) => {
-      settle();
-      launcher.open = false;
-      if (returnFocus) trigger.focus({ preventScroll: true });
-    };
-    const assemble = () => {
-      settle();
-      launcher.open = true;
-      if (motion.matches) return;
-      // Flush the prior sequence so an explicit replay starts at the first frame.
-      void panel.offsetWidth;
-      autoRunning = true;
-      launcher.classList.add('is-assembling');
-      launcher.classList.toggle('assembly-paused', document.hidden);
-    };
-    assemble();
-    panel.addEventListener('animationend', (event) => {
-      if (autoRunning && event.target === panel && event.animationName === 'agent-dock') dismiss();
-    });
-    // Any engagement turns the moving introduction into the real, stable popover.
-    launcher.addEventListener('pointerenter', () => {
-      if (!replayPointer) settle();
-    });
-    launcher.addEventListener('pointerleave', () => {
-      replayPointer = false;
-    });
-    launcher.addEventListener('pointerdown', (event) => {
-      if (event.target !== replay) settle();
-    });
-    launcher.addEventListener('focusin', settle);
-    launcher.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && launcher.open) {
-        event.preventDefault();
-        event.stopPropagation();
-        dismiss(true);
-      } else if (autoRunning) settle();
-    });
-    trigger.addEventListener('click', settle);
-    close.addEventListener('click', () => dismiss(true));
-    replay.addEventListener('click', (event) => {
-      replayPointer = event.detail > 0;
-      replay.blur();
-      assemble();
-    });
-    document.addEventListener('pointerdown', (event) => {
-      if (launcher.open && event.target instanceof Node && !launcher.contains(event.target))
-        dismiss();
-    });
-    document.addEventListener('focusin', (event) => {
-      if (launcher.open && event.target instanceof Node && !launcher.contains(event.target))
-        dismiss();
-    });
-    document.addEventListener('visibilitychange', () => {
-      if (autoRunning) launcher.classList.toggle('assembly-paused', document.hidden);
-    });
-    motion.addEventListener('change', settle);
-  }
-</script>
+<script src="../scripts/agent-intro.ts"></script>
