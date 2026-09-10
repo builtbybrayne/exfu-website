@@ -539,13 +539,17 @@ test('AI prompt panel fits mobile and works without JavaScript', async ({ browse
   await context.close();
 });
 
-test('real popover assembles on every load and docks swiftly', async ({ page }) => {
+test('real popover waits for the hero then assembles and docks swiftly', async ({ page }) => {
   await page.goto('/');
   const launcher = page.locator('.agent-launcher');
+  await expect(launcher).not.toHaveAttribute('open');
+  await expect(launcher).toHaveAttribute('data-motion', 'waiting');
   await expect(launcher).toHaveAttribute('open', '');
   await expect(launcher).toHaveAttribute('data-motion', 'opening');
   await expect(launcher).not.toHaveAttribute('open', { timeout: 6000 });
   await page.reload();
+  await expect(launcher).not.toHaveAttribute('open');
+  await expect(launcher).toHaveAttribute('data-motion', 'waiting');
   await expect(launcher).toHaveAttribute('open', '');
   await expect(launcher).toHaveAttribute('data-motion', 'opening');
   await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();
@@ -649,4 +653,15 @@ test('FAB prompt is a wrapped scrollable text box without removed links', async 
   await pre.focus();
   await page.keyboard.press('ArrowDown');
   await expect.poll(() => pre.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+});
+
+test('opening FAB early cancels the delayed automatic introduction', async ({ page }) => {
+  await page.goto('/');
+  const launcher = page.locator('.agent-launcher');
+  await launcher.locator('summary').click();
+  await expect(launcher).toHaveAttribute('data-motion', 'open');
+  await page.waitForTimeout(3000);
+  await expect(launcher).toHaveAttribute('data-motion', 'open');
+  await page.keyboard.press('Escape');
+  await expect(launcher).not.toHaveAttribute('open');
 });

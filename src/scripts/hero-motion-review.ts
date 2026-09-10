@@ -1,6 +1,7 @@
 const params = new URLSearchParams(location.search);
 const review = document.querySelector<HTMLElement>('.hero-review');
-if (review && params.has('hero-review')) {
+if (review) {
+  const reviewing = params.has('hero-review');
   const scene = document.querySelector<HTMLElement>('.paper-scene')!;
   const cards = Array.from(scene.querySelectorAll<HTMLElement>('.paper'));
   const orbit = scene.querySelector<HTMLElement>('.paper-orbit')!;
@@ -8,8 +9,7 @@ if (review && params.has('hero-review')) {
   const description = review.querySelector<HTMLElement>('.hero-review-description')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const descriptions: Record<string, string> = {
-    shuffle:
-      'A tight pack peels apart, trades places in depth, balances on edge, then fans into position.',
+    shuffle: 'A tight pack arcs through a shuffle, balances on edge, then fans into position.',
     chain:
       'A tipping card triggers the next. Each impact stamps its number; the red circle absorbs the final landing.',
     drawing:
@@ -18,10 +18,10 @@ if (review && params.has('hero-review')) {
       'Paper, numbers and captions separate into depth layers, rotate together, then assemble with three precise clicks.',
   };
   let animations: Animation[] = [];
-  let selected = params.get('hero-review') || 'shuffle';
-  if (!(selected in descriptions)) selected = 'shuffle';
+  let selected = params.get('hero-review') || 'machine';
+  if (!(selected in descriptions)) selected = 'machine';
   scene.classList.add('hero-motion-review');
-  review.hidden = false;
+  review.hidden = !reviewing;
   const outlines = cards.map((card) => {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('class', 'hero-card-outline');
@@ -61,9 +61,11 @@ if (review && params.has('hero-review')) {
     description.textContent =
       descriptions[selected] +
       (reduced.matches ? ' Reduced motion: showing the finished composition.' : '');
-    const url = new URL(location.href);
-    url.searchParams.set('hero-review', selected);
-    history.replaceState(null, '', url);
+    if (reviewing) {
+      const url = new URL(location.href);
+      url.searchParams.set('hero-review', selected);
+      history.replaceState(null, '', url);
+    }
     if (reduced.matches) return;
     const bases = cards.map((card) => getComputedStyle(card).transform);
     const frame = (i: number, x: number, y: number, z: number, rx = 0, ry = 0, rz = 0) =>

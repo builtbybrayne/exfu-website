@@ -428,16 +428,19 @@ p + a.button {
   color: var(--muted);
 }
 .paper-one {
+  z-index: 3;
   top: 21px;
   left: 30px;
   transform: rotate(-12deg);
 }
 .paper-two {
+  z-index: 2;
   top: 211px;
   left: 122px;
   transform: rotate(9deg);
 }
 .paper-three {
+  z-index: 1;
   top: 418px;
   left: 191px;
   transform: rotate(13deg);
@@ -4445,7 +4448,7 @@ p + a.button {
 }
 .hero-motion-review .paper-stack {
   perspective: 1100px;
-  transform-style: preserve-3d;
+  transform-style: flat;
 }
 .hero-card-outline {
   position: absolute;

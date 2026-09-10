@@ -18,6 +18,17 @@ if (candidate) {
   let timer = 0;
   let deadline = 0;
   let remaining = 1800;
+  let initialPending = true;
+  let initialTimer = 0;
+  let initialRemaining = 2500;
+  let initialDeadline = 0;
+  function scheduleInitial() {
+    if (!initialPending || document.hidden) return;
+    initialDeadline = performance.now() + initialRemaining;
+    initialTimer = window.setTimeout(() => {
+      if (initialPending) void unfold(!reduced.matches);
+    }, initialRemaining);
+  }
   close.hidden = false;
   launcher.classList.add('motion-ready');
   const clearTimer = () => {
@@ -28,9 +39,15 @@ if (candidate) {
     launcher.dataset.motion = state;
   };
   // Sample the currently rendered frame before replacing a transition. No reset-to-keyframe jump.
-  function animate(el: Element, frames: Keyframe[], duration: number, delay = 0) {
+  function animate(
+    el: Element,
+    frames: Keyframe[],
+    duration: number,
+    delay = 0,
+    easing = 'cubic-bezier(.22,.8,.22,1)',
+  ) {
     const properties = [...new Set(frames.flatMap((frame) => Object.keys(frame)))].filter(
-      (key) => key !== 'offset',
+      (key) => key !== 'offset' && key !== 'easing',
     );
     const computed = getComputedStyle(el);
     const current: Record<string, string> = {};
@@ -41,7 +58,7 @@ if (candidate) {
     const animation = el.animate([current, ...frames], {
       duration: reduced.matches ? 0 : duration,
       delay: reduced.matches ? 0 : delay,
-      easing: 'cubic-bezier(.22,.8,.22,1)',
+      easing,
       fill: 'both',
     });
     active.set(el, animation);
@@ -51,6 +68,7 @@ if (candidate) {
         if (active.get(el) !== animation) return;
         const last = { ...frames[frames.length - 1] };
         delete last.offset;
+        delete last.easing;
         Object.assign((el as HTMLElement).style, last);
         animation.cancel();
         active.delete(el);
@@ -94,6 +112,8 @@ if (candidate) {
     }, remaining);
   }
   async function unfold(auto = false) {
+    initialPending = false;
+    window.clearTimeout(initialTimer);
     const run = ++revision;
     clearTimer();
     automatic = auto;
@@ -150,40 +170,29 @@ if (candidate) {
     if (!launcher.open) return;
     setState('closing');
     const bottom = cards[2].offsetTop + cards[2].offsetHeight;
-    // As each sheet docks, the remaining stack falls into its vacated space.
-    const collapseCards = async () => {
-      for (let i = cards.length - 1; i >= 0; i--) {
-        if (revision !== run) return;
-        const moves = [
-          animate(
-            cards[i],
-            [
-              { transform: docked(i), opacity: 1, boxShadow: '0 1px 0 #302e2930', offset: 0.96 },
-              { transform: docked(i), opacity: 0, boxShadow: '0 1px 0 #302e2930' },
-            ],
-            260,
-          ),
-        ];
-        const drop = i > 0 ? bottom - cards[i - 1].offsetTop - cards[i - 1].offsetHeight : 0;
-        for (let j = 0; j < i; j++) {
-          moves.push(
-            animate(
-              cards[j],
-              [
-                {
-                  transform: `translate3d(0,${drop + 7}px,0) rotateZ(${j === 0 ? -0.7 : 0.9}deg)`,
-                  offset: 0.76,
-                },
-                { transform: `translate3d(0,${drop}px,0) rotateZ(0deg)` },
-              ],
-              260,
-            ),
-          );
-        }
-        await Promise.all(moves);
+    // One timeline per card avoids stop/start hand-offs and repeated bounce resets.
+    const moves = cards.map((card, i) => {
+      const target = docked(i);
+      const frames: Keyframe[] = [];
+      const dockStart = (2 - i) / 3;
+      if (i < 2) {
+        const drop = bottom - card.offsetTop - card.offsetHeight;
+        frames.push({
+          transform: `translate3d(0,${drop}px,0)`,
+          opacity: 1,
+          offset: dockStart,
+          easing: 'cubic-bezier(.35,0,.25,1)',
+        });
       }
-    };
-    const moves = [collapseCards()];
+      const dockEnd = (3 - i) / 3;
+      frames.push(
+        { transform: target, opacity: 1, boxShadow: '0 1px 0 #302e2930', offset: dockEnd - 0.025 },
+        { transform: target, opacity: 0, boxShadow: '0 1px 0 #302e2930', offset: dockEnd },
+      );
+      if (dockEnd < 1)
+        frames.push({ transform: target, opacity: 0, boxShadow: '0 1px 0 #302e2930', offset: 1 });
+      return animate(card, frames, 900, 0, 'linear');
+    });
     moves.push(animate(thread, [{ strokeDashoffset: -1, opacity: 0 }], 600));
     moves.push(
       animate(
@@ -195,12 +204,12 @@ if (candidate) {
             boxShadow: '0 3px 0 #1e1c19, 0 7px 16px #302e2926',
           },
         ],
-        790,
+        900,
       ),
     );
-    moves.push(animate(label, [{ opacity: 1 }], 260, 520));
+    moves.push(animate(label, [{ opacity: 1 }], 300, 600));
     moves.push(
-      animate(mark, [{ transform: 'translateY(0px) rotate(0deg)', opacity: 1 }], 260, 260),
+      animate(mark, [{ transform: 'translateY(0px) rotate(0deg)', opacity: 1 }], 300, 300),
     );
     moves.push(animate(arrow, [{ opacity: 1, transform: 'rotate(0deg)' }], 450, 160));
     await Promise.all(moves);
@@ -245,12 +254,18 @@ if (candidate) {
   });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
+      if (initialPending && initialTimer) {
+        initialRemaining = Math.max(0, initialDeadline - performance.now());
+        window.clearTimeout(initialTimer);
+        initialTimer = 0;
+      }
       if (timer) {
         remaining = Math.max(0, deadline - performance.now());
         clearTimer();
       }
       active.forEach((animation) => animation.pause());
     } else {
+      scheduleInitial();
       active.forEach((animation) => animation.play());
       if (launcher.dataset.motion === 'open') hold();
     }
@@ -267,5 +282,6 @@ if (candidate) {
       void unfold(false);
     }
   });
-  void unfold(!reduced.matches);
+  setState('waiting');
+  scheduleInitial();
 }
