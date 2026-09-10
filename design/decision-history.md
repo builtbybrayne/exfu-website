@@ -177,3 +177,11 @@ Hero cards now deal in with staggered depth/rotation, overshoot and a quiet sett
 ## Cover accent and stable colour, 2026-09-10
 
 User requested more accent on the For your AI cover and questioned changing background colours. Added a red heading and top rule on a flat pale paper surface, removed contrasting backside fills, and kept cards opaque through movement until the final docking instant. Build passed; six Chromium/Firefox interaction and reduced-motion accessibility checks passed before the final opacity timing adjustment, which was build verified. User subsequently rejected the hero entrance as boring and requested alternative concepts; no replacement hero concept has been approved yet.
+
+## FAB simplification and four hero studies, 2026-09-10
+
+User requested removal of The brief pill and sitemap/replay links from the FAB, a more obvious scrollable text box, and all four proposed hero directions implemented for visual comparison. Removed the pill and links plus replay logic; retained copy, close, keyboard and automatic opening. Prompt now wraps inside a dark recessed bordered area with a persistent scrollbar and explicit scroll hint.
+
+Added homepage review mode at `/?hero-review=shuffle` (also chain, drawing and machine). Its four selector buttons play the selected choreography immediately; a separate hero replay button repeats it. Review controls are hidden on the ordinary homepage. These are alternatives for user selection, not a newly accepted final hero direction. Shuffle uses a shared pack origin and depth exchanges; chain uses staggered tips, stamped numbers and circle compression; drawing traces red outlines and reveals paper/type; machine separates typography in depth and assembles it onto rotating surfaces. Switching cancels previous animations, hidden tabs pause, reduced motion shows static cards, and URL preserves the selected study.
+
+Astro check and build passed. Fourteen Chromium/Firefox checks passed covering review switching/replay, reduced motion, ordinary-page absence of review controls, removed FAB elements, wrapped keyboard-scrollable prompt, copying, dismissal, interrupted collapse and no-JavaScript mobile use. Reviewed live comparison screenshots. Final shared 3D context adjustment was build verified; removed unused styles and formatted components afterward.

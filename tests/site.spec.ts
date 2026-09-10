@@ -539,9 +539,7 @@ test('AI prompt panel fits mobile and works without JavaScript', async ({ browse
   await context.close();
 });
 
-test('real popover assembles on every load, docks swiftly and supports replay', async ({
-  page,
-}) => {
+test('real popover assembles on every load and docks swiftly', async ({ page }) => {
   await page.goto('/');
   const launcher = page.locator('.agent-launcher');
   await expect(launcher).toHaveAttribute('open', '');
@@ -549,9 +547,6 @@ test('real popover assembles on every load, docks swiftly and supports replay', 
   await expect(launcher).not.toHaveAttribute('open', { timeout: 6000 });
   await page.reload();
   await expect(launcher).toHaveAttribute('open', '');
-  await expect(launcher).toHaveAttribute('data-motion', 'opening');
-  await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();
-  await page.getByRole('button', { name: 'Replay assembly' }).click();
   await expect(launcher).toHaveAttribute('data-motion', 'opening');
   await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();
   await expect(launcher).toHaveAttribute('data-motion', 'open');
@@ -599,4 +594,59 @@ test('AI motion can reverse a close without a stale transition hiding the panel'
   await expect(page.getByRole('button', { name: 'Copy agent fit prompt' })).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(launcher).not.toHaveAttribute('open');
+});
+
+test('hero studies switch and replay without leaving broken card layers', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/?hero-review=shuffle');
+  const review = page.getByRole('complementary', { name: 'Hero animation comparison' });
+  await expect(review).toBeVisible();
+  for (const option of ['chain', 'drawing', 'machine', 'shuffle']) {
+    await review.locator(`[data-hero-option="${option}"]`).click();
+    await expect(page).toHaveURL(new RegExp(`hero-review=${option}`));
+    await expect(review.locator(`[data-hero-option="${option}"]`)).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await page.waitForTimeout(180);
+  }
+  await review.getByRole('button', { name: 'Replay' }).click();
+  await expect
+    .poll(() =>
+      page
+        .locator('.paper-scene')
+        .evaluate((el) =>
+          el.getAnimations({ subtree: true }).every((a) => a.playState === 'finished'),
+        ),
+    )
+    .toBe(true);
+  for (const card of await page.locator('.paper').all()) {
+    await expect(card).toBeVisible();
+    await expect(card).toHaveCSS('opacity', '1');
+  }
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await review.locator('[data-hero-option="machine"]').click();
+  expect(
+    await page.locator('.paper-scene').evaluate((el) => el.getAnimations({ subtree: true }).length),
+  ).toBe(0);
+  expect(errors).toEqual([]);
+  await page.goto('/');
+  await expect(review).toBeHidden();
+});
+
+test('FAB prompt is a wrapped scrollable text box without removed links', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const panel = page.locator('.agent-panel');
+  await expect(panel.getByText('The brief', { exact: true })).toHaveCount(0);
+  await expect(panel.getByRole('link')).toHaveCount(0);
+  await expect(panel.getByRole('button', { name: 'Replay assembly' })).toHaveCount(0);
+  const pre = panel.locator('pre');
+  await expect(pre).toHaveCSS('white-space', 'pre-wrap');
+  await expect(pre).toHaveCSS('overflow-y', 'scroll');
+  expect(await pre.evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(true);
+  await pre.focus();
+  await page.keyboard.press('ArrowDown');
+  await expect.poll(() => pre.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
 });

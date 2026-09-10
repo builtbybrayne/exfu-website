@@ -4090,28 +4090,6 @@ p + a.button {
   margin: 0 0 5px;
   font-size: 12px;
 }
-.agent-panel-links {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: center;
-}
-.agent-panel-links .text-link {
-  font-size: 12px;
-  min-height: 36px;
-  display: inline-flex;
-  align-items: center;
-}
-.agent-replay {
-  background: none;
-  border: 0;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-}
-.agent-replay[hidden] {
-  display: none;
-}
 .people-section #show-roles {
   color: #a12e20;
 }
@@ -4297,20 +4275,6 @@ p + a.button {
 .agent-prompt::before {
   background: transparent;
 }
-.agent-prompt-tab {
-  display: inline-block;
-  position: absolute;
-  top: -9px;
-  left: 18px;
-  background: #a4422e;
-  color: #fff5e8;
-  padding: 2px 10px;
-  font-size: 10px;
-  line-height: 1.4;
-  transform: rotate(-2deg);
-  border-radius: 1px;
-  box-shadow: 0 2px 2px #0003;
-}
 .agent-panel .copy-block button {
   margin: 3px 0 0;
   border-radius: 2px;
@@ -4387,6 +4351,118 @@ p + a.button {
 }
 @media print {
   .agent-launcher {
+    display: none;
+  }
+}
+
+/* A visibly recessed, wrapped reading area with a persistent scroll affordance. */
+.agent-panel .copy-block pre {
+  background: #191815;
+  border: 1px solid #93856e;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 5px #0006;
+  padding: 12px 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow-y: scroll;
+  scrollbar-width: auto;
+  scrollbar-color: #cdbb9d #494237;
+}
+.agent-panel .copy-block pre::-webkit-scrollbar {
+  width: 10px;
+}
+.agent-panel .copy-block pre::-webkit-scrollbar-track {
+  background: #494237;
+}
+.agent-panel .copy-block pre::-webkit-scrollbar-thumb {
+  background: #cdbb9d;
+  border: 2px solid #494237;
+  border-radius: 5px;
+}
+.agent-panel .agent-scroll-hint {
+  font-size: 11px;
+  color: #e0d4bd;
+  margin: 7px 0 0;
+}
+.hero-review {
+  position: fixed;
+  z-index: 90;
+  left: 16px;
+  bottom: 16px;
+  width: min(490px, calc(100vw - 32px));
+  padding: 15px;
+  background: #f8f2e6;
+  color: #302e29;
+  border: 1px solid #baab91;
+  box-shadow:
+    0 4px 0 #b5a68e,
+    0 12px 32px #302e2926;
+  border-radius: 5px;
+}
+.hero-review[hidden] {
+  display: none;
+}
+.hero-review-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.hero-review-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 10px;
+}
+.hero-review button {
+  min-height: 40px;
+  padding: 7px 10px;
+  font-size: 12px;
+  border: 1px solid #b7a88e;
+  background: transparent;
+  color: #302e29;
+  cursor: pointer;
+}
+.hero-review button[aria-pressed='true'] {
+  background: #a4422e;
+  color: #fff8ed;
+  border-color: #a4422e;
+}
+.hero-review-description {
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 9px 0 0;
+}
+.hero-motion-review .paper {
+  animation: none;
+  transition: none;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+.hero-motion-review .paper:hover {
+  translate: none;
+  rotate: none;
+}
+.hero-motion-review .paper-stack {
+  perspective: 1100px;
+  transform-style: preserve-3d;
+}
+.hero-card-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.hero-card-outline rect {
+  fill: none;
+  stroke: #a4422e;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+@media print {
+  .hero-review {
     display: none;
   }
 }

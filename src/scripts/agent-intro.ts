@@ -11,7 +11,6 @@ if (candidate) {
   const thread = launcher.querySelector<SVGPathElement>('.agent-binding-path')!;
   const svg = launcher.querySelector<SVGSVGElement>('.agent-binding')!;
   const close = launcher.querySelector<HTMLButtonElement>('.agent-panel-close')!;
-  const replay = launcher.querySelector<HTMLButtonElement>('.agent-replay')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const active = new Map<Element, Animation>();
   let revision = 0;
@@ -19,7 +18,7 @@ if (candidate) {
   let timer = 0;
   let deadline = 0;
   let remaining = 1800;
-  close.hidden = replay.hidden = false;
+  close.hidden = false;
   launcher.classList.add('motion-ready');
   const clearTimer = () => {
     window.clearTimeout(timer);
@@ -223,18 +222,10 @@ if (candidate) {
     else void unfold(false);
   });
   close.addEventListener('click', () => void fold(true));
-  replay.addEventListener('click', async () => {
-    replay.blur();
-    await fold(false);
-    if (!launcher.open) void unfold(true);
-  });
   launcher.addEventListener('pointerenter', engage);
   launcher.addEventListener('focusin', engage);
   launcher.addEventListener('pointerdown', (event) => {
-    if (!(
-      event.target instanceof Element &&
-      event.target.closest('.agent-replay, .agent-panel-close, summary')
-    ))
+    if (!(event.target instanceof Element && event.target.closest('.agent-panel-close, summary')))
       engage();
   });
   launcher.addEventListener('keydown', (event) => {
