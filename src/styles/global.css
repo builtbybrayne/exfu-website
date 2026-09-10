@@ -4382,11 +4382,7 @@ p + a.button {
   border: 2px solid #494237;
   border-radius: 5px;
 }
-.agent-panel .agent-scroll-hint {
-  font-size: 11px;
-  color: #e0d4bd;
-  margin: 7px 0 0;
-}
+
 .hero-review {
   position: fixed;
   z-index: 90;
@@ -4567,4 +4563,53 @@ p + a.button {
     font-size: 11px;
     padding: 5px;
   }
+}
+
+.agent-panel .copy-block pre {
+  width: calc(100% - 34px);
+  flex-basis: calc(100% - 34px);
+}
+.agent-scroll-controls {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.agent-scroll-controls[hidden] {
+  display: none;
+}
+.agent-scroll-controls button {
+  width: 30px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #a99b83;
+  border-radius: 3px;
+  background: #4a4337;
+  color: #fff4de;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.agent-scroll-controls button:hover:not(:disabled) {
+  background: #655643;
+}
+.agent-scroll-controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.agent-scroll-controls button:focus-visible {
+  outline: 2px solid #fff4de;
+  outline-offset: 2px;
+}
+.agent-panel .copy-block {
+  margin-block: 0;
+  gap: 12px;
+}
+.agent-panel .copy-block pre {
+  flex-grow: 0;
+}
+.agent-scroll-controls {
+  top: 16px;
 }

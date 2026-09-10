@@ -37,7 +37,10 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
     </div>
     <div class="agent-layer agent-prompt">
       <CopyBlock text={prompt} label="Copy agent fit prompt" />
-      <p class="agent-scroll-hint">Scroll to read the full prompt ↓</p>
+      <div class="agent-scroll-controls" aria-label="Scroll prompt" hidden>
+        <button type="button" data-prompt-scroll="up" aria-label="Scroll prompt up">↑</button>
+        <button type="button" data-prompt-scroll="down" aria-label="Scroll prompt down">↓</button>
+      </div>
     </div>
     <div class="agent-layer agent-foot-layer">
       <p class="agent-panel-note">Copy into your own AI. Nothing is sent to ExFu.</p>
@@ -47,7 +50,8 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
 <aside class="hero-review fab-review" aria-label="FAB collapse comparison" hidden>
   <div class="hero-review-heading">
     <strong>FAB collapse studies</strong><button type="button" data-fab-replay
-      >Replay collapse ↻</button>
+      >Replay collapse ↻</button
+    >
   </div>
   <div class="hero-review-options" role="group" aria-label="Collapse option">
     <button type="button" data-fab-option="slot" aria-pressed="false">1. Feed into a slot</button>

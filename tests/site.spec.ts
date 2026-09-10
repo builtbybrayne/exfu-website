@@ -702,3 +702,31 @@ test('FAB collapse studies replay, switch mid-motion and leave a usable prompt',
   await page.goto('/');
   await expect(review).toBeHidden();
 });
+
+test('prompt arrow controls scroll text and reflect both ends', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const box = page.locator('.agent-panel pre');
+  const up = page.getByRole('button', { name: 'Scroll prompt up' });
+  const down = page.getByRole('button', { name: 'Scroll prompt down' });
+  await expect(box).toBeVisible();
+  await expect(up).toBeDisabled();
+  await down.click();
+  await expect.poll(() => box.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+  await expect(up).toBeEnabled();
+  await up.click();
+  await expect.poll(() => box.evaluate((el) => el.scrollTop)).toBe(0);
+  for (let step = 0; step < 60; step++) {
+    const position = await box.evaluate((el) => ({
+      top: el.scrollTop,
+      end: el.scrollHeight - el.clientHeight,
+    }));
+    if (position.top >= position.end - 1) break;
+    await down.click();
+    await expect.poll(() => box.evaluate((el) => el.scrollTop)).toBeGreaterThan(position.top);
+  }
+  await expect(down).toBeDisabled();
+  const preBounds = await box.boundingBox();
+  const arrowBounds = await down.boundingBox();
+  expect(arrowBounds!.x).toBeGreaterThanOrEqual(preBounds!.x + preBounds!.width);
+});

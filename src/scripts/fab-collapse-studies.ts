@@ -60,8 +60,8 @@ export function createFabStudies(
       const dx = mouth.left - area.left + 9 - card.offsetLeft;
       const mouthY = mouth.top - area.top - card.offsetTop - 3;
       const drop = bottom - card.offsetTop - height;
-      const pose = (y: number, rx = 0, rz = 0) =>
-        `translate3d(${dx}px,${y}px,0) scale(${scale}) rotateX(${rx}deg) rotateZ(${rz}deg)`;
+      const pose = (y: number, rx = 0, rz = 0, sway = 0) =>
+        `translate3d(${dx + sway}px,${y}px,0) scale(${scale}) rotateX(${rx}deg) rotateZ(${rz}deg)`;
       const frames: Keyframe[] = [];
       if (start > 0)
         frames.push({
@@ -72,20 +72,35 @@ export function createFabStudies(
           easing: smooth,
         });
       if (kind === 'slot') {
+        const direction = i === 1 ? -1 : 1;
         // Align the bottom edge with the mouth, then feed the paper behind its lip.
         frames.push(
           {
-            transform: pose(mouthY - height * scale, -9),
+            transform: pose(mouthY - height * scale, -9, 2.4 * direction, 3 * direction),
             clipPath: 'inset(0% 0% 0% 0%)',
             opacity: 1,
             offset: portion(0.34),
             easing: 'cubic-bezier(.25,.15,.65,1)',
           },
           {
-            transform: pose(mouthY - height * scale * 0.46, 4),
-            clipPath: 'inset(0% 0% 54% 0%)',
+            transform: pose(mouthY - height * scale * 0.73, 5, -1.6 * direction, -2 * direction),
+            clipPath: 'inset(0% 0% 27% 0%)',
             opacity: 1,
-            offset: portion(0.7),
+            offset: portion(0.52),
+            easing: 'cubic-bezier(.3,0,.6,1)',
+          },
+          {
+            transform: pose(mouthY - height * scale * 0.43, -2, 0.8 * direction, direction),
+            clipPath: 'inset(0% 0% 57% 0%)',
+            opacity: 1,
+            offset: portion(0.72),
+            easing: 'cubic-bezier(.3,0,.6,1)',
+          },
+          {
+            transform: pose(mouthY - height * scale * 0.19, 1, -0.3 * direction, -0.4 * direction),
+            clipPath: 'inset(0% 0% 81% 0%)',
+            opacity: 1,
+            offset: portion(0.87),
           },
           { transform: pose(mouthY), clipPath: 'inset(0% 0% 100% 0%)', opacity: 1, offset: end },
         );

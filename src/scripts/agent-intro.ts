@@ -17,6 +17,29 @@ if (candidate) {
   let study = new URLSearchParams(location.search).get('fab-review') || 'slot';
   if (!['slot', 'envelope', 'roller'].includes(study)) study = 'slot';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const promptBox = launcher.querySelector<HTMLElement>('.copy-block pre')!;
+  const scrollControls = launcher.querySelector<HTMLElement>('.agent-scroll-controls')!;
+  const scrollUp = scrollControls.querySelector<HTMLButtonElement>('[data-prompt-scroll="up"]')!;
+  const scrollDown = scrollControls.querySelector<HTMLButtonElement>(
+    '[data-prompt-scroll="down"]',
+  )!;
+  scrollControls.hidden = false;
+  function updateScrollControls() {
+    scrollUp.disabled = promptBox.scrollTop <= 1;
+    scrollDown.disabled =
+      promptBox.scrollTop + promptBox.clientHeight >= promptBox.scrollHeight - 1;
+  }
+  scrollControls.querySelectorAll<HTMLButtonElement>('button').forEach((button) => {
+    button.addEventListener('click', () => {
+      promptBox.scrollBy({
+        top: Math.max(48, promptBox.clientHeight * 0.8) * (button === scrollUp ? -1 : 1),
+        behavior: reduced.matches ? 'instant' : 'smooth',
+      });
+    });
+  });
+  promptBox.addEventListener('scroll', updateScrollControls, { passive: true });
+  new ResizeObserver(updateScrollControls).observe(promptBox);
+  launcher.addEventListener('toggle', updateScrollControls);
   const active = new Map<Element, Animation>();
   let revision = 0;
   let automatic = false;
@@ -128,6 +151,7 @@ if (candidate) {
     automatic = auto;
     const wasClosed = !launcher.open;
     launcher.open = true;
+    updateScrollControls();
     setState('opening');
     studies.reset();
     drawThread();
@@ -187,41 +211,40 @@ if (candidate) {
     // One timeline per card avoids stop/start hand-offs and repeated bounce resets.
     const rate =
       reviewMode && review.querySelector<HTMLInputElement>('[data-fab-slow]')!.checked ? 2 : 1;
-    const moves =
-      reviewMode && !reduced.matches
-        ? studies.run(study, rate)
-        : cards.map((card, i) => {
-            const target = docked(i);
-            const frames: Keyframe[] = [];
-            const dockStart = (2 - i) / 3;
-            if (i < 2) {
-              const drop = bottom - card.offsetTop - card.offsetHeight;
-              frames.push({
-                transform: `translate3d(0,${drop}px,0)`,
-                opacity: 1,
-                offset: dockStart,
-                easing: 'cubic-bezier(.35,0,.25,1)',
-              });
-            }
-            const dockEnd = (3 - i) / 3;
-            frames.push(
-              {
-                transform: target,
-                opacity: 1,
-                boxShadow: '0 1px 0 #302e2930',
-                offset: dockEnd - 0.025,
-              },
-              { transform: target, opacity: 0, boxShadow: '0 1px 0 #302e2930', offset: dockEnd },
-            );
-            if (dockEnd < 1)
-              frames.push({
-                transform: target,
-                opacity: 0,
-                boxShadow: '0 1px 0 #302e2930',
-                offset: 1,
-              });
-            return animate(card, frames, 900, 0, 'linear');
-          });
+    const moves = !reduced.matches
+      ? studies.run(reviewMode ? study : 'slot', rate)
+      : cards.map((card, i) => {
+          const target = docked(i);
+          const frames: Keyframe[] = [];
+          const dockStart = (2 - i) / 3;
+          if (i < 2) {
+            const drop = bottom - card.offsetTop - card.offsetHeight;
+            frames.push({
+              transform: `translate3d(0,${drop}px,0)`,
+              opacity: 1,
+              offset: dockStart,
+              easing: 'cubic-bezier(.35,0,.25,1)',
+            });
+          }
+          const dockEnd = (3 - i) / 3;
+          frames.push(
+            {
+              transform: target,
+              opacity: 1,
+              boxShadow: '0 1px 0 #302e2930',
+              offset: dockEnd - 0.025,
+            },
+            { transform: target, opacity: 0, boxShadow: '0 1px 0 #302e2930', offset: dockEnd },
+          );
+          if (dockEnd < 1)
+            frames.push({
+              transform: target,
+              opacity: 0,
+              boxShadow: '0 1px 0 #302e2930',
+              offset: 1,
+            });
+          return animate(card, frames, 900, 0, 'linear');
+        });
     moves.push(animate(thread, [{ strokeDashoffset: -1, opacity: 0 }], 600));
     moves.push(
       animate(
@@ -233,7 +256,7 @@ if (candidate) {
             boxShadow: '0 3px 0 #1e1c19, 0 7px 16px #302e2926',
           },
         ],
-        reviewMode ? 1200 * rate : 900,
+        1200 * rate,
       ),
     );
     moves.push(animate(label, [{ opacity: 1 }], 300, 600));
