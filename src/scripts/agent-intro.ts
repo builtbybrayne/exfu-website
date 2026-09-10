@@ -1,3 +1,4 @@
+import { createFabStudies } from './fab-collapse-studies';
 const candidate = document.querySelector<HTMLDetailsElement>('.agent-launcher');
 if (candidate) {
   const launcher = candidate;
@@ -11,6 +12,10 @@ if (candidate) {
   const thread = launcher.querySelector<SVGPathElement>('.agent-binding-path')!;
   const svg = launcher.querySelector<SVGSVGElement>('.agent-binding')!;
   const close = launcher.querySelector<HTMLButtonElement>('.agent-panel-close')!;
+  const review = document.querySelector<HTMLElement>('.fab-review')!;
+  const reviewMode = new URLSearchParams(location.search).has('fab-review');
+  let study = new URLSearchParams(location.search).get('fab-review') || 'slot';
+  if (!['slot', 'envelope', 'roller'].includes(study)) study = 'slot';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const active = new Map<Element, Animation>();
   let revision = 0;
@@ -75,6 +80,10 @@ if (candidate) {
       })
       .catch(() => {});
   }
+  const studies = createFabStudies(launcher, cards, animate, (el) => {
+    active.get(el)?.cancel();
+    active.delete(el);
+  });
   const openShadow = (i: number) =>
     `0 1px 0 ${i === 1 ? '#676052' : '#c2b295'}, 0 3px 0 ${i === 1 ? '#292620' : '#b09a78'}, 0 7px 9px #302e2926, 0 18px 28px #302e2924`;
   const docked = (i: number) => {
@@ -120,11 +129,13 @@ if (candidate) {
     const wasClosed = !launcher.open;
     launcher.open = true;
     setState('opening');
+    studies.reset();
     drawThread();
     if (wasClosed)
       cards.forEach((card, i) => {
         card.style.transform = docked(i);
         card.style.opacity = '1';
+        card.style.clipPath = 'inset(0% 0% 0% 0%)';
         card.style.boxShadow = '0 1px 0 #302e2930';
       });
     const fresh = wasClosed;
@@ -140,6 +151,9 @@ if (candidate) {
             { transform: 'translate3d(0,0,0)', opacity: 1, boxShadow: openShadow(i) },
           ]
         : [{ transform: 'translate3d(0,0,0)', opacity: 1, boxShadow: openShadow(i) }];
+      frames.forEach((frame) => {
+        frame.clipPath = 'inset(0% 0% 0% 0%)';
+      });
       return animate(card, frames, fresh ? 820 : 340, fresh ? [0, 90, 170][i] : 0);
     });
     moves.push(
@@ -171,28 +185,43 @@ if (candidate) {
     setState('closing');
     const bottom = cards[2].offsetTop + cards[2].offsetHeight;
     // One timeline per card avoids stop/start hand-offs and repeated bounce resets.
-    const moves = cards.map((card, i) => {
-      const target = docked(i);
-      const frames: Keyframe[] = [];
-      const dockStart = (2 - i) / 3;
-      if (i < 2) {
-        const drop = bottom - card.offsetTop - card.offsetHeight;
-        frames.push({
-          transform: `translate3d(0,${drop}px,0)`,
-          opacity: 1,
-          offset: dockStart,
-          easing: 'cubic-bezier(.35,0,.25,1)',
-        });
-      }
-      const dockEnd = (3 - i) / 3;
-      frames.push(
-        { transform: target, opacity: 1, boxShadow: '0 1px 0 #302e2930', offset: dockEnd - 0.025 },
-        { transform: target, opacity: 0, boxShadow: '0 1px 0 #302e2930', offset: dockEnd },
-      );
-      if (dockEnd < 1)
-        frames.push({ transform: target, opacity: 0, boxShadow: '0 1px 0 #302e2930', offset: 1 });
-      return animate(card, frames, 900, 0, 'linear');
-    });
+    const rate =
+      reviewMode && review.querySelector<HTMLInputElement>('[data-fab-slow]')!.checked ? 2 : 1;
+    const moves =
+      reviewMode && !reduced.matches
+        ? studies.run(study, rate)
+        : cards.map((card, i) => {
+            const target = docked(i);
+            const frames: Keyframe[] = [];
+            const dockStart = (2 - i) / 3;
+            if (i < 2) {
+              const drop = bottom - card.offsetTop - card.offsetHeight;
+              frames.push({
+                transform: `translate3d(0,${drop}px,0)`,
+                opacity: 1,
+                offset: dockStart,
+                easing: 'cubic-bezier(.35,0,.25,1)',
+              });
+            }
+            const dockEnd = (3 - i) / 3;
+            frames.push(
+              {
+                transform: target,
+                opacity: 1,
+                boxShadow: '0 1px 0 #302e2930',
+                offset: dockEnd - 0.025,
+              },
+              { transform: target, opacity: 0, boxShadow: '0 1px 0 #302e2930', offset: dockEnd },
+            );
+            if (dockEnd < 1)
+              frames.push({
+                transform: target,
+                opacity: 0,
+                boxShadow: '0 1px 0 #302e2930',
+                offset: 1,
+              });
+            return animate(card, frames, 900, 0, 'linear');
+          });
     moves.push(animate(thread, [{ strokeDashoffset: -1, opacity: 0 }], 600));
     moves.push(
       animate(
@@ -204,7 +233,7 @@ if (candidate) {
             boxShadow: '0 3px 0 #1e1c19, 0 7px 16px #302e2926',
           },
         ],
-        900,
+        reviewMode ? 1200 * rate : 900,
       ),
     );
     moves.push(animate(label, [{ opacity: 1 }], 300, 600));
@@ -245,11 +274,21 @@ if (candidate) {
     }
   });
   document.addEventListener('pointerdown', (event) => {
-    if (launcher.open && event.target instanceof Node && !launcher.contains(event.target))
+    if (
+      launcher.open &&
+      event.target instanceof Node &&
+      !launcher.contains(event.target) &&
+      !review.contains(event.target)
+    )
       void fold(false);
   });
   document.addEventListener('focusin', (event) => {
-    if (launcher.open && event.target instanceof Node && !launcher.contains(event.target))
+    if (
+      launcher.open &&
+      event.target instanceof Node &&
+      !launcher.contains(event.target) &&
+      !review.contains(event.target)
+    )
       void fold(false);
   });
   document.addEventListener('visibilitychange', () => {
@@ -282,6 +321,41 @@ if (candidate) {
       void unfold(false);
     }
   });
-  setState('waiting');
-  scheduleInitial();
+  if (reviewMode) {
+    review.hidden = false;
+    const descriptions: Record<string, string> = {
+      slot: 'Paper tips into the button and disappears progressively behind its slot.',
+      envelope: 'Each lower half folds over its crease, then the packet tucks into the button.',
+      roller: 'A shaded curl winds each sheet upward; the resulting roll drops into the button.',
+    };
+    let previewRun = 0;
+    async function preview() {
+      const request = ++previewRun;
+      review
+        .querySelectorAll<HTMLButtonElement>('[data-fab-option]')
+        .forEach((button) =>
+          button.setAttribute('aria-pressed', String(button.dataset.fabOption === study)),
+        );
+      review.querySelector('.hero-review-description')!.textContent = descriptions[study];
+      const url = new URL(location.href);
+      url.searchParams.set('fab-review', study);
+      history.replaceState(null, '', url);
+      await unfold(false);
+      const stableRevision = revision;
+      await new Promise((resolve) => window.setTimeout(resolve, 500));
+      if (request === previewRun && stableRevision === revision) void fold(false);
+    }
+    review.querySelectorAll<HTMLButtonElement>('[data-fab-option]').forEach((button) =>
+      button.addEventListener('click', () => {
+        study = button.dataset.fabOption!;
+        void preview();
+      }),
+    );
+    review.querySelector('[data-fab-replay]')!.addEventListener('click', () => void preview());
+    review.querySelector('[data-fab-slow]')!.addEventListener('change', () => void preview());
+    void preview();
+  } else {
+    setState('waiting');
+    scheduleInitial();
+  }
 }

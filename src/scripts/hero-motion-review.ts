@@ -1,5 +1,5 @@
 const params = new URLSearchParams(location.search);
-const review = document.querySelector<HTMLElement>('.hero-review');
+const review = document.querySelector<HTMLElement>('.hero-review:not(.fab-review)');
 if (review) {
   const reviewing = params.has('hero-review');
   const scene = document.querySelector<HTMLElement>('.paper-scene')!;

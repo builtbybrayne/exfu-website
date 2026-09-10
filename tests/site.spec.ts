@@ -650,7 +650,9 @@ test('FAB prompt is a wrapped scrollable text box without removed links', async 
   await expect(pre).toHaveCSS('white-space', 'pre-wrap');
   await expect(pre).toHaveCSS('overflow-y', 'scroll');
   expect(await pre.evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(true);
+  await expect(pre).toBeVisible();
   await pre.focus();
+  await expect(pre).toBeFocused();
   await page.keyboard.press('ArrowDown');
   await expect.poll(() => pre.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
 });
@@ -664,4 +666,39 @@ test('opening FAB early cancels the delayed automatic introduction', async ({ pa
   await expect(launcher).toHaveAttribute('data-motion', 'open');
   await page.keyboard.press('Escape');
   await expect(launcher).not.toHaveAttribute('open');
+});
+
+test('FAB collapse studies replay, switch mid-motion and leave a usable prompt', async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/?fab-review=slot');
+  const review = page.getByRole('complementary', { name: 'FAB collapse comparison' });
+  const launcher = page.locator('.agent-launcher');
+  await expect(review).toBeVisible();
+  await expect(launcher).not.toHaveAttribute('open', { timeout: 7000 });
+  for (const option of ['envelope', 'roller', 'slot']) {
+    await review.locator(`[data-fab-option="${option}"]`).click();
+    await expect(launcher).toHaveAttribute('open', '');
+    await expect(launcher).toHaveAttribute('data-motion', 'closing');
+    await expect(launcher).not.toHaveAttribute('open');
+  }
+  await review.getByLabel('Slow motion').check();
+  await expect(launcher).toHaveAttribute('data-motion', 'closing');
+  await review.locator('[data-fab-option="roller"]').click();
+  await expect(launcher).toHaveAttribute('data-motion', 'opening');
+  await expect(launcher).not.toHaveAttribute('open', { timeout: 7000 });
+  await launcher.locator('summary').click();
+  await expect(launcher).toHaveAttribute('data-motion', 'open');
+  await expect(launcher.locator('.agent-prompt')).toHaveCSS('clip-path', 'inset(0%)');
+  const textbox = await launcher.locator('pre').boundingBox();
+  const copy = await launcher.getByRole('button', { name: 'Copy agent fit prompt' }).boundingBox();
+  expect(copy!.y).toBeGreaterThanOrEqual(textbox!.y + textbox!.height);
+  expect(errors).toEqual([]);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await review.locator('[data-fab-option="envelope"]').click();
+  await expect(launcher).not.toHaveAttribute('open');
+  await page.goto('/');
+  await expect(review).toBeHidden();
 });

@@ -4469,3 +4469,102 @@ p + a.button {
     display: none;
   }
 }
+
+.agent-panel .copy-block button {
+  order: 0;
+}
+.fab-review .hero-review-options {
+  grid-template-columns: 1fr;
+}
+.fab-review {
+  width: min(330px, calc(100vw - 32px));
+}
+.fab-review-slow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.fab-review-slow input {
+  width: 16px;
+  height: 16px;
+  accent-color: #a4422e;
+}
+.fab-slot-lip {
+  position: absolute;
+  inset: -6px 6px auto;
+  height: 9px;
+  border-radius: 50% 50% 2px 2px;
+  background: linear-gradient(#0f0e0c 0 45%, #b29b73 48% 60%, #302e29 75%);
+  box-shadow:
+    0 -2px 3px #0003,
+    0 2px 0 #625541;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  pointer-events: none;
+  z-index: 8;
+}
+.agent-launcher[data-collapse-study] > summary {
+  z-index: 8;
+}
+.fab-study-flap,
+.fab-study-roll {
+  position: absolute;
+  pointer-events: none;
+  z-index: 7;
+}
+.fab-study-flap {
+  transform-style: preserve-3d;
+}
+.fab-study-foldface {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  background: linear-gradient(0deg, #d5c3a3, #f5ead6 46%, #b29b73 49%, transparent 50%);
+  backface-visibility: visible;
+  border-radius: 0 0 4px 4px;
+  filter: drop-shadow(0 3px 2px #302e2926);
+}
+.fab-study-flap.is-dark .fab-study-foldface {
+  background: linear-gradient(0deg, #776b55, #b1a082 46%, #393329 49%, transparent 50%);
+}
+.fab-study-roll {
+  height: 18px;
+  border-radius: 9px;
+  transform-origin: 0 0;
+  background: linear-gradient(#b29c77, #fff8e7 27%, #e5d3b3 49%, #bca079 78%, #736043);
+  border: 1px solid #9f8762;
+  box-shadow: 0 5px 6px #302e2940;
+}
+.fab-study-roll::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  width: 13px;
+  height: 17px;
+  border: 1px solid #a48b65;
+  border-radius: 50%;
+  background: repeating-radial-gradient(ellipse, #786044 0 1px, #dfc9a5 2px 3px);
+}
+.fab-study-roll.is-dark {
+  background: linear-gradient(#332d24, #a5977a 28%, #645944 60%, #29251e);
+}
+@media (max-width: 650px) {
+  .fab-review {
+    bottom: auto;
+    top: 12px;
+    left: 12px;
+    width: calc(100vw - 24px);
+    padding: 10px;
+  }
+  .fab-review .hero-review-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .fab-review .hero-review-options button {
+    font-size: 11px;
+    padding: 5px;
+  }
+}
