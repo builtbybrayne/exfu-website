@@ -154,8 +154,8 @@ if (candidate) {
       animate(
         card,
         [{ transform: docked(i), opacity: 0, boxShadow: '0 1px 0 #302e2930' }],
-        610,
-        [90, 45, 0][i],
+        240,
+        [480, 240, 0][i],
       ),
     );
     moves.push(animate(thread, [{ strokeDashoffset: -1, opacity: 0 }], 600));
@@ -172,9 +172,9 @@ if (candidate) {
         730,
       ),
     );
-    moves.push(animate(label, [{ opacity: 1 }], 380, 200));
+    moves.push(animate(label, [{ opacity: 1 }], 240, 480));
     moves.push(
-      animate(mark, [{ transform: 'translateY(0px) rotate(0deg)', opacity: 1 }], 420, 180),
+      animate(mark, [{ transform: 'translateY(0px) rotate(0deg)', opacity: 1 }], 240, 240),
     );
     moves.push(animate(arrow, [{ opacity: 1, transform: 'rotate(0deg)' }], 450, 160));
     await Promise.all(moves);

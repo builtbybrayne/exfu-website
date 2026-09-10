@@ -163,3 +163,7 @@ User rated the previous animation 2/5 and approved rebuilding its component desi
 Replaced independent CSS timelines with one interruptible Web Animations controller. Replacement transitions sample their current rendered frame, stale completions cannot close a reopened panel, and hidden tabs pause both movement and the remaining hold time. Opens on every load in about one second, holds 1.6 seconds and closes in 0.73 seconds unless engaged. Reduced motion stays open without automatic movement. Native details remains usable without JavaScript.
 
 Visual browser inspection caught and corrected backside paint obscuring content during rotation. Browser tests exposed and corrected pointer entry during closing cancelling dismissal. Astro check, production build and ten Chromium/Firefox checks passed, including copying, every-load opening, replay, Escape/focus return, interrupted close/reopen, no-JavaScript mobile bounds and reduced-motion mobile Axe checks. The design quality remains for Alastair to judge; test results do not establish a subjective 5/5 rating.
+
+## Sequential collapse, 2026-09-10
+
+User requested one card at a time, starting at the bottom, still quickly. Each card now takes 240ms: footer, prompt, then heading, with no overlap. Total card return is 720ms; the tray finishes at 730ms. The button icon and label restore alongside their corresponding cards.
