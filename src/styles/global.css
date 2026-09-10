@@ -4016,3 +4016,257 @@ p + a.button {
     display: none;
   }
 }
+
+/* Paper fragments gather into a briefing, then fold into the persistent control. */
+.agent-intro-preview {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: min(320px, calc(100vw - 32px));
+  padding: 10px 20px 22px;
+  background: #eee7da;
+  color: #302e29;
+  border: 1px solid #cfc3b1;
+  border-radius: 5px 5px 2px 5px;
+  box-shadow:
+    0 12px 35px #302e2926,
+    3px 3px 0 #d5c9b7;
+  transform-origin: bottom right;
+  animation: agent-intro-fold 9s cubic-bezier(0.22, 0.7, 0.2, 1) both;
+}
+.agent-intro-preview[hidden] {
+  display: none;
+}
+.agent-paper-scene {
+  display: block;
+  width: 100%;
+  height: 120px;
+  overflow: visible;
+}
+.agent-paper,
+.agent-brief {
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: url(#paper-grain);
+}
+.agent-paper {
+  animation: agent-paper-gather 9s both;
+}
+.paper-one {
+  --start-x: -22px;
+  --start-y: 16px;
+  --start-angle: -18deg;
+  --gather-x: 78px;
+  --gather-angle: 7deg;
+}
+.paper-two {
+  --start-x: 5px;
+  --start-y: -20px;
+  --start-angle: 12deg;
+  --gather-x: 8px;
+  --gather-angle: -5deg;
+  animation-name: agent-paper-middle;
+}
+.paper-three {
+  --start-x: 24px;
+  --start-y: 12px;
+  --start-angle: 20deg;
+  --gather-x: -83px;
+  --gather-angle: -8deg;
+  animation-name: agent-paper-last;
+}
+.agent-thread {
+  stroke-dasharray: 1;
+  animation: agent-thread-draw 9s both;
+}
+.agent-brief {
+  animation: agent-brief-arrive 9s both;
+}
+.agent-tick {
+  stroke-dasharray: 1;
+  animation: agent-tick-draw 9s both;
+}
+.agent-invitation {
+  display: block;
+  font-size: 25px;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  animation: agent-label-arrive 9s both;
+}
+.agent-invitation-note {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  animation: agent-label-arrive 9s both;
+}
+.intro-paused .agent-intro-preview,
+.intro-paused .agent-intro-preview * {
+  animation-play-state: paused;
+}
+@keyframes agent-intro-fold {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  6%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  94%,
+  100% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.15, 0.08) rotate(4deg);
+  }
+}
+@keyframes agent-paper-gather {
+  0%,
+  3% {
+    opacity: 0;
+    transform: translate(var(--start-x), var(--start-y)) rotate(var(--start-angle));
+  }
+  12%,
+  24% {
+    opacity: 1;
+    transform: rotate(-5deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(var(--gather-x)) rotate(var(--gather-angle));
+  }
+  46%,
+  100% {
+    opacity: 0;
+    transform: translateX(var(--gather-x)) scale(0.9);
+  }
+}
+@keyframes agent-paper-middle {
+  0%,
+  8% {
+    opacity: 0;
+    transform: translate(var(--start-x), var(--start-y)) rotate(var(--start-angle));
+  }
+  17%,
+  26% {
+    opacity: 1;
+    transform: rotate(3deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(var(--gather-x)) rotate(var(--gather-angle));
+  }
+  46%,
+  100% {
+    opacity: 0;
+    transform: translateX(var(--gather-x)) scale(0.9);
+  }
+}
+@keyframes agent-paper-last {
+  0%,
+  13% {
+    opacity: 0;
+    transform: translate(var(--start-x), var(--start-y)) rotate(var(--start-angle));
+  }
+  22%,
+  28% {
+    opacity: 1;
+    transform: rotate(7deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(var(--gather-x)) rotate(var(--gather-angle));
+  }
+  46%,
+  100% {
+    opacity: 0;
+    transform: translateX(var(--gather-x)) scale(0.9);
+  }
+}
+@keyframes agent-thread-draw {
+  0%,
+  12% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  43%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@keyframes agent-brief-arrive {
+  0%,
+  36% {
+    opacity: 0;
+    transform: scale(0.85) rotate(-8deg);
+  }
+  48%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes agent-tick-draw {
+  0%,
+  46% {
+    stroke-dashoffset: 1;
+  }
+  55%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes agent-label-arrive {
+  0%,
+  22% {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  35%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .agent-intro-preview,
+  .agent-intro-preview * {
+    animation: none !important;
+  }
+  .agent-paper,
+  .agent-thread {
+    display: none;
+  }
+}
+@media (max-height: 500px) {
+  .agent-paper-scene {
+    height: 65px;
+  }
+  .agent-intro-preview {
+    padding-bottom: 12px;
+  }
+  .agent-invitation {
+    font-size: 21px;
+  }
+}
+
+.agent-replay {
+  display: block;
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  margin-bottom: 8px;
+  font: inherit;
+  cursor: pointer;
+}
+.agent-replay[hidden] {
+  display: none;
+}

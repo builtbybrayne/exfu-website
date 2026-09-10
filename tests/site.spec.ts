@@ -537,3 +537,39 @@ test('AI prompt panel fits mobile and works without JavaScript', async ({ browse
   await expect(launcher.locator('pre')).toBeHidden();
   await context.close();
 });
+
+test('paper introduction pauses, folds away and only runs once per visit', async ({ page }) => {
+  await page.goto('/');
+  const intro = page.locator('.agent-intro-preview');
+  await expect(intro).toBeVisible();
+  await page.locator('.agent-launcher summary').focus();
+  await expect(intro).toHaveCSS('animation-play-state', 'paused');
+  await page.locator('.site-header a').first().focus();
+  await expect(intro).toHaveCSS('animation-play-state', 'running');
+  await expect(intro).toBeHidden({ timeout: 12000 });
+  await page.reload();
+  await expect(intro).toBeHidden();
+  await page.locator('.agent-launcher summary').click();
+  await expect(page.locator('.agent-panel')).toBeVisible();
+  await page.getByRole('button', { name: 'Replay introduction' }).click();
+  await expect(intro).toBeVisible();
+  await expect(page.locator('.agent-panel')).toBeHidden();
+  await page.locator('.agent-launcher summary').click();
+  await expect(page.locator('.agent-panel')).toBeVisible();
+});
+
+test('reduced motion shows a static invitation and clicking opens the prompt', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.goto('/');
+  const intro = page.locator('.agent-intro-preview');
+  await expect(intro).toBeVisible();
+  await expect(intro).toHaveCSS('animation-name', 'none');
+  const box = await intro.boundingBox();
+  expect(box!.x).toBeGreaterThanOrEqual(0);
+  expect(box!.y).toBeGreaterThanOrEqual(0);
+  expect(box!.x + box!.width).toBeLessThanOrEqual(320);
+  await intro.click();
+  await expect(intro).toBeHidden();
+  await expect(page.locator('.agent-panel')).toBeVisible();
+});

@@ -12,7 +12,61 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
 ---
 
 <details class="agent-launcher">
-  <summary>For your AI <span aria-hidden="true">↗</span></summary>
+  <summary aria-label="For your AI">
+    <span class="agent-intro-preview" aria-hidden="true" hidden>
+      <svg class="agent-paper-scene" viewBox="0 0 300 130" fill="none">
+        <defs
+          ><filter id="paper-grain"
+            ><feTurbulence
+              type="fractalNoise"
+              baseFrequency=".7"
+              numOctaves="3"
+              stitchTiles="stitch"></feTurbulence><feComposite in2="SourceGraphic" operator="in"
+            ></feComposite><feBlend in="SourceGraphic" mode="multiply"></feBlend></filter
+          ></defs
+        >
+        <path
+          class="agent-thread"
+          d="M35 82C55 8 110 115 149 62S237 16 270 71"
+          stroke="#777064"
+          stroke-width="1.2"
+          pathLength="1"></path>
+        <g class="agent-paper paper-one"
+          ><path d="M39 29L98 24L105 94L43 99Z" fill="#e3d7c3"></path><path
+            d="M51 47L84 44M53 58L87 55M55 70L77 68"
+            stroke="#8e8371"
+            stroke-width="2"></path><circle cx="83" cy="81" r="5" fill="#a7422d"></circle></g
+        >
+        <g class="agent-paper paper-two"
+          ><path d="M116 22L175 28L169 102L108 94Z" fill="#f4eddf"></path><path
+            d="M125 43L161 47M123 55L153 58M121 67L158 71"
+            stroke="#8e8371"
+            stroke-width="2"></path></g
+        >
+        <g class="agent-paper paper-three"
+          ><path d="M199 35L254 27L262 94L205 105Z" fill="#cfc2ab"></path><path
+            d="M211 50L240 46M213 61L244 57M215 74L235 71"
+            stroke="#817666"
+            stroke-width="2"></path></g
+        >
+        <g class="agent-brief"
+          ><path d="M119 17H177L191 31V111H119Z" fill="#f4eddf"></path><path
+            d="M177 17V31H191"
+            fill="#d4c4aa"></path><path d="M131 39H163" stroke="#a7422d" stroke-width="5"
+          ></path><path d="M131 55H178M131 66H173M131 77H158" stroke="#8e8371" stroke-width="2"
+          ></path><path
+            class="agent-tick"
+            d="M162 94L168 100L182 85"
+            stroke="#a7422d"
+            stroke-width="3"
+            pathLength="1"></path></g
+        >
+      </svg>
+      <span class="agent-invitation">Let your AI<br />get to know ExFu.</span>
+      <span class="agent-invitation-note">A prompt for an independent view ↗</span>
+    </span>
+    For your AI <span aria-hidden="true">↗</span>
+  </summary>
   <section class="agent-panel" aria-labelledby="agent-intro-title">
     <div class="agent-panel-heading">
       <h2 id="agent-intro-title">Ask your AI if we’re a fit.</h2>
@@ -26,6 +80,7 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
     <p class="agent-panel-note">
       This copies a prompt; it does not start a chat or send anything to ExFu.
     </p>
+    <button type="button" class="text-link agent-replay" hidden>Replay introduction</button>
     <a class="text-link" href="/llms.txt" target="_blank" rel="noopener noreferrer"
       >Site map for agents ↗</a
     >
@@ -37,15 +92,61 @@ If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@e
     const trigger = launcher.querySelector('summary')!;
     const close = launcher.querySelector<HTMLButtonElement>('.agent-panel-close')!;
     close.hidden = false;
+    const preview = launcher.querySelector<HTMLElement>('.agent-intro-preview')!;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem('exfu-agent-introduction') === 'seen';
+    } catch {
+      /* Storage is optional. */
+    }
+    const finishIntro = () => {
+      preview.hidden = true;
+      launcher.classList.remove('intro-paused');
+    };
+    if (!seen) {
+      preview.hidden = false;
+      try {
+        sessionStorage.setItem('exfu-agent-introduction', 'seen');
+      } catch {
+        /* Keep the interaction usable without storage. */
+      }
+    }
+    preview.addEventListener('animationend', (event) => {
+      if (event.target === preview && event.animationName === 'agent-intro-fold') finishIntro();
+    });
+    const pauseIntro = () =>
+      launcher.classList.toggle(
+        'intro-paused',
+        launcher.matches(':hover') || launcher.contains(document.activeElement) || document.hidden,
+      );
+    launcher.addEventListener('pointerenter', pauseIntro);
+    launcher.addEventListener('pointerleave', pauseIntro);
+    launcher.addEventListener('focusin', pauseIntro);
+    launcher.addEventListener('focusout', () => queueMicrotask(pauseIntro));
+    document.addEventListener('visibilitychange', pauseIntro);
+    trigger.addEventListener('click', finishIntro);
+    motion.addEventListener('change', finishIntro);
+    pauseIntro();
+    const replay = launcher.querySelector<HTMLButtonElement>('.agent-replay')!;
+    replay.hidden = false;
+    replay.addEventListener('click', (event) => {
+      launcher.open = false;
+      preview.hidden = false;
+      trigger.focus({ preventScroll: true });
+      if (event.detail > 0) trigger.blur();
+      pauseIntro();
+    });
     const dismiss = () => {
       launcher.open = false;
       trigger.focus({ preventScroll: true });
     };
     close.addEventListener('click', dismiss);
     launcher.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && launcher.open) {
+      if (event.key === 'Escape' && (launcher.open || !preview.hidden)) {
         event.preventDefault();
         event.stopPropagation();
+        finishIntro();
         dismiss();
       }
     });
