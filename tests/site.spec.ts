@@ -406,7 +406,17 @@ test('agent handoff is copyable and the structured map has real local destinatio
       },
     }),
   );
+  const launcher = page.locator('.agent-launcher');
+  await expect(launcher).not.toHaveAttribute('open');
+  await launcher.locator('summary').click();
   await page.getByRole('button', { name: 'Copy agent fit prompt' }).click();
+  await page.getByRole('button', { name: 'Close AI prompt' }).click();
+  await expect(launcher).not.toHaveAttribute('open');
+  await expect(launcher.locator('summary')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(launcher).toHaveAttribute('open', '');
+  await page.keyboard.press('Escape');
+  await expect(launcher).not.toHaveAttribute('open');
   expect(await page.evaluate(() => (window as any).copied)).toContain('independent assessment');
   expect(await page.evaluate(() => (window as any).copied)).toContain('not a booking API');
   const data = await (await request.get('/agent-info.json')).json();
@@ -507,4 +517,23 @@ test('Codex and ChatGPT show appropriate setup and preserve the selected plugin'
   await page.getByRole('radio', { name: 'Codex', exact: true }).check();
   await expect(page.locator('#plugin-choice')).toHaveValue('exfu-agent-plan-visualiser');
   await expect(page.locator('#selected-codex')).toBeVisible();
+});
+
+test('AI prompt panel fits mobile and works without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({
+    javaScriptEnabled: false,
+    viewport: { width: 320, height: 568 },
+  });
+  const page = await context.newPage();
+  await page.goto('http://127.0.0.1:4391/');
+  const launcher = page.locator('.agent-launcher');
+  await launcher.locator('summary').click();
+  await expect(launcher.locator('pre')).toBeVisible();
+  const box = await page.locator('.agent-panel').boundingBox();
+  expect(box!.x).toBeGreaterThanOrEqual(0);
+  expect(box!.y).toBeGreaterThanOrEqual(0);
+  expect(box!.x + box!.width).toBeLessThanOrEqual(320);
+  await launcher.locator('summary').click();
+  await expect(launcher.locator('pre')).toBeHidden();
+  await context.close();
 });

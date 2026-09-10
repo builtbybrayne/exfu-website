@@ -3368,19 +3368,6 @@ p + a.button {
 }
 
 /* Agent-led discovery and a clear installation sequence. */
-.agent-intro {
-  background: #e8e3db;
-  border-block: 1px solid #d5cec2;
-}
-.agent-intro-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: clamp(30px, 5vw, 80px);
-  align-items: start;
-}
-.agent-intro h2 {
-  font-size: clamp(36px, 4vw, 58px);
-}
 .agent-prompt {
   background: #302e29;
   color: #f6f2e9;
@@ -3573,9 +3560,6 @@ p + a.button {
   }
 }
 @media (max-width: 700px) {
-  .agent-intro-grid {
-    grid-template-columns: 1fr;
-  }
   .tools-layout {
     display: block;
     padding-top: 0;
@@ -3948,4 +3932,87 @@ p + a.button {
 
 .editorial-prose .experience-followup {
   margin-top: 2rem;
+}
+
+/* Optional agent handoff stays outside the homepage reading flow. */
+.agent-launcher {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 25;
+}
+.agent-launcher > summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  min-height: 46px;
+  list-style: none;
+  cursor: pointer;
+  background: #302e29;
+  color: #f6f2e9;
+  border: 1px solid #696257;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px #302e291a;
+  font-weight: 600;
+}
+.agent-launcher > summary::-webkit-details-marker {
+  display: none;
+}
+.agent-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: min(430px, calc(100vw - 32px));
+  max-height: calc(100dvh - 100px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 22px;
+  background: #f6f2e9;
+  color: #302e29;
+  border: 1px solid #c7bfb2;
+  border-radius: 6px;
+  box-shadow: 0 10px 40px #302e2926;
+}
+.agent-panel-heading {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  justify-content: space-between;
+}
+.agent-panel h2 {
+  font-size: 25px;
+  line-height: 1.15;
+  margin: 0;
+}
+.agent-panel p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-block: 16px;
+}
+.agent-panel-close {
+  flex: 0 0 44px;
+  height: 44px;
+  margin: -10px -10px 0 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 28px;
+  cursor: pointer;
+}
+.agent-panel .agent-prompt {
+  padding: 16px;
+  box-shadow: none;
+}
+.agent-panel .copy-block pre {
+  height: 150px;
+  font-size: 12px;
+}
+.agent-panel .agent-panel-note {
+  font-size: 13px;
+}
+@media print {
+  .agent-launcher {
+    display: none;
+  }
 }

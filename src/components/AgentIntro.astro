@@ -11,25 +11,51 @@ Then give me your independent assessment. Is ExFu a good fit? Explain why or why
 If there is a fit, help me draft an enquiry for https://exfu.ai/enquire/ or al@exfu.ai. Show it to me before sending or submitting anything. The site currently offers a human enquiry, not a booking API or MCP server. Do not claim a session is booked.`;
 ---
 
-<section class="agent-intro section" aria-labelledby="agent-intro-title">
-  <div class="wrap agent-intro-grid">
-    <div>
-      <p class="eyebrow red">Already have an agent?</p><h2 id="agent-intro-title">
-        Ask your agent<br />if we’re a fit.
-      </h2><p>
-        Want an AI to read this website for you? Give this prompt to your agent and ask them to work
-        it out with you.
-      </p><p>
-        They can get to know ExFu, ask what you need and give you an independent view of whether I
-        can help.
-      </p><a class="text-link" href="/llms.txt" target="_blank" rel="noopener noreferrer"
-        >The site map for agents ↗</a
-      >
-    </div><div class="agent-prompt">
-      <p class="eyebrow">Prompt / fit check</p><CopyBlock
-        text={prompt}
-        label="Copy agent fit prompt"
-      /><p>Scroll to read, or copy the full prompt. Nothing is sent to ExFu.</p>
+<details class="agent-launcher">
+  <summary>For your AI <span aria-hidden="true">↗</span></summary>
+  <section class="agent-panel" aria-labelledby="agent-intro-title">
+    <div class="agent-panel-heading">
+      <h2 id="agent-intro-title">Ask your AI if we’re a fit.</h2>
+      <button type="button" class="agent-panel-close" aria-label="Close AI prompt" hidden>×</button>
     </div>
-  </div>
-</section>
+    <p>
+      Copy this prompt into your own AI. It can read the site, ask what you need and give you an
+      independent view.
+    </p>
+    <div class="agent-prompt"><CopyBlock text={prompt} label="Copy agent fit prompt" /></div>
+    <p class="agent-panel-note">
+      This copies a prompt; it does not start a chat or send anything to ExFu.
+    </p>
+    <a class="text-link" href="/llms.txt" target="_blank" rel="noopener noreferrer"
+      >Site map for agents ↗</a
+    >
+  </section>
+</details>
+<script>
+  const launcher = document.querySelector<HTMLDetailsElement>('.agent-launcher');
+  if (launcher) {
+    const trigger = launcher.querySelector('summary')!;
+    const close = launcher.querySelector<HTMLButtonElement>('.agent-panel-close')!;
+    close.hidden = false;
+    const dismiss = () => {
+      launcher.open = false;
+      trigger.focus({ preventScroll: true });
+    };
+    close.addEventListener('click', dismiss);
+    launcher.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && launcher.open) {
+        event.preventDefault();
+        event.stopPropagation();
+        dismiss();
+      }
+    });
+    document.addEventListener('pointerdown', (event) => {
+      if (launcher.open && event.target instanceof Node && !launcher.contains(event.target))
+        launcher.open = false;
+    });
+    document.addEventListener('focusin', (event) => {
+      if (launcher.open && event.target instanceof Node && !launcher.contains(event.target))
+        launcher.open = false;
+    });
+  }
+</script>
