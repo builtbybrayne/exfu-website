@@ -407,6 +407,7 @@ test('agent handoff is copyable and the structured map has real local destinatio
     }),
   );
   const launcher = page.locator('.agent-launcher');
+  await page.getByRole('button', { name: 'Close AI prompt' }).click();
   await expect(launcher).not.toHaveAttribute('open');
   await launcher.locator('summary').click();
   await page.getByRole('button', { name: 'Copy agent fit prompt' }).click();
@@ -538,38 +539,40 @@ test('AI prompt panel fits mobile and works without JavaScript', async ({ browse
   await context.close();
 });
 
-test('paper introduction pauses, folds away and only runs once per visit', async ({ page }) => {
+test('real popover assembles, docks once and supports replay', async ({ page }) => {
   await page.goto('/');
-  const intro = page.locator('.agent-intro-preview');
-  await expect(intro).toBeVisible();
-  await page.locator('.agent-launcher summary').focus();
-  await expect(intro).toHaveCSS('animation-play-state', 'paused');
-  await page.locator('.site-header a').first().focus();
-  await expect(intro).toHaveCSS('animation-play-state', 'running');
-  await expect(intro).toBeHidden({ timeout: 12000 });
+  const launcher = page.locator('.agent-launcher');
+  await expect(launcher).toHaveAttribute('open', '');
+  await expect(launcher).toHaveClass(/is-assembling/);
+  await expect(launcher).not.toHaveAttribute('open', { timeout: 13000 });
   await page.reload();
-  await expect(intro).toBeHidden();
-  await page.locator('.agent-launcher summary').click();
-  await expect(page.locator('.agent-panel')).toBeVisible();
-  await page.getByRole('button', { name: 'Replay introduction' }).click();
-  await expect(intro).toBeVisible();
-  await expect(page.locator('.agent-panel')).toBeHidden();
-  await page.locator('.agent-launcher summary').click();
-  await expect(page.locator('.agent-panel')).toBeVisible();
+  await expect(launcher).not.toHaveAttribute('open');
+  await launcher.locator('summary').click();
+  await page.getByRole('button', { name: 'Replay assembly' }).click();
+  await expect(launcher).toHaveClass(/is-assembling/);
+  await page.getByRole('button', { name: 'Copy agent fit prompt' }).focus();
+  await expect(launcher).not.toHaveClass(/is-assembling/);
+  await expect(launcher).toHaveAttribute('open', '');
+  await page.keyboard.press('Escape');
+  await expect(launcher).not.toHaveAttribute('open');
+  await expect(launcher.locator('summary')).toBeFocused();
 });
 
-test('reduced motion shows a static invitation and clicking opens the prompt', async ({ page }) => {
+test('reduced motion has a stable usable popover on mobile', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.setViewportSize({ width: 320, height: 568 });
   await page.goto('/');
-  const intro = page.locator('.agent-intro-preview');
-  await expect(intro).toBeVisible();
-  await expect(intro).toHaveCSS('animation-name', 'none');
-  const box = await intro.boundingBox();
+  const panel = page.locator('.agent-panel');
+  await expect(panel).toBeVisible();
+  await expect(panel).toHaveCSS('animation-name', 'none');
+  const box = await panel.boundingBox();
   expect(box!.x).toBeGreaterThanOrEqual(0);
   expect(box!.y).toBeGreaterThanOrEqual(0);
   expect(box!.x + box!.width).toBeLessThanOrEqual(320);
-  await intro.click();
-  await expect(intro).toBeHidden();
-  await expect(page.locator('.agent-panel')).toBeVisible();
+  expect(
+    (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+      .violations,
+  ).toEqual([]);
+  await page.getByRole('button', { name: 'Close AI prompt' }).click();
+  await expect(panel).toBeHidden();
 });
