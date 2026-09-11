@@ -121,15 +121,20 @@ const links = [
     <main id="main"><slot /></main>
     <footer class="site-footer">
       <div class="wrap footer-top">
-        <a class="brand" href="/" aria-label="ExFu home"
-          ><img
-            src="/images/exfu-logo-dark.png"
-            width="2211"
-            height="917"
-            alt="ExFu"
-            loading="lazy"
-          /></a
-        >
+        <div class="footer-identity">
+          <a class="brand" href="/" aria-label="ExFu home"
+            ><span class="logo-crop"
+              ><img
+                src="/images/exfu-logo-dark.png"
+                width="2211"
+                height="917"
+                alt="ExFu"
+                loading="lazy"
+              /></span
+            ></a
+          >
+          <p class="footer-tagline">The art of making AI work for you</p>
+        </div>
         <a href="/about/#experience">CV & experience</a>
         <a href="/tools/">Open-source tools</a>
         <a href="mailto:al@exfu.ai" target="_blank" rel="noopener noreferrer">al@exfu.ai</a>

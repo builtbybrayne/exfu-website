@@ -687,7 +687,7 @@ p + a.button {
 .definitions-grid > div {
   padding-right: 40px;
 }
-.definitions img {
+.definitions .logo-crop {
   width: 350px;
 }
 .pronunciation {
@@ -796,9 +796,17 @@ p + a.button {
   align-items: center;
   gap: 55px;
 }
+.footer-identity {
+  margin-right: auto;
+}
+.footer-tagline {
+  max-width: 250px;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+}
 .footer-top .brand {
   width: 86px;
-  margin-right: auto;
 }
 .footer-top > a:not(.brand) {
   font-size: 14px;
@@ -1737,7 +1745,7 @@ p + a.button {
   .definitions dd {
     font-size: 15px;
   }
-  .definitions img {
+  .definitions .logo-crop {
     max-width: 270px;
   }
   .needs-links {
@@ -1753,7 +1761,7 @@ p + a.button {
     gap: 25px;
     flex-wrap: wrap;
   }
-  .footer-top .brand {
+  .footer-identity {
     margin-right: 0;
   }
   .footer-top > a:not(.brand) {
@@ -2097,7 +2105,7 @@ p + a.button {
     grid-template-columns: 1fr;
     gap: 35px;
   }
-  .definitions img {
+  .definitions .logo-crop {
     width: 235px;
   }
   .pronunciation {
@@ -2145,6 +2153,9 @@ p + a.button {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
+  }
+  .footer-identity {
+    grid-column: 1 / -1;
   }
   .footer-top .brand {
     width: 85px;
@@ -4679,4 +4690,21 @@ p + a.button {
   .hero-copy h1 {
     font-size: clamp(44px, 13vw, 56px);
   }
+}
+
+/* Display the dark logo's visible bounds without its transparent PNG padding. */
+.logo-crop {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1679 / 629;
+}
+.logo-crop > img {
+  position: absolute;
+  width: 131.68553%;
+  max-width: none;
+  left: -15.48541%;
+  top: -23.52941%;
 }
